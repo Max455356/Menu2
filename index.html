@@ -1,0 +1,925 @@
+<html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Menú — Platos Fusión (Completo)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#070709;
+      --panel:#121316;
+      --glass: rgba(255,255,255,0.03);
+      --accent:#e6c27a;
+      --muted:#c9cbd0;
+      --radius:18px;
+      --ease:cubic-bezier(.2,.9,.3,1);
+      --gold-dark:#c49a6c;
+      --nav-width:280px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      min-height:100vh;
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(230,194,122,0.06), transparent 6%),
+                  linear-gradient(180deg,#050506,#0c0d0f 60%);
+      color:#fff;
+      font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      scroll-behavior: smooth;
+    }
+
+    /* ---------- Header ---------- */
+    header{
+      position:sticky; top:0; z-index:300;
+      display:flex;align-items:center;justify-content:space-between;
+      padding:14px 20px;
+      background:linear-gradient(180deg, rgba(10,10,11,0.66), rgba(10,10,11,0.36));
+      border-bottom:1px solid rgba(255,255,255,0.03);
+      backdrop-filter: blur(8px) saturate(120%);
+    }
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{
+      width:48px;height:48px;border-radius:10px;
+      background:linear-gradient(135deg,#20160f,#4a2b0b);
+      display:flex;align-items:center;justify-content:center;
+      box-shadow: 0 6px 20px rgba(0,0,0,.6);
+      border:1px solid rgba(255,255,255,.03);
+    }
+    .logo svg{filter:drop-shadow(0 6px 18px rgba(0,0,0,.5))}
+    h1{margin:0;font-family:'Playfair Display',serif;color:var(--accent);font-size:20px}
+    .tag{color:var(--muted);font-size:13px;margin-top:2px}
+
+    /* nav desktop */
+    nav.main-nav{display:flex;gap:10px;align-items:center}
+    .filter-btn{
+      background:var(--glass);border:1px solid rgba(255,255,255,0.04);
+      color:var(--muted);padding:8px 12px;border-radius:12px;cursor:pointer;font-weight:600;
+      transition: all 220ms var(--ease);
+    }
+    .filter-btn:hover{transform:translateY(-3px)}
+    .filter-btn.active{background:linear-gradient(90deg,var(--accent), #ffdca3); color:#1b1200; border:none}
+
+    .location-btn{
+      display:inline-flex;align-items:center;gap:8px;
+      background:transparent;border:1px solid var(--gold-dark);
+      color:var(--gold-dark);
+      padding:8px 14px;border-radius:12px;
+      cursor:pointer;font-weight:700;font-size:14px;
+      transition:all .18s var(--ease);
+    }
+    .location-btn svg{width:16px;height:16px;fill:var(--gold-dark)}
+    .location-btn:hover{background:linear-gradient(90deg, rgba(230,194,122,0.12), rgba(196,154,108,0.06)); color:#1b1200}
+
+    /* ---------- Hamburger & Mobile Nav ---------- */
+    .hamburger{
+      display:none;
+      width:44px;height:44px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.04);
+      align-items:center;justify-content:center;cursor:pointer;
+    }
+    .hamburger svg{width:22px;height:22px;fill:var(--muted)}
+    .mobile-panel{
+      position:fixed;top:0;right:-100%;height:100vh;width:var(--nav-width);
+      background:linear-gradient(180deg,#0b0c0d,#0f1113);box-shadow:-20px 0 60px rgba(0,0,0,.7);
+      transition:right .36s cubic-bezier(.2,.9,.3,1);z-index:400;padding:20px;
+      display:flex;flex-direction:column;gap:16px;
+    }
+    .mobile-panel.open{right:0}
+    .mobile-panel .close-mobile{align-self:flex-end;background:none;border:none;color:var(--muted);font-size:22px;cursor:pointer}
+
+    /* ---------- Hero ---------- */
+    .hero{padding:48px 20px 16px;text-align:center;max-width:1100px;margin:0 auto}
+    .hero h2{font-family:'Playfair Display',serif;color:var(--accent);font-size:30px;margin:0 0 6px}
+    .hero p{color:var(--muted);max-width:820px;margin:0 auto;font-size:15px}
+
+    /* ---------- Grid ---------- */
+    .container{max-width:1200px;margin:20px auto;padding:0 20px}
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap:22px;
+    }
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:var(--radius);overflow:hidden;
+      display:flex;flex-direction:column;
+      transform:translateY(30px) scale(.98);opacity:0;
+      transition: transform 520ms var(--ease), opacity 520ms var(--ease), box-shadow 280ms var(--ease);
+      box-shadow: 0 12px 30px rgba(0,0,0,.55);
+      border:1px solid rgba(255,255,255,0.03);
+      position:relative;
+    }
+    .card.show{transform:none;opacity:1}
+    .card-media{height:180px;overflow:hidden}
+    .card-media img{width:100%;height:100%;object-fit:cover;transition: transform 700ms ease}
+    .card:hover{transform:translateY(-8px) scale(1.02); box-shadow: 0 30px 70px rgba(0,0,0,.7)}
+    .card:hover img{transform:scale(1.08)}
+    .card-body{padding:16px;display:flex;flex-direction:column;gap:8px}
+    .meta{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    .title{font-family:'Playfair Display',serif;font-size:18px;margin:0;color:var(--accent)}
+    .time{font-size:13px;color:var(--muted)}
+    .desc{color:var(--muted);font-size:14px;margin:6px 0 0;min-height:40px}
+    .card-actions{display:flex;gap:10px;margin-top:10px}
+    .btn{flex:1;padding:10px 12px;border-radius:12px;border:none;background:linear-gradient(90deg,var(--accent), #ffdca3); color:#1b1200; cursor:pointer;font-weight:700;transition:all 220ms var(--ease)}
+    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06)}
+
+    .cat-label{position:absolute;top:12px;left:12px;padding:7px 10px;border-radius:10px;background:rgba(0,0,0,0.45);font-size:13px;color:var(--muted);backdrop-filter: blur(6px)}
+
+    /* ---------- Modal ---------- */
+    .modal{
+      position:fixed;inset:0;display:none;align-items:center;justify-content:center;
+      background: linear-gradient(180deg, rgba(2,2,2,0.6), rgba(2,2,2,0.9));
+      z-index:500;backdrop-filter: blur(6px) saturate(120%);
+    }
+    .modal.show{display:flex}
+    .dialog{
+      width:94%;max-width:980px;border-radius:18px;background:linear-gradient(180deg,#0f1113,#0b0c0d);
+      padding:18px;display:grid;grid-template-columns: 1fr 360px;gap:18px;align-items:start;
+      box-shadow: 0 30px 80px rgba(0,0,0,.7);transform:translateY(30px) scale(.96);opacity:0;transition:all 360ms var(--ease);
+      position:relative;
+    }
+    .modal.show .dialog{transform:none;opacity:1}
+    .close-x{position:absolute;right:18px;top:14px;background:transparent;border:none;color:#f0e4d6;font-size:20px;cursor:pointer}
+    .close-x:hover{color:var(--accent)}
+    .dialog h2{margin:8px 0 6px;font-family:'Playfair Display',serif;color:var(--accent)}
+    .dialog p{color:#f0e4d6;margin:0 0 10px}
+    .ingredients{margin-top:10px;padding-left:18px;color:var(--muted)}
+    .tabs{display:flex;gap:10px}
+    .tab-btn{padding:10px 12px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);color:var(--muted);cursor:pointer;font-weight:700}
+    .tab-btn.active{background:linear-gradient(90deg,var(--accent),#ffdca3);color:#1b1200}
+    .tab-content{display:none;margin-top:10px;color:var(--muted)}
+    .tab-content.active{display:block}
+    .dialog-right{border-radius:12px;overflow:hidden;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01))}
+    .dialog-right img{width:100%;height:100%;object-fit:cover}
+
+    /* ---------- Footer with map + contact ---------- */
+    footer{margin-top:40px;background:#111;color:#ccc;padding:28px 20px}
+    .footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns: 1fr 420px;gap:18px;align-items:start}
+    .contact-block{padding:18px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));}
+    .contact-block h3{color:var(--accent);font-family:'Playfair Display',serif;margin-top:0}
+    .contact-block p{margin:8px 0;color:#ddd}
+    .socials{display:flex;gap:12px;margin-top:10px}
+    .socials a{display:inline-flex;align-items:center; justify-content:center;width:44px;height:44px;border-radius:8px;background:transparent;text-decoration:none;border:1px solid rgba(255,255,255,0.1);transition:all 0.3s ease}
+    .socials a:hover{background:rgba(255,255,255,0.05);transform:translateY(-2px);border-color:var(--accent)}
+    .socials svg{width:26px;height:26px;display:block}
+
+    /* Improved social icons */
+    .social-icon {
+      width: 26px;
+      height: 26px;
+      display: block;
+      filter: brightness(0.9);
+      transition: filter 0.3s ease;
+    }
+    .socials a:hover .social-icon {
+      filter: brightness(1.2);
+    }
+
+    /* Instagram icon with better gradient */
+    .instagram-icon {
+      background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+    }
+    .instagram-icon-inner {
+      width: 18px;
+      height: 18px;
+      border: 2px solid white;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .instagram-icon-dot {
+      width: 4px;
+      height: 4px;
+      background: white;
+      border-radius: 50%;
+      position: absolute;
+      top: 3px;
+      right: 3px;
+    }
+
+    /* Gmail icon with better design */
+    .gmail-icon {
+      width: 26px;
+      height: 26px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .gmail-icon-envelope {
+      width: 100%;
+      height: 100%;
+      background: #EA4335;
+      border-radius: 4px;
+      position: relative;
+      overflow: hidden;
+    }
+    .gmail-icon-fold {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-left: 13px solid #F1F1F1;
+      border-right: 13px solid transparent;
+      border-bottom: 13px solid transparent;
+    }
+    .gmail-icon-body {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 14px;
+      background: #F1F1F1;
+    }
+
+    /* Improved SVG icons */
+    .instagram-svg {
+      width: 26px;
+      height: 26px;
+      border-radius: 8px;
+      overflow: visible;
+    }
+    
+    .gmail-svg {
+      width: 26px;
+      height: 26px;
+    }
+
+    /* Responsive */
+    @media (max-width:980px){
+      .dialog{grid-template-columns:1fr;max-width:720px}
+      .dialog-right{height:260px}
+      .footer-grid{grid-template-columns:1fr;gap:14px}
+    }
+    @media (max-width:720px){
+      nav.main-nav{display:none}
+      .hamburger{display:inline-flex}
+      .mobile-panel{width:84%}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="logo" aria-hidden="true">
+        <svg width="36" height="36" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="32" cy="32" r="31" stroke="rgba(255,255,255,0.06)"/>
+          <path d="M20 34c0-6 5-10 12-10s12 4 12 10v6H20v-6z" fill="#fff" opacity=".9"/>
+          <path d="M24 28c0-4 3-6 8-6s8 2 8 6" stroke="#e6c27a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div>
+        <h1>Platos Fusión</h1>
+        <div class="tag">Menú Completo</div>
+      </div>
+    </div>
+
+    <!-- Desktop nav -->
+    <nav class="main-nav" aria-label="Navegación principal">
+      <button class="filter-btn active" data-filter="all">Todos</button>
+      <button class="filter-btn" data-filter="platos-fuertes">Platos fuertes</button>
+      <button class="filter-btn" data-filter="sopas">Sopas</button>
+      <button class="filter-btn" data-filter="postres">Postres</button>
+      <button class="filter-btn" data-filter="bebidas">Bebidas</button>
+      <button class="location-btn" id="locationBtn" title="Ir a información de contacto">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C8 2 5 5 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-4-3-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>
+        Av. Insurgentes 123
+      </button>
+    </nav>
+
+    <!-- Hamburger for mobile -->
+    <button class="hamburger" id="hamburger" aria-label="Abrir menú">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M3 6h18v2H3zM3 11h18v2H3zM3 16h18v2H3z"/></svg>
+    </button>
+  </header>
+
+  <!-- Mobile sliding panel -->
+  <aside id="mobilePanel" class="mobile-panel" aria-hidden="true">
+    <button class="close-mobile" id="closeMobile" aria-label="Cerrar menú">✕</button>
+    <div style="display:flex;flex-direction:column;gap:12px;margin-top:8px">
+      <button class="filter-btn" data-filter="all">Todos</button>
+      <button class="filter-btn" data-filter="platos-fuertes">Platos fuertes</button>
+      <button class="filter-btn" data-filter="sopas">Sopas</button>
+      <button class="filter-btn" data-filter="postres">Postres</button>
+      <button class="filter-btn" data-filter="bebidas">Bebidas</button>
+      <button class="location-btn" id="locationBtnMobile">📍 Ir a Contacto</button>
+    </div>
+  </aside>
+
+  <main>
+    <section class="hero">
+      <h2>Menú Completo</h2>
+      <p>Explora todas nuestras recetas: platos fuertes, sopas, postres y bebidas. Haz clic en "Ver Receta" para abrir la ficha con ingredientes y preparación.</p>
+    </section>
+
+    <div class="container">
+      <div class="grid" id="menuGrid" aria-live="polite"></div>
+    </div>
+  </main>
+
+  <!-- Modal -->
+  <div id="modal" class="modal" role="dialog" aria-hidden="true">
+    <div class="dialog" role="document" aria-modal="true">
+      <button class="close-x" aria-label="Cerrar">✕</button>
+      <div class="dialog-left">
+        <h2 id="m-title">Título</h2>
+        <p id="m-desc"></p>
+
+        <div class="tabs" role="tablist" aria-label="Opciones receta">
+          <button class="tab-btn active" data-tab="ingredients" role="tab" aria-selected="true">Ingredientes</button>
+          <button class="tab-btn" data-tab="steps" role="tab" aria-selected="false">Preparación</button>
+        </div>
+
+        <div id="tab-ingredients" class="tab-content active">
+          <ul id="m-ingredients" class="ingredients"></ul>
+        </div>
+
+        <div id="tab-steps" class="tab-content">
+          <p id="m-steps"></p>
+        </div>
+      </div>
+
+      <div class="dialog-right">
+        <img id="m-img" src="" alt="Foto del platillo">
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer id="contacto">
+    <div class="footer-grid">
+      <div>
+        <!-- embedded Google Map for the address -->
+        <iframe
+          id="mapFrame"
+          title="Mapa - Av. Insurgentes Sur 123, Col. Roma, CDMX"
+          src="https://www.google.com/maps?q=Av.+Insurgentes+Sur+123,+Col.+Roma,+CDMX&output=embed"
+          width="100%" height="320" style="border:0;border-radius:12px" allowfullscreen loading="lazy"></iframe>
+      </div>
+
+      <div class="contact-block" aria-label="Información de contacto">
+        <h3>Encuéntranos</h3>
+        <p>📌 <strong>Dirección:</strong> Av. Insurgentes Sur 123, Col. Roma, CDMX</p>
+        <p>🕒 <strong>Horario:</strong> Lunes a Domingo — 12:00 - 22:00 hrs</p>
+        <p>📞 <strong>Teléfono:</strong> <a href="tel:+521234567890" style="color:var(--accent);text-decoration:none">+52 123 456 7890</a></p>
+        <p>✉️ <strong>Reservas:</strong> <a href="mailto:reservasfusion@gmail.com" style="color:var(--accent);text-decoration:none">reservasfusion@gmail.com</a></p>
+
+        <div style="margin-top:10px">
+  <strong style="color:#ddd">Redes sociales</strong>
+  <div style="margin-top:10px">
+  <strong style="color:#ddd">Redes sociales</strong>
+  <div class="socials" role="navigation" aria-label="Redes sociales">
+    <!-- WhatsApp con fondo blanco -->
+    <a href="https://wa.me/521234567890" target="_blank" rel="noopener" aria-label="WhatsApp" style="display:inline-flex; align-items:center; justify-content:center; width:50px; height:50px; border-radius:50%; background-color:white; text-decoration:none; box-shadow:0 2px 5px rgba(0,0,0,0.1); margin:5px;">
+      <svg width="30" height="30" viewBox="0 0 24 24">
+        <path fill="#25D366" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.55 4.142 1.61 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.441h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413"/>
+      </svg>
+    </a>
+
+    <!-- Botón circular con logo Instagram en SVG -->
+<a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram" 
+   style="display:inline-flex; align-items:center; justify-content:center; width:50px; height:50px; 
+          border-radius:50%; background-color:white; text-decoration:none; 
+          box-shadow:0 2px 5px rgba(0,0,0,0.15); margin:5px;">
+  
+  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 448 512">
+    <defs>
+      <!-- Gradiente oficial Instagram -->
+      <linearGradient id="igGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#f09433"/>
+        <stop offset="25%" stop-color="#e6683c"/>
+        <stop offset="50%" stop-color="#dc2743"/>
+        <stop offset="75%" stop-color="#cc2366"/>
+        <stop offset="100%" stop-color="#bc1888"/>
+      </linearGradient>
+    </defs>
+
+    <!-- Forma del logo oficial -->
+    <path fill="url(#igGradient)" d="M224.1 141c-63.6 
+      0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 
+      114.9 114.9-51.3 114.9-114.9S287.6 141 
+      224.1 141zm0 189.6c-41.3 0-74.7-33.4-74.7-74.7
+      s33.4-74.7 74.7-74.7 74.7 33.4 
+      74.7 74.7-33.4 74.7-74.7 74.7zm146.4-194.3c0 
+      14.9-12 26.9-26.9 26.9s-26.9-12-26.9-26.9 
+      12-26.9 26.9-26.9 26.9 12 
+      26.9 26.9zm76.1 27.2c-1.7-35.7-9.9-67.3-36.2-93.5
+      S377.4 38.8 341.7 37.1c-35.7-1.7-142.7-1.7-178.4 
+      0-35.7 1.7-67.3 9.9-93.5 36.2S38.8 134.6 
+      37.1 170.3c-1.7 35.7-1.7 142.7 
+      0 178.4 1.7 35.7 9.9 67.3 36.2 
+      93.5s57.8 34.5 93.5 36.2c35.7 1.7 
+      142.7 1.7 178.4 0 35.7-1.7 
+      67.3-9.9 93.5-36.2s34.5-57.8 
+      36.2-93.5c1.7-35.7 1.7-142.7 
+      0-178.4zM398.8 388c-7.8 19.6-22.9 
+      34.7-42.6 42.6-29.5 11.7-99.5 
+      9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9
+      -42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 
+      9-132.1c7.8-19.6 22.9-34.7 
+      42.6-42.6 29.5-11.7 99.5-9 
+      132.1-9s102.7-2.6 132.1 
+      9c19.6 7.8 34.7 22.9 
+      42.6 42.6 11.7 29.5 9 
+      99.5 9 132.1s2.7 102.7-9 
+      132.1z"/>
+  </svg>
+</a>
+    <!-- Gmail con fondo blanco -->
+    <a href="mailto:reservasfusion@gmail.com" aria-label="Email" style="display:inline-flex; align-items:center; justify-content:center; width:50px; height:50px; border-radius:50%; background-color:white; text-decoration:none; box-shadow:0 2px 5px rgba(0,0,0,0.1); margin:5px;">
+      <svg width="30" height="30" viewBox="0 0 24 24">
+        <path fill="#EA4335" d="M22.288 21h-20.576c-.945 0-1.712-.767-1.712-1.712v-13.576c0-.945.767-1.712 1.712-1.712h20.576c.945 0 1.712.767 1.712 1.712v13.576c0 .945-.767 1.712-1.712 1.712zm-10.288-6.086l-9.342-6.483-.02 11.569h18.684v-11.569l-9.322 6.483zm8.869-9.914h-17.789l8.92 6.229s6.252-4.406 8.869-6.229z"/>
+      </svg>
+    </a>
+  </div>
+</div>
+  <!-- ========== SCRIPT: render, modal, mobile nav, map behavior ========== -->
+  <script>
+    /* ===========================
+       menuData: todas las recetas (completas)
+       =========================== */
+    const menuData = [
+      {
+        id: 'elotitos',
+        title: 'Elotitos',
+        category: 'platos-fuertes',
+        time: '25 min',
+        img: 'elotito.jpeg',
+        desc: 'Elotes tiernos asados, untados con mantequilla mezclada con salsa de soya y espolvoreados con shichimi.',
+        ingredients: ['Elotes tiernos', 'Mantequilla', 'Salsa de soya', 'Shichimi'],
+        steps: 'Asar los elotes en grill o carbón hasta dorar. Mezclar mantequilla con soya, untar y espolvorear shichimi.'
+      },
+      {
+        id: 'rollitos-thai',
+        title: 'Rollitos Thai',
+        category: 'platos-fuertes',
+        time: '25 min',
+        img: 'rollitos thai.jpeg',
+        desc: 'Papel de arroz relleno de tiras de lechuga, zanahoria, pepino, pimiento rojo y guacamole picante.',
+        ingredients: ['Papel de arroz', 'Lechuga', 'Zanahoria', 'Pepino', 'Pimiento rojo', 'Aguacate', 'Limón', 'Chile serrano'],
+        steps: 'Hidratar papel de arroz, colocar verduras en tiras y enrollar. Acompañar con guacamole de aguacate, limón y chile.'
+      },
+      {
+        id: 'dumplings-cochinita',
+        title: 'Dumplings de Cochinita pibil',
+        category: 'platos-fuertes',
+        time: '30 min',
+        img: 'Dumplings de Cochinita pibil.jpeg',
+        desc: 'Cochinita pibil sazonada, envuelta en láminas de wonton y cocida al vapor o al horno.',
+        ingredients: ['Carne de cerdo', 'Achiote en pasta', 'Jugo de naranja agria', 'Ajo', 'Sal', 'Pimienta', 'Láminas de wonton'],
+        steps: 'Marinar carne en achiote y cítricos; rellenar wonton; cocer al vapor u hornear envuelto en hoja de plátano opcionalmente.'
+      },
+      {
+        id: 'ceviche-coco-mango',
+        title: 'Ceviche en leche de coco con habanero y mango',
+        category: 'platos-fuertes',
+        time: '25 min',
+        img: 'Ceviche.jpeg',
+        desc: 'Pescado marinado en cítricos y leche de coco con habanero y mango; servido con tostadas.',
+        ingredients: ['Pescado blanco', 'Leche de coco', 'Jugo de limón', 'Jugo de naranja', 'Cebolla morada', 'Habanero', 'Mango', 'Cilantro'],
+        steps: 'Marinar pescado 10–12 min con jugos; agregar leche de coco y vegetales; mezclar y servir con tostadas.'
+      },
+      {
+        id: 'pescado-fusion',
+        title: 'Pescado Fusión (achiote + salsa thai)',
+        category: 'platos-fuertes',
+        time: '40 min',
+        img: 'Pescado.jpeg',
+        desc: 'Filetes marinados en achiote y limón, servidos con salsa de leche de coco estilo thai.',
+        ingredients: ['Filetes de pescado', 'Achiote', 'Jugo de limón', 'Ajo', 'Jengibre', 'Leche de coco', 'Salsa de pescado', 'Cúrcuma', 'Albahaca'],
+        steps: 'Marinar filetes en achiote y cítricos 15–20 min; sellar en sartén; preparar salsa thai con leche de coco y servir sobre filetes.'
+      },
+      {
+        id: 'tacos-tierra-fuego',
+        title: 'Tacos Tierra y Fuego',
+        category: 'platos-fuertes',
+        time: '40 min',
+        img: 'Tacos.jpeg',
+        desc: 'Pulpa de res con salsa de tamarindo y chipotle, salteada con jengibre para un perfil ahumado y picante.',
+        ingredients: ['Pulpa de res', 'Pasta de tamarindo', 'Chipotle en adobo', 'Jengibre', 'Salsa de pescado/soya', 'Cilantro'],
+        steps: 'Saltear carne; preparar salsa con tamarindo, chipotle y jengibre; mezclar y servir en tortillas con vegetales.'
+      },
+      {
+        id: 'mayum',
+        title: 'Mayum (sopa tipo Tom Yum)',
+        category: 'sopas',
+        time: '30 min',
+        img: 'Mayum.jpeg',
+        desc: 'Sopa aromática con camarones, lemongrass, pasta Tom Yum, leche de coco y jugo de limón.',
+        ingredients: ['Caldo de pollo', 'Camarones', 'Champiñones', 'Lemongrass', 'Hojas de lima', 'Pasta Tom Yum', 'Leche de coco', 'Jugo de limón', 'Salsa de pescado'],
+        steps: 'Aromatizar caldo con lemongrass y hojas de lima; añadir pasta Tom Yum, verduras y camarones; terminar con limón y leche de coco.'
+      },
+      {
+        id: 'crema-chicharron',
+        title: 'Crema de Chicharrón',
+        category: 'sopas',
+        time: '45 min',
+        img: 'Crema de Chicharron.jpeg',
+        desc: 'Crema rica con chicharrón, crema para batir, leche y un toque de epazote.',
+        ingredients: ['Chicharrón de cerdo', 'Cebolla', 'Crema para batir', 'Leche', 'Fondo de ave', 'Epazote', 'Sal y pimienta'],
+        steps: 'Sofreír cebolla, incorporar chicharrón, añadir leche y fondo; temperar la crema, hervir y ajustar sazón; servir con aceite de chile verde.'
+      },
+      {
+        id: 'mixiote-carnero',
+        title: 'Mixiote de Carnero',
+        category: 'platos-fuertes',
+        time: '2 hrs',
+        img: 'mixiote.jpeg',
+        desc: 'Preparación tradicional con carnero, elote, chilacayote y epazote.',
+        ingredients: ['Carnero', 'Cebolla', 'Elote', 'Chilacayote', 'Chile poblano', 'Flor de calabaza', 'Fondo de vegetales', 'Epazote'],
+        steps: 'Saltear verduras, añadir fondo y cocinar; integrar carnero y vegetales hasta punto deseado; sazonar.'
+      },
+      {
+        id: 'sopa-tarasca',
+        title: 'Sopa Tarasca',
+        category: 'sopas',
+        time: '60 min',
+        img: 'sopa tascara.jpeg',
+        desc: 'Sopa de tomate con base de tortilla frita, chile pasilla y queso Cotija.',
+        ingredients: ['Jitomate', 'Cebolla', 'Ajo', 'Chile pasilla', 'Tortillas', 'Fondo de ave', 'Orégano', 'Epazote', 'Queso Cotija'],
+        steps: 'Freír tortillas y chile pasilla; moler jitomate con caldo; saltear y agregar fondo; hervir y servir con guarniciones.'
+      },
+      {
+        id: 'sopa-milpa',
+        title: 'Sopa de Milpa',
+        category: 'sopas',
+        time: '2 hrs',
+        img: 'chilacayote.jpeg',
+        desc: 'Sopa tradicional con elote, flor de calabaza, chilacayote y epazote.',
+        ingredients: ['Elote', 'Chilacayote', 'Flor de calabaza', 'Chile poblano', 'Cebolla', 'Fondo de vegetales', 'Epazote'],
+        steps: 'Saltear cebolla y elote, añadir poblano; agregar fondo, cocer y sumar chilacayote y flor de calabaza; sazonar.'
+      },
+      {
+        id: 'pad-thai',
+        title: 'Pad Thai',
+        category: 'platos-fuertes',
+        time: '35 min',
+        img: 'Pad Thai.jpeg',
+        desc: 'Clásico pad thai con fideos de arroz, camarones, huevo y cacahuate tostado.',
+        ingredients: ['Fideos de arroz', 'Camarones', 'Huevos', 'Ajo', 'Zanahoria', 'Pimiento', 'Brotes de soya', 'Salsa de soya', 'Miel de agave', 'Cacahuates'],
+        steps: 'Preparar fideos; saltear ajo y camarones; cocinar huevos; mezclar todos los ingredientes con salsa y servir con cacahuates.'
+      },
+      {
+        id: 'karin-gai',
+        title: 'Karin Gai (curry amarillo)',
+        category: 'platos-fuertes',
+        time: '30 min',
+        img: 'curry amarillo.jpeg',
+        desc: 'Guiso suave de pollo con curry amarillo, leche de coco y vegetales.',
+        ingredients: ['Pechuga de pollo', 'Curry amarillo', 'Leche de coco', 'Caldo de pollo', 'Papa', 'Zanahoria', 'Cúrcuma', 'Comino', 'Salsa de pescado'],
+        steps: 'Sellar pollo; sofreír pasta de curry; añadir leche de coco y caldo; cocinar verduras; incorporar pollo y servir con arroz jazmín.'
+      },
+      {
+        id: 'paleta-cordero',
+        title: 'Paleta de cordero (massaman)',
+        category: 'platos-fuertes',
+        time: '70 min',
+        img: 'cordero.jpeg',
+        desc: 'Paletilla asada con pasta massaman, canela y anís para un resultado meloso.',
+        ingredients: ['Paletilla de cordero', 'Pasta massaman', 'Leche de coco', 'Canela', 'Anís', 'Caldo de pollo', 'Papa'],
+        steps: 'Cubrir paletilla con curry y leche de coco; hornear tapada a 220°C 1 hr hasta tierna; reducir salsa y servir.'
+      },
+      {
+        id: 'gai-yang',
+        title: 'Gai Yang (pollo marinado estilo Thai)',
+        category: 'platos-fuertes',
+        time: '3 hrs (marinado)',
+        img: 'Paleta de Cordero al Curry Massaman.jpeg',
+        desc: 'Muslos de pollo marinados en mezcla aromática (lemongrass, ajo, salsa de pescado) y asados.',
+        ingredients: ['Muslo de pollo', 'Ajo', 'Lemongrass', 'Jugo de lima', 'Salsa de pescado', 'Jerez', 'Miel', 'Aceite de sésamo'],
+        steps: 'Marinar pollo 3–24 hrs; asar a fuego medio-alto hasta dorar y cocinar internamente; servir con salsa a gusto.'
+      },
+      {
+        id: 'sopa-calabaza-coco',
+        title: 'Sopa de Calabaza y Coco',
+        category: 'sopas',
+        time: '30 min',
+        img: 'Sopa de Calabaza y Coco.jpeg',
+        desc: 'Crema de calabaza con leche de coco, curry rojo y un toque de salsa de pescado.',
+        ingredients: ['Calabaza', 'Leche de coco', 'Cebolla', 'Ajo', 'Pasta de curry roja', 'Salsa de pescado'],
+        steps: 'Sofreír ajo y cebolla, añadir pasta de curry, agregar calabaza y cubrir con leche de coco; cocer, licuar y rectificar sazón.'
+      },
+      {
+        id: 'camarones-coco-mango',
+        title: 'Camarones al coco y habanero con mango',
+        category: 'platos-fuertes',
+        time: '25 min',
+        img: 'Camarones de coco.jpeg',
+        desc: 'Camarones salteados en leche de coco con habanero y mango asado; balance dulce-picante.',
+        ingredients: ['Camarones', 'Leche de coco', 'Habanero', 'Mango', 'Ajo', 'Jengibre', 'Salsa de pescado', 'Cilantro'],
+        steps: 'Marinar camarones; dorar mango; saltear camarones 4–5 min y añadir mango al final; servir con cilantro.'
+      },
+      {
+        id: 'flan-coco-piloncillo',
+        title: 'Flan de coco y Piloncillo',
+        category: 'postres',
+        time: '50 min + reposo',
+        img: 'Flan de coco.jpeg',
+        desc: 'Flan horneado a baño María con caramelo de piloncillo y jengibre para aroma.',
+        ingredients: ['Huevos', 'Yemas', 'Leche de coco', 'Piloncillo', 'Jengibre'],
+        steps: 'Hacer caramelo con piloncillo; mezclar huevos y leche de coco con jengibre; hornear a baño María 35-40 min; refrigerar y desmoldar.'
+      },
+      {
+        id: 'platanos-fritos',
+        title: 'Plátanos fritos con cajeta y coco tostado',
+        category: 'postres',
+        time: '15 min',
+        img: 'Platanos fritos.jpeg',
+        desc: 'Plátanos empanizados y fritos, bañados en cajeta y espolvoreados con coco tostado.',
+        ingredients: ['Plátano macho', 'Harina', 'Huevo', 'Panko', 'Aceite vegetal', 'Cajeta', 'Coco rallado'],
+        steps: 'Empanizar plátanos en harina-huevo-panko; freír a 170–180°C; bañar con cajeta y espolvorear coco.'
+      },
+      {
+        id: 'dragon-mezcal',
+        title: 'Dragon Fruit Mezcalito',
+        category: 'bebidas',
+        time: '5 min',
+        img: 'Dragon Fruit Mezcalito.jpeg',
+        desc: 'Mezcal con pulpa de dragon fruit, jugo de naranja y unas gotas de bitter de jengibre.',
+        ingredients: ['Mezcal', 'Pulpa de dragon fruit', 'Jugo de naranja', 'Bitter de jengibre', 'Jarabe simple', 'Hielo'],
+        steps: 'Licuar dragon fruit con naranja, mezclar con mezcal y agitar con hielo; servir y añadir bitter.'
+      },
+      {
+        id: 'coco-siam',
+        title: 'Coco Siam',
+        category: 'bebidas',
+        time: '5 min',
+        img: 'Coco Siam.jpeg',
+        desc: 'Agua de coco infusionada con menta y pepino con un toque de miel.',
+        ingredients: ['Agua de coco', 'Menta', 'Pepino', 'Jugo de limón', 'Miel', 'Hielo'],
+        steps: 'Infusionar agua de coco con menta y pepino en frío; colar y añadir limón y miel; servir con hielo.'
+      },
+      {
+        id: 'jamaica-fizz',
+        title: 'Jamaica Fizz',
+        category: 'bebidas',
+        time: '6 min',
+        img: 'Jamaica Fizz.jpeg',
+        desc: 'Infusión de jamaica fría con soda de lychee y un toque de limón.',
+        ingredients: ['Infusión de jamaica', 'Soda de lychee', 'Jugo de limón', 'Azúcar', 'Hielo'],
+        steps: 'Preparar infusión de jamaica, enfriar; mezclar con soda de lychee y limón; servir en vasos escarchados.'
+      },
+      {
+        id: 'horchata-tai',
+        title: 'Horchata Tai',
+        category: 'bebidas',
+        time: '10 min (+remojo)',
+        img: 'Horchata Tai.jpeg',
+        desc: 'Horchata de arroz mezclada con leche de coco infusionada con canela y cardamomo.',
+        ingredients: ['Arroz remojado', 'Agua', 'Leche de coco', 'Canela', 'Cardamomo', 'Azúcar', 'Hielo'],
+        steps: 'Remojar arroz, licuar con agua, colar; infusionar leche de coco con canela; mezclar y servir frío con hielo.'
+      },
+      {
+        id: 'chilate',
+        title: 'Chilate',
+        category: 'bebidas',
+        time: '10 min',
+        img: 'Chilate.jpeg',
+        desc: 'Bebida tradicional a base de cacao tostado, arroz y piloncillo, servida con hielo y espuma.',
+        ingredients: ['Cacao crudo', 'Arroz blanco', 'Canela', 'Piloncillo', 'Agua', 'Hielo'],
+        steps: 'Tostar cacao y canela; moler ingredientes y formar pasta; diluir con agua, colar y servir con hielo para generar espuma.'
+      },
+      {
+        id: 'tejuino',
+        title: 'Tejuino',
+        category: 'bebidas',
+        time: '1.5 hrs',
+        img: 'Tejuino.jpeg',
+        desc: 'Bebida fermentada a base de maíz pozolero, piloncillo y especias, servida fría.',
+        ingredients: ['Agua', 'Piloncillo', 'Clavos', 'Canela', 'Maíz pozolero precocido', 'Leche condensada opcional'],
+        steps: 'Cocer piloncillo con especias; cocer maíz; licuar con dulces y servir frío.'
+      },
+      {
+        id: 'ponche-frutas',
+        title: 'Ponche de Frutas',
+        category: 'bebidas',
+        time: '60 min',
+        img: 'Ponche de Frutas.jpeg',
+        desc: 'Ponche tradicional con jamaica, tamarindo, tejocotes, piloncillo y fruta surtida.',
+        ingredients: ['Agua', 'Flor de jamaica', 'Tamarindo', 'Caña', 'Tejocotes', 'Piloncillo', 'Guayaba', 'Manzana', 'Ciruela pasa'],
+        steps: 'Cocer jamaica, tamarindo y piloncillo; añadir frutas y cocinar hasta suavizar; servir caliente.'
+      },
+      {
+        id: 'thai-iced-tea',
+        title: 'Thai Iced Tea',
+        category: 'bebidas',
+        time: '60 min',
+        img: 'Thai Iced Tea.jpeg',
+        desc: 'Té negro tailandés infusionado, endulzado y servido con leche de coco sobre hielo.',
+        ingredients: ['Té negro tailandés', 'Agua caliente', 'Azúcar mascabado', 'Leche de coco', 'Hielo'],
+        steps: 'Infusionar té 3–5 min, colar y endulzar; enfriar y servir con hielo y leche de coco.'
+      },
+      {
+        id: 'thai-mai-tai',
+        title: 'Thai Mai Tai (versión)',
+        category: 'bebidas',
+        time: '10 min',
+        img: 'Thai Mai Tai.jpeg',
+        desc: 'Cóctel tropical con ron, triple sec y jugo de lima; refrescante y cítrico.',
+        ingredients: ['Ron oscuro', 'Triple sec', 'Jugo de lima', 'Hielo', 'Decoración'],
+        steps: 'Mezclar licores con jugo de lima y hielo; servir en vaso con decoración cítrica.'
+      },
+      {
+        id: 'siam-sunset',
+        title: 'Siam Sunset',
+        category: 'bebidas',
+        time: '8 min',
+        img: 'Siam Sunser.jpeg',
+        desc: 'Cóctel brillante con jugo de naranja y granadina; simple y visualmente atractivo.',
+        ingredients: ['Jugo de naranja', 'Granadina', 'Vodka opcional', 'Hielo'],
+        steps: 'Mezclar líquidos y servir con hielo y rodaja de naranja.'
+      }
+    ];
+
+    /* ===========================
+       Utilidades y Render
+       =========================== */
+    const grid = document.getElementById('menuGrid');
+    function escapeHtml(str){ if(!str) return ''; return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+    function capitalizeCat(cat){ return cat ? cat.split('-').map(w=>w[0].toUpperCase()+w.slice(1)).join(' ') : ''; }
+
+    function createCard(item, idx){
+      const el = document.createElement('article');
+      el.className = 'card';
+      el.dataset.category = item.category;
+      el.innerHTML = `
+        <div class="cat-label">${escapeHtml(capitalizeCat(item.category))}</div>
+        <div class="card-media"><img loading="lazy" src="${item.img}" alt="${escapeHtml(item.title)}"></div>
+        <div class="card-body">
+          <div class="meta">
+            <h3 class="title">${escapeHtml(item.title)}</h3>
+            <div class="time">${escapeHtml(item.time || '')}</div>
+          </div>
+          <div class="desc">${escapeHtml(item.desc)}</div>
+          <div class="card-actions"><button class="btn view" data-id="${item.id}">Ver Receta</button></div>
+        </div>`;
+      setTimeout(()=> el.classList.add('show'), idx * 70 + 80);
+      addParallax(el);
+      return el;
+    }
+
+    function render(items){
+      grid.innerHTML = '';
+      items.forEach((it,i)=> grid.appendChild(createCard(it,i)));
+      // observe for reveal
+      setTimeout(()=> {
+        document.querySelectorAll('.card').forEach(c => {
+          if(!c.dataset.observed){
+            observer.observe(c);
+            c.dataset.observed = '1';
+          }
+        });
+      }, 200);
+    }
+
+    render(menuData);
+
+    /* Filters */
+    document.querySelectorAll('.filter-btn').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        const f = btn.dataset.filter;
+        if(f === 'all') render(menuData);
+        else render(menuData.filter(x => x.category === f));
+      });
+    });
+
+    /* Parallax micro */
+    function addParallax(card){
+      const media = card.querySelector('.card-media img');
+      if(!media) return;
+      card.addEventListener('mousemove', (ev)=>{
+        const r = card.getBoundingClientRect();
+        const cx = r.left + r.width/2;
+        const cy = r.top + r.height/2;
+        const dx = (ev.clientX - cx) / r.width;
+        const dy = (ev.clientY - cy) / r.height;
+        media.style.transform = `translate(${dx*8}px, ${dy*8}px) scale(1.06)`;
+      });
+      card.addEventListener('mouseleave', ()=> media.style.transform = '');
+    }
+
+    /* ===========================
+       Modal logic
+       =========================== */
+    const modal = document.getElementById('modal');
+    const mTitle = document.getElementById('m-title');
+    const mDesc = document.getElementById('m-desc');
+    const mIngredients = document.getElementById('m-ingredients');
+    const mSteps = document.getElementById('m-steps');
+    const mImg = document.getElementById('m-img');
+
+    document.body.addEventListener('click', (e)=>{
+      const view = e.target.closest('.view');
+      if(view){
+        const id = view.dataset.id;
+        const item = menuData.find(x=>x.id === id);
+        if(!item) return;
+        mTitle.textContent = item.title;
+        mDesc.textContent = item.desc;
+        mIngredients.innerHTML = (item.ingredients||[]).map(i=>`<li>${escapeHtml(i)}</li>`).join('');
+        mSteps.textContent = item.steps || '';
+        mImg.src = item.img || '';
+        modal.classList.add('show');
+        // default to ingredients
+        document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(tc=>tc.classList.remove('active'));
+        document.querySelector('.tab-btn[data-tab="ingredients"]').classList.add('active');
+        document.getElementById('tab-ingredients').classList.add('active');
+      }
+    });
+
+    document.querySelector('.close-x').addEventListener('click', ()=> modal.classList.remove('show'));
+    modal.addEventListener('click', (e)=> { if(e.target === modal) modal.classList.remove('show'); });
+    document.addEventListener('keydown', (e)=> { if(e.key === 'Escape' && modal.classList.contains('show')) modal.classList.remove('show'); });
+
+    document.querySelectorAll('.tab-btn').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(tc=>tc.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
+      });
+    });
+
+    /* ===========================
+       Mobile panel behavior
+       =========================== */
+    const hamburger = document.getElementById('hamburger');
+    const mobilePanel = document.getElementById('mobilePanel');
+    const closeMobile = document.getElementById('closeMobile');
+    hamburger.addEventListener('click', ()=> {
+      mobilePanel.classList.add('open');
+      mobilePanel.setAttribute('aria-hidden','false');
+    });
+    closeMobile.addEventListener('click', ()=> {
+      mobilePanel.classList.remove('open');
+      mobilePanel.setAttribute('aria-hidden','true');
+    });
+    // wire mobile filter buttons
+    mobilePanel.querySelectorAll('.filter-btn').forEach(btn=>{
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+        // set desktop buttons active too for consistency
+        document.querySelectorAll('.main-nav .filter-btn').forEach(b=> b.classList.remove('active'));
+        // find desktop button with same data-filter and set active (if exists)
+        const df = btn.dataset.filter;
+        const desktopBtn = document.querySelector('.main-nav .filter-btn[data-filter="'+df+'"]');
+        if(desktopBtn) desktopBtn.classList.add('active');
+        // render
+        if(df === 'all') render(menuData);
+        else render(menuData.filter(x=>x.category===df));
+        // close panel
+        mobilePanel.classList.remove('open');
+        mobilePanel.setAttribute('aria-hidden','true');
+      });
+    });
+
+    // mobile location button scrolls to contact section
+    document.getElementById('locationBtnMobile').addEventListener('click', ()=> {
+      document.getElementById('contacto').scrollIntoView({ behavior: 'smooth' });
+      mobilePanel.classList.remove('open');
+    });
+
+    /* locationBtn (desktop) scrolls to contact section */
+    document.getElementById('locationBtn').addEventListener('click', ()=> {
+      document.getElementById('contacto').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    /* ===========================
+       Intersection observer for reveal
+       =========================== */
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('show');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.12});
+
+    // observe after initial render
+    setTimeout(()=> {
+      document.querySelectorAll('.card').forEach(c => {
+        if(!c.dataset.observed){
+          observer.observe(c);
+          c.dataset.observed = '1';
+        }
+      });
+    }, 300);
+
+  </script>
+</body>
+</html>
