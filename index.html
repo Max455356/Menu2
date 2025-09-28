@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<html>
 <html lang="es">
 <head>
   <meta charset="utf-8" />
@@ -109,11 +109,11 @@
     .location-btn svg{width:16px;height:16px;fill:var(--gold-dark)}
     .location-btn:hover{background:linear-gradient(90deg, rgba(230,194,122,0.12), rgba(196,154,108,0.06)); color:#1b1200}
 
-    /* Theme Toggle Button */
+    /* Theme Toggle Button - Estilo como en el video */
     .theme-toggle {
       background: var(--glass);
       border: 1px solid rgba(255,255,255,0.04);
-      border-radius: 12px;
+      border-radius: 50%;
       width: 44px;
       height: 44px;
       display: flex;
@@ -121,6 +121,8 @@
       justify-content: center;
       cursor: pointer;
       transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
     }
     [data-theme="light"] .theme-toggle {
       border: 1px solid rgba(0,0,0,0.08);
@@ -128,11 +130,41 @@
     .theme-toggle:hover {
       transform: translateY(-3px);
     }
-    .theme-toggle svg {
-      width: 22px;
-      height: 22px;
-      fill: var(--muted);
+    
+    .theme-toggle-inner {
+      width: 20px;
+      height: 20px;
+      position: relative;
       transition: all 0.3s ease;
+    }
+    
+    .sun-icon, .moon-icon {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      transition: all 0.3s ease;
+    }
+    
+    .sun-icon {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    
+    .moon-icon {
+      opacity: 1;
+      transform: scale(1);
+    }
+    
+    [data-theme="light"] .sun-icon {
+      opacity: 1;
+      transform: scale(1);
+    }
+    
+    [data-theme="light"] .moon-icon {
+      opacity: 0;
+      transform: scale(0.5);
     }
 
     /* Language Toggle Button */
@@ -162,7 +194,7 @@
     [data-theme="light"] .hamburger {
       border: 1px solid rgba(0,0,0,0.08);
     }
-    .hamburger svg{width:22px;height:22px;fill:var(--muted)}
+    .hamburger svg{width:22px;height:22px;fill:var(--text-primary)}
     .mobile-panel{
       position:fixed;top:0;right:-100%;height:100vh;width:var(--nav-width);
       background:linear-gradient(180deg,var(--panel), var(--bg));box-shadow:-20px 0 60px rgba(0,0,0,.7);
@@ -195,11 +227,24 @@
       position:relative;
     }
     .card.show{transform:none;opacity:1}
-    .card-media{height:180px;overflow:hidden;position:relative}
-    .card-media img{width:100%;height:100%;object-fit:cover;transition: transform 700ms ease}
+    .card-media{
+      height:180px;
+      overflow:hidden;
+      position:relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card-media img{
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: transform 700ms ease;
+    }
     .card:hover{transform:translateY(-8px) scale(1.02); box-shadow: 0 30px 70px rgba(0,0,0,.7)}
-    /* REDUCIR EL ZOOM DEL HOVER */
+    /* ZOOM MUY REDUCIDO para bebidas */
     .card:hover img{transform:scale(1.03)}
+    .card[data-category="bebidas"]:hover img{transform:scale(1.005)}
     .card-body{padding:16px;display:flex;flex-direction:column;gap:8px}
     .meta{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
     .title{font-family:'Playfair Display',serif;font-size:18px;margin:0;color:var(--accent)}
@@ -242,8 +287,19 @@
     .tab-btn.active{background:linear-gradient(90deg,var(--accent),#ffdca3);color:#1b1200}
     .tab-content{display:none;margin-top:10px;color:var(--muted)}
     .tab-content.active{display:block}
-    .dialog-right{border-radius:12px;overflow:hidden;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01))}
-    .dialog-right img{width:100%;height:100%;object-fit:cover}
+    .dialog-right{
+      border-radius:12px;
+      overflow:hidden;
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .dialog-right img{
+      width:100%;
+      height:100%;
+      object-fit: contain;
+    }
 
     /* ---------- Footer with map + contact ---------- */
     footer{margin-top:40px;background:var(--footer-bg);color:var(--text-secondary);padding:28px 20px}
@@ -302,17 +358,22 @@
       <button class="filter-btn" data-filter="bebidas">Bebidas</button>
       <button class="lang-toggle" id="langToggle">EN</button>
       <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-          <path d="M12,18c-3.3,0-6-2.7-6-6s2.7-6,6-6s6,2.7,6,6S15.3,18,12,18zM12,8c-2.2,0-4,1.8-4,4c0,2.2,1.8,4,4,4s4-1.8,4-4C16,9.8,14.2,8,12,8z"/>
-          <path d="M12,4c-0.6,0-1-0.4-1-1V1c0-0.6,0.4-1,1-1s1,0.4,1,1v2C13,3.6,12.6,4,12,4z"/>
-          <path d="M12,20c-0.6,0-1,0.4-1,1v2c0,0.6,0.4,1,1,1s1-0.4,1-1v-2C13,20.4,12.6,20,12,20z"/>
-          <path d="M5.6,6.6c-0.3,0-0.5-0.1-0.7-0.3L3.5,4.9c-0.4-0.4-0.4-1,0-1.4s1-0.4,1.4,0l1.4,1.4c0.4,0.4,0.4,1,0,1.4C6.1,6.5,5.9,6.6,5.6,6.6z"/>
-          <path d="M19.8,16.4c-0.3,0-0.5-0.1-0.7-0.3l-1.4-1.4c-0.4-0.4-0.4-1,0-1.4s1-0.4,1.4,0l1.4,1.4c0.4,0.4,0.4,1,0,1.4C20.3,16.3,20,16.4,19.8,16.4z"/>
-          <path d="M3,13H1c-0.6,0-1-0.4-1-1s0.4-1,1-1h2c0.6,0,1,0.4,1,1S3.6,13,3,13z"/>
-          <path d="M23,13h-2c-0.6,0-1-0.4-1-1s0.4-1,1-1h2c0.6,0,1,0.4,1,1S23.6,13,23,13z"/>
-          <path d="M4.2,16.4c-0.3,0-0.5-0.1-0.7-0.3c-0.4-0.4-0.4-1,0-1.4l1.4-1.4c0.4-0.4,1-0.4,1.4,0s0.4,1,0,1.4l-1.4,1.4C4.7,16.3,4.5,16.4,4.2,16.4z"/>
-          <path d="M18.4,6.6c-0.3,0-0.5-0.1-0.7-0.3c-0.4-0.4-0.4-1,0-1.4l1.4-1.4c0.4-0.4,1-0.4,1.4,0s0.4,1,0,1.4l-1.4,1.4C18.9,6.5,18.6,6.6,18.4,6.6z"/>
-        </svg>
+        <div class="theme-toggle-inner">
+          <svg class="sun-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2"/>
+            <path d="M12 2V4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M12 20V22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M4 12H2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M22 12H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M19.07 4.93L17.66 6.34" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M6.34 17.66L4.93 19.07" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M19.07 19.07L17.66 17.66" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M6.34 6.34L4.93 4.93" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <svg class="moon-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
       </button>
       <button class="location-btn" id="locationBtn" title="Ir a información de contacto">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C8 2 5 5 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-4-3-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>
@@ -339,17 +400,22 @@
       <button class="filter-btn" data-filter="bebidas">Bebidas</button>
       <button class="lang-toggle" id="langToggleMobile">EN</button>
       <button class="theme-toggle" id="themeToggleMobile" aria-label="Cambiar tema">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-          <path d="M12,18c-3.3,0-6-2.7-6-6s2.7-6,6-6s6,2.7,6,6S15.3,18,12,18zM12,8c-2.2,0-4,1.8-4,4c0,2.2,1.8,4,4,4s4-1.8,4-4C16,9.8,14.2,8,12,8z"/>
-          <path d="M12,4c-0.6,0-1-0.4-1-1V1c0-0.6,0.4-1,1-1s1,0.4,1,1v2C13,3.6,12.6,4,12,4z"/>
-          <path d="M12,20c-0.6,0-1,0.4-1,1v2c0,0.6,0.4,1,1,1s1-0.4,1-1v-2C13,20.4,12.6,20,12,20z"/>
-          <path d="M5.6,6.6c-0.3,0-0.5-0.1-0.7-0.3L3.5,4.9c-0.4-0.4-0.4-1,0-1.4s1-0.4,1.4,0l1.4,1.4c0.4,0.4,0.4,1,0,1.4C6.1,6.5,5.9,6.6,5.6,6.6z"/>
-          <path d="M19.8,16.4c-0.3,0-0.5-0.1-0.7-0.3l-1.4-1.4c-0.4-0.4-0.4-1,0-1.4s1-0.4,1.4,0l1.4,1.4c0.4,0.4,0.4,1,0,1.4C20.3,16.3,20,16.4,19.8,16.4z"/>
-          <path d="M3,13H1c-0.6,0-1-0.4-1-1s0.4-1,1-1h2c0.6,0,1,0.4,1,1S3.6,13,3,13z"/>
-          <path d="M23,13h-2c-0.6,0-1-0.4-1-1s0.4-1,1-1h2c0.6,0,1,0.4,1,1S23.6,13,23,13z"/>
-          <path d="M4.2,16.4c-0.3,0-0.5-0.1-0.7-0.3c-0.4-0.4-0.4-1,0-1.4l1.4-1.4c0.4-0.4,1-0.4,1.4,0s0.4,1,0,1.4l-1.4,1.4C4.7,16.3,4.5,16.4,4.2,16.4z"/>
-          <path d="M18.4,6.6c-0.3,0-0.5-0.1-0.7-0.3c-0.4-0.4-0.4-1,0-1.4l1.4-1.4c0.4-0.4,1-0.4,1.4,0s0.4,1,0,1.4l-1.4,1.4C18.9,6.5,18.6,6.6,18.4,6.6z"/>
-        </svg>
+        <div class="theme-toggle-inner">
+          <svg class="sun-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2"/>
+            <path d="M12 2V4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M12 20V22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M4 12H2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M22 12H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M19.07 4.93L17.66 6.34" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M6.34 17.66L4.93 19.07" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M19.07 19.07L17.66 17.66" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M6.34 6.34L4.93 4.93" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <svg class="moon-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
       </button>
       <button class="location-btn" id="locationBtnMobile">📍 Ir a Contacto</button>
     </div>
@@ -848,7 +914,7 @@
         desc: 'Horchata de arroz mezclada con leche de coco infusionada con canela y cardamomo.',
         desc_en: 'Rice horchata mixed with coconut milk infused with cinnamon and cardamom.',
         ingredients: ['Arroz remojado', 'Agua', 'Leche de coco', 'Canela', 'Cardamomo', 'Azúcar', 'Hielo'],
-        ingredients_en: ['Soaked rice', 'Water', 'Coconut milk', 'Cinnamon', 'Cardamom', 'Sugar', 'Ice'],
+        ingredients_en: ['Soaked rice', 'Water', 'Coconut milk', 'Cinnamon', 'Cardamomo', 'Sugar', 'Ice'],
         steps: 'Remojar arroz, licuar con agua, colar; infusionar leche de coco con canela; mezclar y servir frío con hielo.',
         steps_en: 'Soak rice, blend with water, strain; infuse coconut milk with cinnamon; mix and serve cold with ice.'
       },
@@ -970,6 +1036,7 @@
       const el = document.createElement('article');
       el.className = 'card';
       el.dataset.category = item.category;
+      el.dataset.cat = item.category; // Para identificar bebidas
       
       const title = currentLanguage === 'es' ? item.title : item.title_en;
       const desc = currentLanguage === 'es' ? item.desc : item.desc_en;
@@ -1198,48 +1265,6 @@
     function toggleTheme() {
       currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
       document.documentElement.setAttribute('data-theme', currentTheme);
-      
-      // Update theme toggle icon
-      const themeIcon = document.querySelector('#themeToggle svg');
-      if (currentTheme === 'dark') {
-        // Sun icon for light theme
-        themeIcon.innerHTML = `
-          <path d="M12,18c-3.3,0-6-2.7-6-6s2.7-6,6-6s6,2.7,6,6S15.3,18,12,18zM12,8c-2.2,0-4,1.8-4,4c0,2.2,1.8,4,4,4s4-1.8,4-4C16,9.8,14.2,8,12,8z"/>
-          <path d="M12,4c-0.6,0-1-0.4-1-1V1c0-0.6,0.4-1,1-1s1,0.4,1,1v2C13,3.6,12.6,4,12,4z"/>
-          <path d="M12,20c-0.6,0-1,0.4-1,1v2c0,0.6,0.4,1,1,1s1-0.4,1-1v-2C13,20.4,12.6,20,12,20z"/>
-          <path d="M5.6,6.6c-0.3,0-0.5-0.1-0.7-0.3L3.5,4.9c-0.4-0.4-0.4-1,0-1.4s1-0.4,1.4,0l1.4,1.4c0.4,0.4,0.4,1,0,1.4C6.1,6.5,5.9,6.6,5.6,6.6z"/>
-          <path d="M19.8,16.4c-0.3,0-0.5-0.1-0.7-0.3l-1.4-1.4c-0.4-0.4-0.4-1,0-1.4s1-0.4,1.4,0l1.4,1.4c0.4,0.4,0.4,1,0,1.4C20.3,16.3,20,16.4,19.8,16.4z"/>
-          <path d="M3,13H1c-0.6,0-1-0.4-1-1s0.4-1,1-1h2c0.6,0,1,0.4,1,1S3.6,13,3,13z"/>
-          <path d="M23,13h-2c-0.6,0-1-0.4-1-1s0.4-1,1-1h2c0.6,0,1,0.4,1,1S23.6,13,23,13z"/>
-          <path d="M4.2,16.4c-0.3,0-0.5-0.1-0.7-0.3c-0.4-0.4-0.4-1,0-1.4l1.4-1.4c0.4-0.4,1-0.4,1.4,0s0.4,1,0,1.4l-1.4,1.4C4.7,16.3,4.5,16.4,4.2,16.4z"/>
-          <path d="M18.4,6.6c-0.3,0-0.5-0.1-0.7-0.3c-0.4-0.4-0.4-1,0-1.4l1.4-1.4c0.4-0.4,1-0.4,1.4,0s0.4,1,0,1.4l-1.4,1.4C18.9,6.5,18.6,6.6,18.4,6.6z"/>
-        `;
-      } else {
-        // Moon icon for dark theme
-        themeIcon.innerHTML = `
-          <path d="M12,11.807C9.349,9.155,8.18,5.54,9.125,2C5.582,2.816,3,5.989,3,9.807C3,13.972,6.582,17.554,10.75,17.554c3.818,0,6.991-2.582,7.807-6.125C14.46,13.013,10.846,14.182,8.194,11.531L12,11.807z"/>
-        `;
-      }
-      
-      // Update mobile theme toggle icon
-      const mobileThemeIcon = document.querySelector('#themeToggleMobile svg');
-      if (currentTheme === 'dark') {
-        mobileThemeIcon.innerHTML = `
-          <path d="M12,18c-3.3,0-6-2.7-6-6s2.7-6,6-6s6,2.7,6,6S15.3,18,12,18zM12,8c-2.2,0-4,1.8-4,4c0,2.2,1.8,4,4,4s4-1.8,4-4C16,9.8,14.2,8,12,8z"/>
-          <path d="M12,4c-0.6,0-1-0.4-1-1V1c0-0.6,0.4-1,1-1s1,0.4,1,1v2C13,3.6,12.6,4,12,4z"/>
-          <path d="M12,20c-0.6,0-1,0.4-1,1v2c0,0.6,0.4,1,1,1s1-0.4,1-1v-2C13,20.4,12.6,20,12,20z"/>
-          <path d="M5.6,6.6c-0.3,0-0.5-0.1-0.7-0.3L3.5,4.9c-0.4-0.4-0.4-1,0-1.4s1-0.4,1.4,0l1.4,1.4c0.4,0.4,0.4,1,0,1.4C6.1,6.5,5.9,6.6,5.6,6.6z"/>
-          <path d="M19.8,16.4c-0.3,0-0.5-0.1-0.7-0.3l-1.4-1.4c-0.4-0.4-0.4-1,0-1.4s1-0.4,1.4,0l1.4,1.4c0.4,0.4,0.4,1,0,1.4C20.3,16.3,20,16.4,19.8,16.4z"/>
-          <path d="M3,13H1c-0.6,0-1-0.4-1-1s0.4-1,1-1h2c0.6,0,1,0.4,1,1S3.6,13,3,13z"/>
-          <path d="M23,13h-2c-0.6,0-1-0.4-1-1s0.4-1,1-1h2c0.6,0,1,0.4,1,1S23.6,13,23,13z"/>
-          <path d="M4.2,16.4c-0.3,0-0.5-0.1-0.7-0.3c-0.4-0.4-0.4-1,0-1.4l1.4-1.4c0.4-0.4,1-0.4,1.4,0s0.4,1,0,1.4l-1.4,1.4C4.7,16.3,4.5,16.4,4.2,16.4z"/>
-          <path d="M18.4,6.6c-0.3,0-0.5-0.1-0.7-0.3c-0.4-0.4-0.4-1,0-1.4l1.4-1.4c0.4-0.4,1-0.4,1.4,0s0.4,1,0,1.4l-1.4,1.4C18.9,6.5,18.6,6.6,18.4,6.6z"/>
-        `;
-      } else {
-        mobileThemeIcon.innerHTML = `
-          <path d="M12,11.807C9.349,9.155,8.18,5.54,9.125,2C5.582,2.816,3,5.989,3,9.807C3,13.972,6.582,17.554,10.75,17.554c3.818,0,6.991-2.582,7.807-6.125C14.46,13.013,10.846,14.182,8.194,11.531L12,11.807z"/>
-        `;
-      }
     }
 
     document.getElementById('themeToggle').addEventListener('click', toggleTheme);
