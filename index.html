@@ -139,7 +139,12 @@
       width:44px;height:44px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.04);
       align-items:center;justify-content:center;cursor:pointer;
     }
-    .hamburger svg{width:22px;height:22px;fill:var(--muted)}
+    .hamburger svg{width:22px;height:22px;fill:#ffffff} /* Líneas blancas en tema oscuro */
+    
+    [data-theme="light"] .hamburger svg {
+      fill: #000000; /* Líneas negras en tema claro */
+    }
+
     .mobile-panel{
       position:fixed;top:0;right:-100%;height:100vh;width:var(--nav-width);
       background:linear-gradient(180deg,#0b0c0d,#0f1113);box-shadow:-20px 0 60px rgba(0,0,0,.7);
@@ -185,7 +190,15 @@
 
     .card.show{transform:none;opacity:1}
     .card-media{height:180px;overflow:hidden;position:relative}
-    .card-media img{width:100%;height:100%;object-fit:cover;transition: transform 700ms ease}
+    .card-media img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      transition: transform 700ms ease;
+      /* Asegurar que la imagen se muestre completa */
+      min-width: 100%;
+      min-height: 100%;
+    }
     .card:hover{transform:translateY(-8px) scale(1.02); box-shadow: 0 30px 70px rgba(0,0,0,.7)}
     /* REDUCIR EL ZOOM DEL HOVER */
     .card:hover img{transform:scale(1.03)}
@@ -409,15 +422,15 @@
           <path d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z"/>
         </svg>
         <svg class="sun-icon" viewBox="0 0 24 24" style="display:none">
-          <circle cx="12" cy="12" r="5"/>
-          <line x1="12" y1="1" x2="12" y2="3"/>
-          <line x1="12" y1="21" x2="12" y2="23"/>
-          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-          <line x1="1" y1="12" x2="3" y2="12"/>
-          <line x1="21" y1="12" x2="23" y2="12"/>
-          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          <circle cx="12" cy="12" r="5" fill="currentColor"/>
+          <line x1="12" y1="1" x2="12" y2="3" stroke="currentColor" stroke-width="2"/>
+          <line x1="12" y1="21" x2="12" y2="23" stroke="currentColor" stroke-width="2"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" stroke="currentColor" stroke-width="2"/>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" stroke="currentColor" stroke-width="2"/>
+          <line x1="1" y1="12" x2="3" y2="12" stroke="currentColor" stroke-width="2"/>
+          <line x1="21" y1="12" x2="23" y2="12" stroke="currentColor" stroke-width="2"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" stroke="currentColor" stroke-width="2"/>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" stroke="currentColor" stroke-width="2"/>
         </svg>
       </button>
       
@@ -536,7 +549,7 @@
                     <stop offset="100%" stop-color="#bc1888"/>
                   </linearGradient>
                 </defs>
-                <path fill="url(#igGradient)" d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9 114.9-51.3 114.9-114.9S287.6 141 224.1 141zm0 189.6c-41.3 0-74.7-33.4-74.7-74.7s33.4-74.7 74.7-74.7 74.7 33.4 74.7 74.7-33.4 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.9-26.9 26.9s-26.9-12-26.9-26.9 12-26.9 26.9-26.9 26.9 12 26.9 26.9zm76.1 27.2c-1.7-35.7-9.9-67.3-36.2-93.5S377.4 38.8 341.7 37.1c-35.7-1.7-142.7-1.7-178.4 0-35.7 1.7-67.3 9.9-93.5 36.2S38.8 134.6 37.1 170.3c-1.7 35.7-1.7 142.7 0 178.4 1.7 35.7 9.9 67.3 36.2 93.5s57.8 34.5 93.5 36.2c35.7 1.7 142.7 1.7 178.4 0 35.7-1.7 67.3-9.9 93.5-36.2s34.5-57.8 36.2-93.5c1.7-35.7 1.7-142.7 0-178.4zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/>
+                <path fill="url(#igGradient)" d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9 114.9-51.3 114.9-114.9S287.6 141 224.1 141zm0 189.6c-41.3 0-74.7-33.4-74.7-74.7s33.4-74.7 74.7-74.7 74.7 33.4 74.7 74.7-33.4 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.9-26.9 26.9s-26.9-12-26.9-26.9 12-26.9 26.9-26.9 26.9 12 26.9 26.9zm76.1 27.2c-1.7-35.7-9.9-67.3-36.2-93.5S377.4 38.8 341.7 37.1c-35.7-1.7-142.7-1.7-178.4 0-35.7 1.7-67.3 9.9-93.5 36.2S38.8 134.6 37.1 170.3c-1.7 35.7-1.7 142.7 0 178.4 1.7 35.7 9.9 67.3 36.2 93.5s57.8 34.5 93.5 36.2c35.7 1.7 142.7 1.7 178.4 0 35.7-1.7 67.3-9.9 93.5-36.2s34.5-57.8 36.2-93.5c1.7-35.7 1.7-142.7 0-178.4zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7-29.5 9-99.5 9-132.1s2.7 102.7-9 132.1z"/>
               </svg>
             </a>
             
