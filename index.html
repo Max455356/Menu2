@@ -16,6 +16,17 @@
       --gold-dark:#c49a6c;
       --nav-width:280px;
     }
+    
+    /* Tema claro */
+    [data-theme="light"] {
+      --bg:#f5f5f7;
+      --panel:#ffffff;
+      --glass: rgba(0,0,0,0.03);
+      --accent:#b8860b;
+      --muted:#5a5a5a;
+      --gold-dark:#8b6b46;
+    }
+
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
@@ -28,6 +39,14 @@
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
       scroll-behavior: smooth;
+      background-color: var(--bg);
+      color: var(--muted);
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    [data-theme="light"] body {
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(230,194,122,0.1), transparent 6%),
+                  linear-gradient(180deg,#f0f0f0,#e0e0e0 60%);
     }
 
     /* ---------- Header ---------- */
@@ -38,7 +57,14 @@
       background:linear-gradient(180deg, rgba(10,10,11,0.66), rgba(10,10,11,0.36));
       border-bottom:1px solid rgba(255,255,255,0.03);
       backdrop-filter: blur(8px) saturate(120%);
+      transition: background 0.3s ease;
     }
+
+    [data-theme="light"] header {
+      background:linear-gradient(180deg, rgba(255,255,255,0.8), rgba(255,255,255,0.6));
+      border-bottom:1px solid rgba(0,0,0,0.05);
+    }
+
     .brand{display:flex;gap:12px;align-items:center}
     .logo{
       width:48px;height:48px;border-radius:10px;
@@ -58,6 +84,11 @@
       color:var(--muted);padding:8px 12px;border-radius:12px;cursor:pointer;font-weight:600;
       transition: all 220ms var(--ease);
     }
+    
+    [data-theme="light"] .filter-btn {
+      border:1px solid rgba(0,0,0,0.08);
+    }
+
     .filter-btn:hover{transform:translateY(-3px)}
     .filter-btn.active{background:linear-gradient(90deg,var(--accent), #ffdca3); color:#1b1200; border:none}
 
@@ -72,6 +103,36 @@
     .location-btn svg{width:16px;height:16px;fill:var(--gold-dark)}
     .location-btn:hover{background:linear-gradient(90deg, rgba(230,194,122,0.12), rgba(196,154,108,0.06)); color:#1b1200}
 
+    /* Botones de tema e idioma */
+    .theme-toggle, .lang-toggle {
+      background: var(--glass);
+      border: 1px solid rgba(255,255,255,0.04);
+      color: var(--muted);
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 220ms var(--ease);
+    }
+    
+    [data-theme="light"] .theme-toggle,
+    [data-theme="light"] .lang-toggle {
+      border: 1px solid rgba(0,0,0,0.08);
+    }
+
+    .theme-toggle:hover, .lang-toggle:hover {
+      transform: translateY(-3px);
+    }
+
+    .theme-toggle svg, .lang-toggle svg {
+      width: 20px;
+      height: 20px;
+      fill: var(--muted);
+    }
+
     /* ---------- Hamburger & Mobile Nav ---------- */
     .hamburger{
       display:none;
@@ -85,6 +146,11 @@
       transition:right .36s cubic-bezier(.2,.9,.3,1);z-index:400;padding:20px;
       display:flex;flex-direction:column;gap:16px;
     }
+    
+    [data-theme="light"] .mobile-panel {
+      background:linear-gradient(180deg,#f5f5f7,#ffffff);
+    }
+
     .mobile-panel.open{right:0}
     .mobile-panel .close-mobile{align-self:flex-end;background:none;border:none;color:var(--muted);font-size:22px;cursor:pointer}
 
@@ -110,8 +176,15 @@
       border:1px solid rgba(255,255,255,0.03);
       position:relative;
     }
+    
+    [data-theme="light"] .card {
+      background:linear-gradient(180deg, rgba(0,0,0,0.01), rgba(0,0,0,0.02));
+      border:1px solid rgba(0,0,0,0.05);
+      box-shadow: 0 12px 30px rgba(0,0,0,.1);
+    }
+
     .card.show{transform:none;opacity:1}
-    .card-media{height:180px;overflow:hidden}
+    .card-media{height:180px;overflow:hidden;position:relative}
     .card-media img{width:100%;height:100%;object-fit:cover;transition: transform 700ms ease}
     .card:hover{transform:translateY(-8px) scale(1.02); box-shadow: 0 30px 70px rgba(0,0,0,.7)}
     /* REDUCIR EL ZOOM DEL HOVER */
@@ -133,6 +206,11 @@
       background: linear-gradient(180deg, rgba(2,2,2,0.6), rgba(2,2,2,0.9));
       z-index:500;backdrop-filter: blur(6px) saturate(120%);
     }
+    
+    [data-theme="light"] .modal {
+      background: linear-gradient(180deg, rgba(0,0,0,0.4), rgba(0,0,0,0.7));
+    }
+
     .modal.show{display:flex}
     .dialog{
       width:94%;max-width:980px;border-radius:18px;background:linear-gradient(180deg,#0f1113,#0b0c0d);
@@ -140,11 +218,21 @@
       box-shadow: 0 30px 80px rgba(0,0,0,.7);transform:translateY(30px) scale(.96);opacity:0;transition:all 360ms var(--ease);
       position:relative;
     }
+    
+    [data-theme="light"] .dialog {
+      background:linear-gradient(180deg,#ffffff,#f5f5f7);
+    }
+
     .modal.show .dialog{transform:none;opacity:1}
     .close-x{position:absolute;right:18px;top:14px;background:transparent;border:none;color:#f0e4d6;font-size:20px;cursor:pointer}
     .close-x:hover{color:var(--accent)}
     .dialog h2{margin:8px 0 6px;font-family:'Playfair Display',serif;color:var(--accent)}
     .dialog p{color:#f0e4d6;margin:0 0 10px}
+    
+    [data-theme="light"] .dialog p {
+      color: var(--muted);
+    }
+
     .ingredients{margin-top:10px;padding-left:18px;color:var(--muted)}
     .tabs{display:flex;gap:10px}
     .tab-btn{padding:10px 12px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);color:var(--muted);cursor:pointer;font-weight:700}
@@ -156,10 +244,26 @@
 
     /* ---------- Footer with map + contact ---------- */
     footer{margin-top:40px;background:#111;color:#ccc;padding:28px 20px}
+    
+    [data-theme="light"] footer {
+      background:#f0f0f0;
+      color:#555;
+    }
+
     .footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns: 1fr 420px;gap:18px;align-items:start}
     .contact-block{padding:18px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));}
+    
+    [data-theme="light"] .contact-block {
+      background:linear-gradient(180deg, rgba(0,0,0,0.01), rgba(0,0,0,0.02));
+    }
+
     .contact-block h3{color:var(--accent);font-family:'Playfair Display',serif;margin-top:0}
     .contact-block p{margin:8px 0;color:#ddd}
+    
+    [data-theme="light"] .contact-block p {
+      color:#555;
+    }
+
     .socials{display:flex;gap:12px;margin-top:10px}
     .socials a{display:inline-flex;align-items:center; justify-content:center;width:44px;height:44px;border-radius:8px;background:transparent;text-decoration:none;border:1px solid rgba(255,255,255,0.1);transition:all 0.3s ease}
     .socials a:hover{background:rgba(255,255,255,0.05);transform:translateY(-2px);border-color:var(--accent)}
@@ -292,6 +396,31 @@
       <button class="filter-btn" data-filter="sopas">Sopas</button>
       <button class="filter-btn" data-filter="postres">Postres</button>
       <button class="filter-btn" data-filter="bebidas">Bebidas</button>
+      
+      <!-- Botones de tema e idioma -->
+      <button class="lang-toggle" id="langToggle" aria-label="Cambiar idioma">
+        <svg viewBox="0 0 24 24">
+          <path d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/>
+        </svg>
+      </button>
+      
+      <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
+        <svg class="moon-icon" viewBox="0 0 24 24">
+          <path d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z"/>
+        </svg>
+        <svg class="sun-icon" viewBox="0 0 24 24" style="display:none">
+          <circle cx="12" cy="12" r="5"/>
+          <line x1="12" y1="1" x2="12" y2="3"/>
+          <line x1="12" y1="21" x2="12" y2="23"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="1" y1="12" x2="3" y2="12"/>
+          <line x1="21" y1="12" x2="23" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+      </button>
+      
       <button class="location-btn" id="locationBtn" title="Ir a información de contacto">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C8 2 5 5 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-4-3-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>
         Av. Insurgentes 123
@@ -313,6 +442,12 @@
       <button class="filter-btn" data-filter="sopas">Sopas</button>
       <button class="filter-btn" data-filter="postres">Postres</button>
       <button class="filter-btn" data-filter="bebidas">Bebidas</button>
+      
+      <div style="display:flex;gap:10px">
+        <button class="lang-toggle" id="langToggleMobile" style="flex:1">EN/ES</button>
+        <button class="theme-toggle" id="themeToggleMobile" style="flex:1">🌙/☀️</button>
+      </div>
+      
       <button class="location-btn" id="locationBtnMobile">📍 Ir a Contacto</button>
     </div>
   </aside>
@@ -426,294 +561,503 @@
       {
         id: 'elotitos',
         title: 'Elotitos',
+        title_en: 'Mexican Street Corn',
         category: 'platos-fuertes',
+        category_en: 'main dishes',
         time: '25 min',
+        price_mxn: 85,
+        price_usd: 4.50,
         img: 'elotito.jpeg',
         desc: 'Elotes tiernos asados, untados con mantequilla mezclada con salsa de soya y espolvoreados con shichimi.',
+        desc_en: 'Tender roasted corn, coated with butter mixed with soy sauce and sprinkled with shichimi.',
         ingredients: ['Elotes tiernos', 'Mantequilla', 'Salsa de soya', 'Shichimi'],
-        steps: 'Asar los elotes en grill o carbón hasta dorar. Mezclar mantequilla con soya, untar y espolvorear shichimi.'
+        ingredients_en: ['Fresh corn', 'Butter', 'Soy sauce', 'Shichimi'],
+        steps: 'Asar los elotes en grill o carbón hasta dorar. Mezclar mantequilla con soya, untar y espolvorear shichimi.',
+        steps_en: 'Grill corn until golden. Mix butter with soy sauce, brush on corn and sprinkle with shichimi.'
       },
       {
         id: 'rollitos-thai',
         title: 'Rollitos Thai',
+        title_en: 'Thai Spring Rolls',
         category: 'platos-fuertes',
+        category_en: 'main dishes',
         time: '25 min',
+        price_mxn: 120,
+        price_usd: 6.50,
         img: 'rollitos thai.jpeg',
         desc: 'Papel de arroz relleno de tiras de lechuga, zanahoria, pepino, pimiento rojo y guacamole picante.',
+        desc_en: 'Rice paper rolls filled with lettuce strips, carrot, cucumber, red pepper and spicy guacamole.',
         ingredients: ['Papel de arroz', 'Lechuga', 'Zanahoria', 'Pepino', 'Pimiento rojo', 'Aguacate', 'Limón', 'Chile serrano'],
-        steps: 'Hidratar papel de arroz, colocar verduras en tiras y enrollar. Acompañar con guacamole de aguacate, limón y chile.'
+        ingredients_en: ['Rice paper', 'Lettuce', 'Carrot', 'Cucumber', 'Red pepper', 'Avocado', 'Lime', 'Serrano chili'],
+        steps: 'Hidratar papel de arroz, colocar verduras en tiras y enrollar. Acompañar con guacamole de aguacate, limón y chile.',
+        steps_en: 'Soften rice paper, place vegetable strips and roll. Serve with avocado, lime and chili guacamole.'
       },
       {
         id: 'dumplings-cochinita',
         title: 'Dumplings de Cochinita pibil',
+        title_en: 'Cochinita Pibil Dumplings',
         category: 'platos-fuertes',
+        category_en: 'main dishes',
         time: '30 min',
+        price_mxn: 145,
+        price_usd: 7.80,
         img: 'Dumplings de Cochinita pibil.jpeg',
         desc: 'Cochinita pibil sazonada, envuelta en láminas de wonton y cocida al vapor o al horno.',
+        desc_en: 'Seasoned cochinita pibil, wrapped in wonton sheets and steamed or baked.',
         ingredients: ['Carne de cerdo', 'Achiote en pasta', 'Jugo de naranja agria', 'Ajo', 'Sal', 'Pimienta', 'Láminas de wonton'],
-        steps: 'Marinar carne en achiote y cítricos; rellenar wonton; cocer al vapor u hornear envuelto en hoja de plátano opcionalmente.'
+        ingredients_en: ['Pork', 'Achiote paste', 'Bitter orange juice', 'Garlic', 'Salt', 'Pepper', 'Wonton sheets'],
+        steps: 'Marinar carne en achiote y cítricos; rellenar wonton; cocer al vapor u hornear envuelto en hoja de plátano opcionalmente.',
+        steps_en: 'Marinate meat in achiote and citrus; fill wontons; steam or bake optionally wrapped in banana leaf.'
       },
       {
         id: 'ceviche-coco-mango',
         title: 'Ceviche en leche de coco con habanero y mango',
+        title_en: 'Coconut Milk Ceviche with Habanero and Mango',
         category: 'platos-fuertes',
+        category_en: 'main dishes',
         time: '25 min',
+        price_mxn: 160,
+        price_usd: 8.50,
         img: 'Ceviche.jpeg',
         desc: 'Pescado marinado en cítricos y leche de coco con habanero y mango; servido con tostadas.',
+        desc_en: 'Fish marinated in citrus and coconut milk with habanero and mango; served with tostadas.',
         ingredients: ['Pescado blanco', 'Leche de coco', 'Jugo de limón', 'Jugo de naranja', 'Cebolla morada', 'Habanero', 'Mango', 'Cilantro'],
-        steps: 'Marinar pescado 10–12 min con jugos; agregar leche de coco y vegetales; mezclar y servir con tostadas.'
+        ingredients_en: ['White fish', 'Coconut milk', 'Lime juice', 'Orange juice', 'Red onion', 'Habanero', 'Mango', 'Cilantro'],
+        steps: 'Marinar pescado 10–12 min con jugos; agregar leche de coco y vegetales; mezclar y servir con tostadas.',
+        steps_en: 'Marinate fish 10–12 min with juices; add coconut milk and vegetables; mix and serve with tostadas.'
       },
       {
         id: 'pescado-fusion',
         title: 'Pescado Fusión (achiote + salsa thai)',
+        title_en: 'Fusion Fish (Achiote + Thai Sauce)',
         category: 'platos-fuertes',
+        category_en: 'main dishes',
         time: '40 min',
+        price_mxn: 180,
+        price_usd: 9.50,
         img: 'Pescado.jpeg',
         desc: 'Filetes marinados en achiote y limón, servidos con salsa de leche de coco estilo thai.',
+        desc_en: 'Fillets marinated in achiote and lime, served with Thai-style coconut milk sauce.',
         ingredients: ['Filetes de pescado', 'Achiote', 'Jugo de limón', 'Ajo', 'Jengibre', 'Leche de coco', 'Salsa de pescado', 'Cúrcuma', 'Albahaca'],
-        steps: 'Marinar filetes en achiote y cítricos 15–20 min; sellar en sartén; preparar salsa thai con leche de coco y servir sobre filetes.'
+        ingredients_en: ['Fish fillets', 'Achiote', 'Lime juice', 'Garlic', 'Ginger', 'Coconut milk', 'Fish sauce', 'Turmeric', 'Basil'],
+        steps: 'Marinar filetes en achiote y cítricos 15–20 min; sellar en sartén; preparar salsa thai con leche de coco y servir sobre filetes.',
+        steps_en: 'Marinate fillets in achiote and citrus 15–20 min; sear in pan; prepare Thai sauce with coconut milk and serve over fillets.'
       },
       {
         id: 'tacos-tierra-fuego',
         title: 'Tacos Tierra y Fuego',
+        title_en: 'Earth and Fire Tacos',
         category: 'platos-fuertes',
+        category_en: 'main dishes',
         time: '40 min',
+        price_mxn: 135,
+        price_usd: 7.20,
         img: 'Tacos.jpeg',
         desc: 'Pulpa de res con salsa de tamarindo y chipotle, salteada con jengibre para un perfil ahumado y picante.',
+        desc_en: 'Beef with tamarind and chipotle sauce, sautéed with ginger for a smoky and spicy profile.',
         ingredients: ['Pulpa de res', 'Pasta de tamarindo', 'Chipotle en adobo', 'Jengibre', 'Salsa de pescado/soya', 'Cilantro'],
-        steps: 'Saltear carne; preparar salsa con tamarindo, chipotle y jengibre; mezclar y servir en tortillas con vegetales.'
+        ingredients_en: ['Beef', 'Tamarind paste', 'Chipotle in adobo', 'Ginger', 'Fish/soy sauce', 'Cilantro'],
+        steps: 'Saltear carne; preparar salsa con tamarindo, chipotle y jengibre; mezclar y servir en tortillas con vegetales.',
+        steps_en: 'Sauté meat; prepare sauce with tamarind, chipotle and ginger; mix and serve in tortillas with vegetables.'
       },
       {
         id: 'mayum',
         title: 'Mayum (sopa tipo Tom Yum)',
+        title_en: 'Mayum (Tom Yum Style Soup)',
         category: 'sopas',
+        category_en: 'soups',
         time: '30 min',
+        price_mxn: 95,
+        price_usd: 5.00,
         img: 'Mayum.jpeg',
         desc: 'Sopa aromática con camarones, lemongrass, pasta Tom Yum, leche de coco y jugo de limón.',
+        desc_en: 'Aromatic soup with shrimp, lemongrass, Tom Yum paste, coconut milk and lime juice.',
         ingredients: ['Caldo de pollo', 'Camarones', 'Champiñones', 'Lemongrass', 'Hojas de lima', 'Pasta Tom Yum', 'Leche de coco', 'Jugo de limón', 'Salsa de pescado'],
-        steps: 'Aromatizar caldo con lemongrass y hojas de lima; añadir pasta Tom Yum, verduras y camarones; terminar con limón y leche de coco.'
+        ingredients_en: ['Chicken broth', 'Shrimp', 'Mushrooms', 'Lemongrass', 'Lime leaves', 'Tom Yum paste', 'Coconut milk', 'Lime juice', 'Fish sauce'],
+        steps: 'Aromatizar caldo con lemongrass y hojas de lima; añadir pasta Tom Yum, verduras y camarones; terminar con limón y leche de coco.',
+        steps_en: 'Flavor broth with lemongrass and lime leaves; add Tom Yum paste, vegetables and shrimp; finish with lime and coconut milk.'
       },
       {
         id: 'crema-chicharron',
         title: 'Crema de Chicharrón',
+        title_en: 'Pork Rind Cream Soup',
         category: 'sopas',
+        category_en: 'soups',
         time: '45 min',
+        price_mxn: 85,
+        price_usd: 4.50,
         img: 'Crema de Chicharron.jpeg',
         desc: 'Crema rica con chicharrón, crema para batir, leche y un toque de epazote.',
+        desc_en: 'Rich cream soup with pork rinds, whipping cream, milk and a touch of epazote.',
         ingredients: ['Chicharrón de cerdo', 'Cebolla', 'Crema para batir', 'Leche', 'Fondo de ave', 'Epazote', 'Sal y pimienta'],
-        steps: 'Sofreír cebolla, incorporar chicharrón, añadir leche y fondo; temperar la crema, hervir y ajustar sazón; servir con aceite de chile verde.'
+        ingredients_en: ['Pork rinds', 'Onion', 'Whipping cream', 'Milk', 'Poultry stock', 'Epazote', 'Salt and pepper'],
+        steps: 'Sofreír cebolla, incorporar chicharrón, añadir leche y fondo; temperar la crema, hervir y ajustar sazón; servir con aceite de chile verde.',
+        steps_en: 'Sauté onion, add pork rinds, add milk and stock; temper the cream, boil and adjust seasoning; serve with green chili oil.'
       },
       {
         id: 'mixiote-carnero',
         title: 'Mixiote de Carnero',
+        title_en: 'Lamb Mixiote',
         category: 'platos-fuertes',
+        category_en: 'main dishes',
         time: '2 hrs',
+        price_mxn: 220,
+        price_usd: 11.50,
         img: 'mixiote.jpeg',
         desc: 'Preparación tradicional con carnero, elote, chilacayote y epazote.',
+        desc_en: 'Traditional preparation with lamb, corn, chilacayote and epazote.',
         ingredients: ['Carnero', 'Cebolla', 'Elote', 'Chilacayote', 'Chile poblano', 'Flor de calabaza', 'Fondo de vegetales', 'Epazote'],
-        steps: 'Saltear verduras, añadir fondo y cocinar; integrar carnero y vegetales hasta punto deseado; sazonar.'
+        ingredients_en: ['Lamb', 'Onion', 'Corn', 'Chilacayote', 'Poblano pepper', 'Squash blossom', 'Vegetable stock', 'Epazote'],
+        steps: 'Saltear verduras, añadir fondo y cocinar; integrar carnero y vegetales hasta punto deseado; sazonar.',
+        steps_en: 'Sauté vegetables, add stock and cook; incorporate lamb and vegetables until desired doneness; season.'
       },
       {
         id: 'sopa-tarasca',
         title: 'Sopa Tarasca',
+        title_en: 'Tarascan Soup',
         category: 'sopas',
+        category_en: 'soups',
         time: '60 min',
+        price_mxn: 75,
+        price_usd: 4.00,
         img: 'sopa tascara.jpeg',
         desc: 'Sopa de tomate con base de tortilla frita, chile pasilla y queso Cotija.',
+        desc_en: 'Tomato soup with fried tortilla base, pasilla chili and Cotija cheese.',
         ingredients: ['Jitomate', 'Cebolla', 'Ajo', 'Chile pasilla', 'Tortillas', 'Fondo de ave', 'Orégano', 'Epazote', 'Queso Cotija'],
-        steps: 'Freír tortillas y chile pasilla; moler jitomate con caldo; saltear y agregar fondo; hervir y servir con guarniciones.'
+        ingredients_en: ['Tomato', 'Onion', 'Garlic', 'Pasilla chili', 'Tortillas', 'Poultry stock', 'Oregano', 'Epazote', 'Cotija cheese'],
+        steps: 'Freír tortillas y chile pasilla; moler jitomate con caldo; saltear y agregar fondo; hervir y servir con guarniciones.',
+        steps_en: 'Fry tortillas and pasilla chili; grind tomato with broth; sauté and add stock; boil and serve with garnishes.'
       },
       {
         id: 'sopa-milpa',
         title: 'Sopa de Milpa',
+        title_en: 'Milpa Soup',
         category: 'sopas',
+        category_en: 'soups',
         time: '2 hrs',
+        price_mxn: 80,
+        price_usd: 4.20,
         img: 'chilacayote.jpeg',
         desc: 'Sopa tradicional con elote, flor de calabaza, chilacayote y epazote.',
+        desc_en: 'Traditional soup with corn, squash blossom, chilacayote and epazote.',
         ingredients: ['Elote', 'Chilacayote', 'Flor de calabaza', 'Chile poblano', 'Cebolla', 'Fondo de vegetales', 'Epazote'],
-        steps: 'Saltear cebolla y elote, añadir poblano; agregar fondo, cocer y sumar chilacayote y flor de calabaza; sazonar.'
+        ingredients_en: ['Corn', 'Chilacayote', 'Squash blossom', 'Poblano pepper', 'Onion', 'Vegetable stock', 'Epazote'],
+        steps: 'Saltear cebolla y elote, añadir poblano; agregar fondo, cocer y sumar chilacayote y flor de calabaza; sazonar.',
+        steps_en: 'Sauté onion and corn, add poblano; add stock, cook and add chilacayote and squash blossom; season.'
       },
       {
         id: 'pad-thai',
         title: 'Pad Thai',
+        title_en: 'Pad Thai',
         category: 'platos-fuertes',
+        category_en: 'main dishes',
         time: '35 min',
+        price_mxn: 145,
+        price_usd: 7.70,
         img: 'Pad Thai.jpeg',
         desc: 'Clásico pad thai con fideos de arroz, camarones, huevo y cacahuate tostado.',
+        desc_en: 'Classic pad thai with rice noodles, shrimp, egg and toasted peanuts.',
         ingredients: ['Fideos de arroz', 'Camarones', 'Huevos', 'Ajo', 'Zanahoria', 'Pimiento', 'Brotes de soya', 'Salsa de soya', 'Miel de agave', 'Cacahuates'],
-        steps: 'Preparar fideos; saltear ajo y camarones; cocinar huevos; mezclar todos los ingredientes con salsa y servir con cacahuates.'
+        ingredients_en: ['Rice noodles', 'Shrimp', 'Eggs', 'Garlic', 'Carrot', 'Bell pepper', 'Bean sprouts', 'Soy sauce', 'Agave honey', 'Peanuts'],
+        steps: 'Preparar fideos; saltear ajo y camarones; cocinar huevos; mezclar todos los ingredientes con salsa y servir con cacahuates.',
+        steps_en: 'Prepare noodles; sauté garlic and shrimp; cook eggs; mix all ingredients with sauce and serve with peanuts.'
       },
       {
         id: 'karin-gai',
         title: 'Karin Gai (curry amarillo)',
+        title_en: 'Karin Gai (Yellow Curry)',
         category: 'platos-fuertes',
+        category_en: 'main dishes',
         time: '30 min',
+        price_mxn: 155,
+        price_usd: 8.20,
         img: 'curry amarillo.jpeg',
         desc: 'Guiso suave de pollo con curry amarillo, leche de coco y vegetales.',
+        desc_en: 'Mild chicken stew with yellow curry, coconut milk and vegetables.',
         ingredients: ['Pechuga de pollo', 'Curry amarillo', 'Leche de coco', 'Caldo de pollo', 'Papa', 'Zanahoria', 'Cúrcuma', 'Comino', 'Salsa de pescado'],
-        steps: 'Sellar pollo; sofreír pasta de curry; añadir leche de coco y caldo; cocinar verduras; incorporar pollo y servir con arroz jazmín.'
+        ingredients_en: ['Chicken breast', 'Yellow curry', 'Coconut milk', 'Chicken broth', 'Potato', 'Carrot', 'Turmeric', 'Cumin', 'Fish sauce'],
+        steps: 'Sellar pollo; sofreír pasta de curry; añadir leche de coco y caldo; cocinar verduras; incorporar pollo y servir con arroz jazmín.',
+        steps_en: 'Sear chicken; sauté curry paste; add coconut milk and broth; cook vegetables; incorporate chicken and serve with jasmine rice.'
       },
       {
         id: 'paleta-cordero',
         title: 'Paleta de cordero (massaman)',
+        title_en: 'Lamb Shoulder (Massaman)',
         category: 'platos-fuertes',
+        category_en: 'main dishes',
         time: '70 min',
+        price_mxn: 240,
+        price_usd: 12.70,
         img: 'cordero.jpeg',
         desc: 'Paletilla asada con pasta massaman, canela y anís para un resultado meloso.',
+        desc_en: 'Roasted lamb shoulder with massaman paste, cinnamon and anise for a tender result.',
         ingredients: ['Paletilla de cordero', 'Pasta massaman', 'Leche de coco', 'Canela', 'Anís', 'Caldo de pollo', 'Papa'],
-        steps: 'Cubrir paletilla con curry y leche de coco; hornear tapada a 220°C 1 hr hasta tierna; reducir salsa y servir.'
+        ingredients_en: ['Lamb shoulder', 'Massaman paste', 'Coconut milk', 'Cinnamon', 'Anise', 'Chicken broth', 'Potato'],
+        steps: 'Cubrir paletilla con curry y leche de coco; hornear tapada a 220°C 1 hr hasta tierna; reducir salsa y servir.',
+        steps_en: 'Coat shoulder with curry and coconut milk; bake covered at 220°C for 1 hr until tender; reduce sauce and serve.'
       },
       {
         id: 'gai-yang',
         title: 'Gai Yang (pollo marinado estilo Thai)',
+        title_en: 'Gai Yang (Thai Marinated Chicken)',
         category: 'platos-fuertes',
+        category_en: 'main dishes',
         time: '3 hrs (marinado)',
+        price_mxn: 165,
+        price_usd: 8.70,
         img: 'Paleta de Cordero al Curry Massaman.jpeg',
         desc: 'Muslos de pollo marinados en mezcla aromática (lemongrass, ajo, salsa de pescado) y asados.',
+        desc_en: 'Chicken thighs marinated in aromatic mixture (lemongrass, garlic, fish sauce) and grilled.',
         ingredients: ['Muslo de pollo', 'Ajo', 'Lemongrass', 'Jugo de lima', 'Salsa de pescado', 'Jerez', 'Miel', 'Aceite de sésamo'],
-        steps: 'Marinar pollo 3–24 hrs; asar a fuego medio-alto hasta dorar y cocinar internamente; servir con salsa a gusto.'
+        ingredients_en: ['Chicken thighs', 'Garlic', 'Lemongrass', 'Lime juice', 'Fish sauce', 'Sherry', 'Honey', 'Sesame oil'],
+        steps: 'Marinar pollo 3–24 hrs; asar a fuego medio-alto hasta dorar y cocinar internamente; servir con salsa a gusto.',
+        steps_en: 'Marinate chicken 3–24 hrs; grill over medium-high heat until golden and cooked through; serve with sauce to taste.'
       },
       {
         id: 'sopa-calabaza-coco',
         title: 'Sopa de Calabaza y Coco',
+        title_en: 'Pumpkin and Coconut Soup',
         category: 'sopas',
+        category_en: 'soups',
         time: '30 min',
+        price_mxn: 90,
+        price_usd: 4.80,
         img: 'Sopa de Calabaza y Coco.jpeg',
         desc: 'Crema de calabaza con leche de coco, curry rojo y un toque de salsa de pescado.',
+        desc_en: 'Pumpkin cream with coconut milk, red curry and a touch of fish sauce.',
         ingredients: ['Calabaza', 'Leche de coco', 'Cebolla', 'Ajo', 'Pasta de curry roja', 'Salsa de pescado'],
-        steps: 'Sofreír ajo y cebolla, añadir pasta de curry, agregar calabaza y cubrir con leche de coco; cocer, licuar y rectificar sazón.'
+        ingredients_en: ['Pumpkin', 'Coconut milk', 'Onion', 'Garlic', 'Red curry paste', 'Fish sauce'],
+        steps: 'Sofreír ajo y cebolla, añadir pasta de curry, agregar calabaza y cubrir con leche de coco; cocer, licuar y rectificar sazón.',
+        steps_en: 'Sauté garlic and onion, add curry paste, add pumpkin and cover with coconut milk; cook, blend and adjust seasoning.'
       },
       {
         id: 'camarones-coco-mango',
         title: 'Camarones al coco y habanero con mango',
+        title_en: 'Coconut and Habanero Shrimp with Mango',
         category: 'platos-fuertes',
+        category_en: 'main dishes',
         time: '25 min',
+        price_mxn: 195,
+        price_usd: 10.30,
         img: 'Camarones de coco.jpeg',
         desc: 'Camarones salteados en leche de coco con habanero y mango asado; balance dulce-picante.',
+        desc_en: 'Shrimp sautéed in coconut milk with habanero and roasted mango; sweet-spicy balance.',
         ingredients: ['Camarones', 'Leche de coco', 'Habanero', 'Mango', 'Ajo', 'Jengibre', 'Salsa de pescado', 'Cilantro'],
-        steps: 'Marinar camarones; dorar mango; saltear camarones 4–5 min y añadir mango al final; servir con cilantro.'
+        ingredients_en: ['Shrimp', 'Coconut milk', 'Habanero', 'Mango', 'Garlic', 'Ginger', 'Fish sauce', 'Cilantro'],
+        steps: 'Marinar camarones; dorar mango; saltear camarones 4–5 min y añadir mango al final; servir con cilantro.',
+        steps_en: 'Marinate shrimp; brown mango; sauté shrimp 4–5 min and add mango at the end; serve with cilantro.'
       },
       {
         id: 'flan-coco-piloncillo',
         title: 'Flan de coco y Piloncillo',
+        title_en: 'Coconut and Piloncillo Flan',
         category: 'postres',
+        category_en: 'desserts',
         time: '50 min + reposo',
+        price_mxn: 75,
+        price_usd: 4.00,
         img: 'Flan de coco.jpeg',
         desc: 'Flan horneado a baño María con caramelo de piloncillo y jengibre para aroma.',
+        desc_en: 'Flan baked in water bath with piloncillo caramel and ginger for aroma.',
         ingredients: ['Huevos', 'Yemas', 'Leche de coco', 'Piloncillo', 'Jengibre'],
-        steps: 'Hacer caramelo con piloncillo; mezclar huevos y leche de coco con jengibre; hornear a baño María 35-40 min; refrigerar y desmoldar.'
+        ingredients_en: ['Eggs', 'Yolks', 'Coconut milk', 'Piloncillo', 'Ginger'],
+        steps: 'Hacer caramelo con piloncillo; mezclar huevos y leche de coco con jengibre; hornear a baño María 35-40 min; refrigerar y desmoldar.',
+        steps_en: 'Make caramel with piloncillo; mix eggs and coconut milk with ginger; bake in water bath 35-40 min; refrigerate and unmold.'
       },
       {
         id: 'platanos-fritos',
         title: 'Plátanos fritos con cajeta y coco tostado',
+        title_en: 'Fried Plantains with Cajeta and Toasted Coconut',
         category: 'postres',
+        category_en: 'desserts',
         time: '15 min',
+        price_mxn: 65,
+        price_usd: 3.50,
         img: 'Platanos fritos.jpeg',
         desc: 'Plátanos empanizados y fritos, bañados en cajeta y espolvoreados con coco tostado.',
+        desc_en: 'Breaded and fried plantains, drizzled with cajeta and sprinkled with toasted coconut.',
         ingredients: ['Plátano macho', 'Harina', 'Huevo', 'Panko', 'Aceite vegetal', 'Cajeta', 'Coco rallado'],
-        steps: 'Empanizar plátanos en harina-huevo-panko; freír a 170–180°C; bañar con cajeta y espolvorear coco.'
+        ingredients_en: ['Plantain', 'Flour', 'Egg', 'Panko', 'Vegetable oil', 'Cajeta', 'Shredded coconut'],
+        steps: 'Empanizar plátanos en harina-huevo-panko; freír a 170–180°C; bañar con cajeta y espolvorear coco.',
+        steps_en: 'Bread plantains in flour-egg-panko; fry at 170–180°C; drizzle with cajeta and sprinkle with coconut.'
       },
       {
         id: 'dragon-mezcal',
         title: 'Dragon Fruit Mezcalito',
+        title_en: 'Dragon Fruit Mezcalito',
         category: 'bebidas',
+        category_en: 'drinks',
         time: '5 min',
+        price_mxn: 95,
+        price_usd: 5.00,
         img: 'Dragon Fruit Mezcalito.jpeg',
         desc: 'Mezcal con pulpa de dragon fruit, jugo de naranja y unas gotas de bitter de jengibre.',
+        desc_en: 'Mezcal with dragon fruit pulp, orange juice and a few drops of ginger bitter.',
         ingredients: ['Mezcal', 'Pulpa de dragon fruit', 'Jugo de naranja', 'Bitter de jengibre', 'Jarabe simple', 'Hielo'],
-        steps: 'Licuar dragon fruit con naranja, mezclar con mezcal y agitar con hielo; servir y añadir bitter.'
+        ingredients_en: ['Mezcal', 'Dragon fruit pulp', 'Orange juice', 'Ginger bitter', 'Simple syrup', 'Ice'],
+        steps: 'Licuar dragon fruit con naranja, mezclar con mezcal y agitar con hielo; servir y añadir bitter.',
+        steps_en: 'Blend dragon fruit with orange, mix with mezcal and shake with ice; serve and add bitter.'
       },
       {
         id: 'coco-siam',
         title: 'Coco Siam',
+        title_en: 'Coco Siam',
         category: 'bebidas',
+        category_en: 'drinks',
         time: '5 min',
+        price_mxn: 65,
+        price_usd: 3.50,
         img: 'Coco Siam.jpeg',
         desc: 'Agua de coco infusionada con menta y pepino con un toque de miel.',
+        desc_en: 'Coconut water infused with mint and cucumber with a touch of honey.',
         ingredients: ['Agua de coco', 'Menta', 'Pepino', 'Jugo de limón', 'Miel', 'Hielo'],
-        steps: 'Infusionar agua de coco con menta y pepino en frío; colar y añadir limón y miel; servir con hielo.'
+        ingredients_en: ['Coconut water', 'Mint', 'Cucumber', 'Lime juice', 'Honey', 'Ice'],
+        steps: 'Infusionar agua de coco con menta y pepino en frío; colar y añadir limón y miel; servir con hielo.',
+        steps_en: 'Infuse coconut water with mint and cucumber cold; strain and add lime and honey; serve with ice.'
       },
       {
         id: 'jamaica-fizz',
         title: 'Jamaica Fizz',
+        title_en: 'Jamaica Fizz',
         category: 'bebidas',
+        category_en: 'drinks',
         time: '6 min',
+        price_mxn: 55,
+        price_usd: 2.90,
         img: 'Jamaica Fizz.jpeg',
         desc: 'Infusión de jamaica fría con soda de lychee y un toque de limón.',
+        desc_en: 'Cold hibiscus infusion with lychee soda and a touch of lime.',
         ingredients: ['Infusión de jamaica', 'Soda de lychee', 'Jugo de limón', 'Azúcar', 'Hielo'],
-        steps: 'Preparar infusión de jamaica, enfriar; mezclar con soda de lychee y limón; servir en vasos escarchados.'
+        ingredients_en: ['Hibiscus infusion', 'Lychee soda', 'Lime juice', 'Sugar', 'Ice'],
+        steps: 'Preparar infusión de jamaica, enfriar; mezclar con soda de lychee y limón; servir en vasos escarchados.',
+        steps_en: 'Prepare hibiscus infusion, cool; mix with lychee soda and lime; serve in frosted glasses.'
       },
       {
         id: 'horchata-tai',
         title: 'Horchata Tai',
+        title_en: 'Horchata Tai',
         category: 'bebidas',
+        category_en: 'drinks',
         time: '10 min (+remojo)',
+        price_mxn: 60,
+        price_usd: 3.20,
         img: 'Horchata Tai.jpeg',
         desc: 'Horchata de arroz mezclada con leche de coco infusionada con canela y cardamomo.',
+        desc_en: 'Rice horchata mixed with coconut milk infused with cinnamon and cardamom.',
         ingredients: ['Arroz remojado', 'Agua', 'Leche de coco', 'Canela', 'Cardamomo', 'Azúcar', 'Hielo'],
-        steps: 'Remojar arroz, licuar con agua, colar; infusionar leche de coco con canela; mezclar y servir frío con hielo.'
+        ingredients_en: ['Soaked rice', 'Water', 'Coconut milk', 'Cinnamon', 'Cardamom', 'Sugar', 'Ice'],
+        steps: 'Remojar arroz, licuar con agua, colar; infusionar leche de coco con canela; mezclar y servir frío con hielo.',
+        steps_en: 'Soak rice, blend with water, strain; infuse coconut milk with cinnamon; mix and serve cold with ice.'
       },
       {
         id: 'chilate',
         title: 'Chilate',
+        title_en: 'Chilate',
         category: 'bebidas',
+        category_en: 'drinks',
         time: '10 min',
+        price_mxn: 45,
+        price_usd: 2.40,
         img: 'Chilate.jpeg',
         desc: 'Bebida tradicional a base de cacao tostado, arroz y piloncillo, servida con hielo y espuma.',
+        desc_en: 'Traditional drink made from roasted cacao, rice and piloncillo, served with ice and foam.',
         ingredients: ['Cacao crudo', 'Arroz blanco', 'Canela', 'Piloncillo', 'Agua', 'Hielo'],
-        steps: 'Tostar cacao y canela; moler ingredientes y formar pasta; diluir con agua, colar y servir con hielo para generar espuma.'
+        ingredients_en: ['Raw cacao', 'White rice', 'Cinnamon', 'Piloncillo', 'Water', 'Ice'],
+        steps: 'Tostar cacao y canela; moler ingredientes y formar pasta; diluir con agua, colar y servir con hielo para generar espuma.',
+        steps_en: 'Roast cacao and cinnamon; grind ingredients and form paste; dilute with water, strain and serve with ice to create foam.'
       },
       {
         id: 'tejuino',
         title: 'Tejuino',
+        title_en: 'Tejuino',
         category: 'bebidas',
+        category_en: 'drinks',
         time: '1.5 hrs',
+        price_mxn: 40,
+        price_usd: 2.10,
         img: 'Tejuino.jpeg',
         desc: 'Bebida fermentada a base de maíz pozolero, piloncillo y especias, servida fría.',
+        desc_en: 'Fermented drink made from pozolero corn, piloncillo and spices, served cold.',
         ingredients: ['Agua', 'Piloncillo', 'Clavos', 'Canela', 'Maíz pozolero precocido', 'Leche condensada opcional'],
-        steps: 'Cocer piloncillo con especias; cocer maíz; licuar con dulces y servir frío.'
+        ingredients_en: ['Water', 'Piloncillo', 'Cloves', 'Cinnamon', 'Precooked pozolero corn', 'Condensed milk optional'],
+        steps: 'Cocer piloncillo con especias; cocer maíz; licuar con dulces y servir frío.',
+        steps_en: 'Cook piloncillo with spices; cook corn; blend with sweets and serve cold.'
       },
       {
         id: 'ponche-frutas',
         title: 'Ponche de Frutas',
+        title_en: 'Fruit Punch',
         category: 'bebidas',
+        category_en: 'drinks',
         time: '60 min',
+        price_mxn: 70,
+        price_usd: 3.70,
         img: 'Ponche de Frutas.jpeg',
         desc: 'Ponche tradicional con jamaica, tamarindo, tejocotes, piloncillo y fruta surtida.',
+        desc_en: 'Traditional punch with hibiscus, tamarind, tejocotes, piloncillo and assorted fruit.',
         ingredients: ['Agua', 'Flor de jamaica', 'Tamarindo', 'Caña', 'Tejocotes', 'Piloncillo', 'Guayaba', 'Manzana', 'Ciruela pasa'],
-        steps: 'Cocer jamaica, tamarindo y piloncillo; añadir frutas y cocinar hasta suavizar; servir caliente.'
+        ingredients_en: ['Water', 'Hibiscus flowers', 'Tamarind', 'Sugar cane', 'Tejocotes', 'Piloncillo', 'Guava', 'Apple', 'Prune'],
+        steps: 'Cocer jamaica, tamarindo y piloncillo; añadir frutas y cocinar hasta suavizar; servir caliente.',
+        steps_en: 'Cook hibiscus, tamarind and piloncillo; add fruits and cook until softened; serve hot.'
       },
       {
         id: 'thai-iced-tea',
         title: 'Thai Iced Tea',
+        title_en: 'Thai Iced Tea',
         category: 'bebidas',
+        category_en: 'drinks',
         time: '60 min',
+        price_mxn: 65,
+        price_usd: 3.50,
         img: 'Thai Iced Tea.jpeg',
         desc: 'Té negro tailandés infusionado, endulzado y servido con leche de coco sobre hielo.',
+        desc_en: 'Infused Thai black tea, sweetened and served with coconut milk over ice.',
         ingredients: ['Té negro tailandés', 'Agua caliente', 'Azúcar mascabado', 'Leche de coco', 'Hielo'],
-        steps: 'Infusionar té 3–5 min, colar y endulzar; enfriar y servir con hielo y leche de coco.'
+        ingredients_en: ['Thai black tea', 'Hot water', 'Brown sugar', 'Coconut milk', 'Ice'],
+        steps: 'Infusionar té 3–5 min, colar y endulzar; enfriar y servir con hielo y leche de coco.',
+        steps_en: 'Infuse tea 3–5 min, strain and sweeten; cool and serve with ice and coconut milk.'
       },
       {
         id: 'thai-mai-tai',
         title: 'Thai Mai Tai (versión)',
+        title_en: 'Thai Mai Tai (version)',
         category: 'bebidas',
+        category_en: 'drinks',
         time: '10 min',
+        price_mxn: 110,
+        price_usd: 5.80,
         img: 'Thai Mai Tai.jpeg',
         desc: 'Cóctel tropical con ron, triple sec y jugo de lima; refrescante y cítrico.',
+        desc_en: 'Tropical cocktail with rum, triple sec and lime juice; refreshing and citrusy.',
         ingredients: ['Ron oscuro', 'Triple sec', 'Jugo de lima', 'Hielo', 'Decoración'],
-        steps: 'Mezclar licores con jugo de lima y hielo; servir en vaso con decoración cítrica.'
+        ingredients_en: ['Dark rum', 'Triple sec', 'Lime juice', 'Ice', 'Garnish'],
+        steps: 'Mezclar licores con jugo de lima y hielo; servir en vaso con decoración cítrica.',
+        steps_en: 'Mix liquors with lime juice and ice; serve in glass with citrus garnish.'
       },
       {
         id: 'siam-sunset',
         title: 'Siam Sunset',
+        title_en: 'Siam Sunset',
         category: 'bebidas',
+        category_en: 'drinks',
         time: '8 min',
+        price_mxn: 95,
+        price_usd: 5.00,
         img: 'Siam Sunser.jpeg',
         desc: 'Cóctel brillante con jugo de naranja y granadina; simple y visualmente atractivo.',
+        desc_en: 'Bright cocktail with orange juice and grenadine; simple and visually appealing.',
         ingredients: ['Jugo de naranja', 'Granadina', 'Vodka opcional', 'Hielo'],
-        steps: 'Mezclar líquidos y servir con hielo y rodaja de naranja.'
+        ingredients_en: ['Orange juice', 'Grenadine', 'Vodka optional', 'Ice'],
+        steps: 'Mezclar líquidos y servir con hielo y rodaja de naranja.',
+        steps_en: 'Mix liquids and serve with ice and orange slice.'
       }
     ];
+
+    /* ===========================
+       Estado global
+       =========================== */
+    let currentLanguage = 'es';
+    let currentTheme = 'dark';
 
     /* ===========================
        Utilidades y Render
@@ -726,16 +1070,28 @@
       const el = document.createElement('article');
       el.className = 'card';
       el.dataset.category = item.category;
+      
+      // Mostrar precio en lugar de tiempo según el idioma
+      const priceText = currentLanguage === 'es' 
+        ? `$${item.price_mxn} MXN` 
+        : `$${item.price_usd} USD`;
+      
+      const title = currentLanguage === 'es' ? item.title : item.title_en;
+      const desc = currentLanguage === 'es' ? item.desc : item.desc_en;
+      const category = currentLanguage === 'es' 
+        ? capitalizeCat(item.category) 
+        : capitalizeCat(item.category_en);
+      
       el.innerHTML = `
-        <div class="cat-label">${escapeHtml(capitalizeCat(item.category))}</div>
-        <div class="card-media"><img loading="lazy" src="${item.img}" alt="${escapeHtml(item.title)}"></div>
+        <div class="cat-label">${escapeHtml(category)}</div>
+        <div class="card-media"><img loading="lazy" src="${item.img}" alt="${escapeHtml(title)}"></div>
         <div class="card-body">
           <div class="meta">
-            <h3 class="title">${escapeHtml(item.title)}</h3>
-            <div class="time">${escapeHtml(item.time || '')}</div>
+            <h3 class="title">${escapeHtml(title)}</h3>
+            <div class="time">${escapeHtml(priceText)}</div>
           </div>
-          <div class="desc">${escapeHtml(item.desc)}</div>
-          <div class="card-actions"><button class="btn view" data-id="${item.id}">Ver Receta</button></div>
+          <div class="desc">${escapeHtml(desc)}</div>
+          <div class="card-actions"><button class="btn view" data-id="${item.id}">${currentLanguage === 'es' ? 'Ver Receta' : 'View Recipe'}</button></div>
         </div>`;
       setTimeout(()=> el.classList.add('show'), idx * 70 + 80);
       addParallax(el);
@@ -759,6 +1115,30 @@
     render(menuData);
 
     /* Filters */
+    function updateFilterButtons() {
+      const allText = currentLanguage === 'es' ? 'Todos' : 'All';
+      const mainText = currentLanguage === 'es' ? 'Platos fuertes' : 'Main dishes';
+      const soupsText = currentLanguage === 'es' ? 'Sopas' : 'Soups';
+      const dessertsText = currentLanguage === 'es' ? 'Postres' : 'Desserts';
+      const drinksText = currentLanguage === 'es' ? 'Bebidas' : 'Drinks';
+      
+      document.querySelectorAll('.filter-btn[data-filter="all"]').forEach(btn => {
+        btn.textContent = allText;
+      });
+      document.querySelectorAll('.filter-btn[data-filter="platos-fuertes"]').forEach(btn => {
+        btn.textContent = mainText;
+      });
+      document.querySelectorAll('.filter-btn[data-filter="sopas"]').forEach(btn => {
+        btn.textContent = soupsText;
+      });
+      document.querySelectorAll('.filter-btn[data-filter="postres"]').forEach(btn => {
+        btn.textContent = dessertsText;
+      });
+      document.querySelectorAll('.filter-btn[data-filter="bebidas"]').forEach(btn => {
+        btn.textContent = drinksText;
+      });
+    }
+
     document.querySelectorAll('.filter-btn').forEach(btn=>{
       btn.addEventListener('click', ()=>{
         document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
@@ -794,23 +1174,37 @@
     const mSteps = document.getElementById('m-steps');
     const mImg = document.getElementById('m-img');
 
+    function updateModalTexts() {
+      document.querySelector('.tab-btn[data-tab="ingredients"]').textContent = 
+        currentLanguage === 'es' ? 'Ingredientes' : 'Ingredients';
+      document.querySelector('.tab-btn[data-tab="steps"]').textContent = 
+        currentLanguage === 'es' ? 'Preparación' : 'Preparation';
+    }
+
     document.body.addEventListener('click', (e)=>{
       const view = e.target.closest('.view');
       if(view){
         const id = view.dataset.id;
         const item = menuData.find(x=>x.id === id);
         if(!item) return;
-        mTitle.textContent = item.title;
-        mDesc.textContent = item.desc;
-        mIngredients.innerHTML = (item.ingredients||[]).map(i=>`<li>${escapeHtml(i)}</li>`).join('');
-        mSteps.textContent = item.steps || '';
+        
+        mTitle.textContent = currentLanguage === 'es' ? item.title : item.title_en;
+        mDesc.textContent = currentLanguage === 'es' ? item.desc : item.desc_en;
+        
+        const ingredients = currentLanguage === 'es' ? item.ingredients : item.ingredients_en;
+        mIngredients.innerHTML = (ingredients||[]).map(i=>`<li>${escapeHtml(i)}</li>`).join('');
+        
+        mSteps.textContent = currentLanguage === 'es' ? item.steps : item.steps_en;
         mImg.src = item.img || '';
         modal.classList.add('show');
+        
         // default to ingredients
         document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
         document.querySelectorAll('.tab-content').forEach(tc=>tc.classList.remove('active'));
         document.querySelector('.tab-btn[data-tab="ingredients"]').classList.add('active');
         document.getElementById('tab-ingredients').classList.add('active');
+        
+        updateModalTexts();
       }
     });
 
@@ -825,6 +1219,111 @@
         btn.classList.add('active');
         document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
       });
+    });
+
+    /* ===========================
+       Cambio de idioma
+       =========================== */
+    function toggleLanguage() {
+      currentLanguage = currentLanguage === 'es' ? 'en' : 'es';
+      
+      // Actualizar textos de la página
+      document.querySelector('html').lang = currentLanguage;
+      document.querySelector('.tag').textContent = currentLanguage === 'es' ? 'Menú Completo' : 'Complete Menu';
+      document.querySelector('.hero h2').textContent = currentLanguage === 'es' ? 'Menú Completo' : 'Complete Menu';
+      document.querySelector('.hero p').textContent = currentLanguage === 'es' 
+        ? 'Explora todas nuestras recetas: platos fuertes, sopas, postres y bebidas. Haz clic en "Ver Receta" para abrir la ficha con ingredientes y preparación.'
+        : 'Explore all our recipes: main dishes, soups, desserts and drinks. Click "View Recipe" to open the card with ingredients and preparation.';
+      
+      document.getElementById('locationBtn').innerHTML = currentLanguage === 'es' 
+        ? `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C8 2 5 5 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-4-3-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg> Av. Insurgentes 123`
+        : `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C8 2 5 5 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-4-3-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg> Insurgentes Ave 123`;
+      
+      document.getElementById('locationBtnMobile').textContent = currentLanguage === 'es' 
+        ? '📍 Ir a Contacto' : '📍 Go to Contact';
+      
+      // Actualizar footer
+      document.querySelector('.contact-block h3').textContent = currentLanguage === 'es' 
+        ? 'Encuéntranos' : 'Find Us';
+      document.querySelector('.contact-block p:nth-child(2)').innerHTML = currentLanguage === 'es' 
+        ? '📌 <strong>Dirección:</strong> Av. Insurgentes Sur 123, Col. Roma, CDMX'
+        : '📌 <strong>Address:</strong> Insurgentes Sur Ave 123, Roma, Mexico City';
+      document.querySelector('.contact-block p:nth-child(3)').innerHTML = currentLanguage === 'es' 
+        ? '🕒 <strong>Horario:</strong> Lunes a Domingo — 12:00 - 22:00 hrs'
+        : '🕒 <strong>Hours:</strong> Monday to Sunday — 12:00 - 22:00 hrs';
+      document.querySelector('.contact-block p:nth-child(5)').innerHTML = currentLanguage === 'es' 
+        ? '✉️ <strong>Reservas:</strong> <a href="mailto:reservasfusion@gmail.com" style="color:var(--accent);text-decoration:none">reservasfusion@gmail.com</a>'
+        : '✉️ <strong>Reservations:</strong> <a href="mailto:reservasfusion@gmail.com" style="color:var(--accent);text-decoration:none">reservasfusion@gmail.com</a>';
+      
+      const socialText = document.querySelector('.contact-block strong');
+      socialText.textContent = currentLanguage === 'es' ? 'Redes sociales' : 'Social Media';
+      
+      // Actualizar botones de filtro
+      updateFilterButtons();
+      
+      // Volver a renderizar las tarjetas
+      const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
+      if(activeFilter === 'all') {
+        render(menuData);
+      } else {
+        render(menuData.filter(x => x.category === activeFilter));
+      }
+      
+      // Actualizar textos del modal si está abierto
+      updateModalTexts();
+    }
+
+    document.getElementById('langToggle').addEventListener('click', toggleLanguage);
+    document.getElementById('langToggleMobile').addEventListener('click', () => {
+      toggleLanguage();
+      mobilePanel.classList.remove('open');
+    });
+
+    /* ===========================
+       Cambio de tema
+       =========================== */
+    function toggleTheme() {
+      currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', currentTheme);
+      
+      // Cambiar iconos
+      const moonIcon = document.querySelector('.moon-icon');
+      const sunIcon = document.querySelector('.sun-icon');
+      
+      if (currentTheme === 'dark') {
+        moonIcon.style.display = 'block';
+        sunIcon.style.display = 'none';
+      } else {
+        moonIcon.style.display = 'none';
+        sunIcon.style.display = 'block';
+      }
+      
+      // Guardar preferencia
+      localStorage.setItem('theme', currentTheme);
+    }
+
+    // Cargar tema guardado
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      currentTheme = savedTheme;
+      document.documentElement.setAttribute('data-theme', currentTheme);
+      
+      const moonIcon = document.querySelector('.moon-icon');
+      const sunIcon = document.querySelector('.sun-icon');
+      
+      if (currentTheme === 'dark') {
+        moonIcon.style.display = 'block';
+        sunIcon.style.display = 'none';
+      } else {
+        moonIcon.style.display = 'none';
+        sunIcon.style.display = 'block';
+      }
+    }
+
+    document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+    document.getElementById('themeToggleMobile').addEventListener('click', () => {
+      toggleTheme();
+      mobilePanel.classList.remove('open');
     });
 
     /* ===========================
