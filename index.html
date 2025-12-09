@@ -1,1432 +1,2606 @@
 <html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Menú — Platos Fusión (Completo)</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
-  <style>
-    :root{
-      --bg:#070709;
-      --panel:#121316;
-      --glass: rgba(255,255,255,0.03);
-      --accent:#e6c27a;
-      --muted:#c9cbd0;
-      --radius:18px;
-      --ease:cubic-bezier(.2,.9,.3,1);
-      --gold-dark:#c49a6c;
-      --nav-width:280px;
-      --text-primary: #fff;
-      --text-secondary: #c9cbd0;
-      --card-bg: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      --card-border: 1px solid rgba(255,255,255,0.03);
-      --header-bg: linear-gradient(180deg, rgba(10,10,11,0.66), rgba(10,10,11,0.36));
-      --header-border: 1px solid rgba(255,255,255,0.03);
-      --modal-bg: linear-gradient(180deg,#0f1113,#0b0c0d);
-      --footer-bg: #111;
-      --map-filter: none;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tonalithai - Fusión Mexicana-Tailandesa</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #E65100;
+            --secondary: #2E7D32;
+            --accent: #D32F2F;
+            --dark: #1A237E;
+            --light: #FFF8E1;
+            --text: #212121;
+            --bg: #FFFFFF;
+            --card-bg: #FFFFFF;
+            --shadow: rgba(0, 0, 0, 0.15);
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --gold: #FFD700;
+            --bronze: #CD7F32;
+        }
 
-    [data-theme="light"] {
-      --bg: #f5f5f5;
-      --panel: #ffffff;
-      --glass: rgba(0,0,0,0.03);
-      --accent: #b8860b;
-      --muted: #666;
-      --gold-dark: #8b6b3d;
-      --text-primary: #222;
-      --text-secondary: #555;
-      --card-bg: linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.01));
-      --card-border: 1px solid rgba(0,0,0,0.05);
-      --header-bg: linear-gradient(180deg, rgba(255,255,255,0.8), rgba(255,255,255,0.6));
-      --header-border: 1px solid rgba(0,0,0,0.05);
-      --modal-bg: linear-gradient(180deg,#f9f9f9,#f0f0f0);
-      --footer-bg: #eaeaea;
-      --map-filter: invert(0.9) hue-rotate(180deg);
-    }
+        .dark-mode {
+            --primary: #FF9800;
+            --secondary: #4CAF50;
+            --accent: #F44336;
+            --dark: #283593;
+            --light: #424242;
+            --text: #FAFAFA;
+            --bg: #121212;
+            --card-bg: #1E1E1E;
+            --shadow: rgba(0, 0, 0, 0.5);
+            --gold: #FFD700;
+            --bronze: #CD7F32;
+        }
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      min-height:100vh;
-      background: radial-gradient(1200px 600px at 10% 10%, rgba(230,194,122,0.06), transparent 6%),
-                  linear-gradient(180deg,var(--bg) 0%, var(--panel) 60%);
-      color:var(--text-primary);
-      font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      scroll-behavior: smooth;
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    /* ---------- Header ---------- */
-    header{
-      position:sticky; top:0; z-index:300;
-      display:flex;align-items:center;justify-content:space-between;
-      padding:14px 20px;
-      background:var(--header-bg);
-      border-bottom:var(--header-border);
-      backdrop-filter: blur(8px) saturate(120%);
-    }
-    .brand{display:flex;gap:12px;align-items:center}
-    .logo{
-      width:48px;height:48px;border-radius:10px;
-      background:linear-gradient(135deg,#20160f,#4a2b0b);
-      display:flex;align-items:center;justify-content:center;
-      box-shadow: 0 6px 20px rgba(0,0,0,.6);
-      border:1px solid rgba(255,255,255,.03);
-    }
-    [data-theme="light"] .logo {
-      background:linear-gradient(135deg,#f0d9b5,#e6c27a);
-      border:1px solid rgba(0,0,0,.05);
-    }
-    .logo svg{filter:drop-shadow(0 6px 18px rgba(0,0,0,.5))}
-    h1{margin:0;font-family:'Playfair Display',serif;color:var(--accent);font-size:20px}
-    .tag{color:var(--muted);font-size:13px;margin-top:2px}
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            transition: var(--transition);
+            overflow-x: hidden;
+            font-weight: 400;
+        }
 
-    /* nav desktop */
-    nav.main-nav{display:flex;gap:10px;align-items:center}
-    .filter-btn{
-      background:var(--glass);border:1px solid rgba(255,255,255,0.04);
-      color:var(--muted);padding:8px 12px;border-radius:12px;cursor:pointer;font-weight:600;
-      transition: all 220ms var(--ease);
-    }
-    [data-theme="light"] .filter-btn {
-      border:1px solid rgba(0,0,0,0.08);
-    }
-    .filter-btn:hover{transform:translateY(-3px)}
-    .filter-btn.active{background:linear-gradient(90deg,var(--accent), #ffdca3); color:#1b1200; border:none}
+        h1, h2, h3, h4, h5 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
 
-    .location-btn{
-      display:inline-flex;align-items:center;gap:8px;
-      background:transparent;border:1px solid var(--gold-dark);
-      color:var(--gold-dark);
-      padding:8px 14px;border-radius:12px;
-      cursor:pointer;font-weight:700;font-size:14px;
-      transition:all .18s var(--ease);
-    }
-    .location-btn svg{width:16px;height:16px;fill:var(--gold-dark)}
-    .location-btn:hover{background:linear-gradient(90deg, rgba(230,194,122,0.12), rgba(196,154,108,0.06)); color:#1b1200}
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
 
-    /* Theme Toggle Button - Estilo como en el video */
-    .theme-toggle {
-      background: var(--glass);
-      border: 1px solid rgba(255,255,255,0.04);
-      border-radius: 50%;
-      width: 44px;
-      height: 44px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-    [data-theme="light"] .theme-toggle {
-      border: 1px solid rgba(0,0,0,0.08);
-    }
-    .theme-toggle:hover {
-      transform: translateY(-3px);
-    }
-    
-    .theme-toggle-inner {
-      width: 20px;
-      height: 20px;
-      position: relative;
-      transition: all 0.3s ease;
-    }
-    
-    .sun-icon, .moon-icon {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      transition: all 0.3s ease;
-    }
-    
-    .sun-icon {
-      opacity: 0;
-      transform: scale(0.5);
-    }
-    
-    .moon-icon {
-      opacity: 1;
-      transform: scale(1);
-    }
-    
-    [data-theme="light"] .sun-icon {
-      opacity: 1;
-      transform: scale(1);
-    }
-    
-    [data-theme="light"] .moon-icon {
-      opacity: 0;
-      transform: scale(0.5);
-    }
+        /* Header Styles */
+        header {
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.5s ease;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            transform: translateY(0);
+        }
 
-    /* Language Toggle Button */
-    .lang-toggle {
-      background: var(--glass);
-      border: 1px solid rgba(255,255,255,0.04);
-      color: var(--muted);
-      padding: 8px 12px;
-      border-radius: 12px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: all 220ms var(--ease);
-    }
-    [data-theme="light"] .lang-toggle {
-      border: 1px solid rgba(0,0,0,0.08);
-    }
-    .lang-toggle:hover {
-      transform: translateY(-3px);
-    }
+        header.hidden {
+            transform: translateY(-100%);
+        }
 
-    /* ---------- Hamburger & Mobile Nav ---------- */
-    .hamburger{
-      display:none;
-      width:44px;height:44px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.04);
-      align-items:center;justify-content:center;cursor:pointer;
-    }
-    [data-theme="light"] .hamburger {
-      border: 1px solid rgba(0,0,0,0.08);
-    }
-    
-    /* CORRECCIÓN: Líneas del menú hamburguesa blancas en modo oscuro */
-    .hamburger svg{
-      width:22px;
-      height:22px;
-      fill: var(--text-primary); /* Usa el color primario del tema */
-    }
+        header.scrolled {
+            background-color: rgba(0, 0, 0, 0.9);
+            padding: 10px 0;
+        }
 
-    /* CORRECCIÓN: Panel móvil con fondo más claro en modo oscuro */
-    .mobile-panel{
-      position:fixed;top:0;right:-100%;height:100vh;width:var(--nav-width);
-      background: linear-gradient(180deg, #1a1c20, #15171a); /* Fondo más claro para modo oscuro */
-      box-shadow:-20px 0 60px rgba(0,0,0,.9);
-      transition:right .36s cubic-bezier(.2,.9,.3,1);z-index:400;padding:20px;
-      display:flex;flex-direction:column;gap:16px;
-      border-left: 1px solid rgba(255,255,255,0.1);
-    }
-    [data-theme="light"] .mobile-panel {
-      background: linear-gradient(180deg, var(--panel), var(--bg));
-      border-left: 1px solid rgba(0,0,0,0.1);
-    }
-    .mobile-panel.open{right:0}
-    .mobile-panel .close-mobile{
-      align-self:flex-end;
-      background: rgba(255,255,255,0.1);
-      border:1px solid rgba(255,255,255,0.2);
-      border-radius:50%;
-      width:40px;
-      height:40px;
-      color:var(--text-primary);
-      font-size:18px;
-      cursor:pointer;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      transition: all 0.3s ease;
-    }
-    [data-theme="light"] .mobile-panel .close-mobile {
-      background: rgba(0,0,0,0.05);
-      border:1px solid rgba(0,0,0,0.1);
-    }
-    .mobile-panel .close-mobile:hover {
-      background: rgba(255,255,255,0.2);
-      transform: scale(1.1);
-    }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            transition: var(--transition);
+        }
 
-    /* Botones dentro del panel móvil con mejor contraste */
-    .mobile-panel .filter-btn,
-    .mobile-panel .lang-toggle,
-    .mobile-panel .theme-toggle,
-    .mobile-panel .location-btn {
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.15);
-      color: var(--text-primary);
-      font-weight: 600;
-    }
-    [data-theme="light"] .mobile-panel .filter-btn,
-    [data-theme="light"] .mobile-panel .lang-toggle,
-    [data-theme="light"] .mobile-panel .theme-toggle,
-    [data-theme="light"] .mobile-panel .location-btn {
-      background: rgba(0,0,0,0.03);
-      border: 1px solid rgba(0,0,0,0.08);
-      color: var(--text-primary);
-    }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: var(--transition);
+        }
 
-    /* ---------- Hero ---------- */
-    .hero{padding:48px 20px 16px;text-align:center;max-width:1100px;margin:0 auto}
-    .hero h2{font-family:'Playfair Display',serif;color:var(--accent);font-size:30px;margin:0 0 6px}
-    .hero p{color:var(--muted);max-width:820px;margin:0 auto;font-size:15px}
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 24px;
+            box-shadow: 0 4px 15px var(--shadow);
+            transition: var(--transition);
+            animation: pulse 2s infinite;
+        }
 
-    /* ---------- Grid ---------- */
-    .container{max-width:1200px;margin:20px auto;padding:0 20px}
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap:22px;
-    }
-    .card{
-      background:var(--card-bg);
-      border-radius:var(--radius);overflow:hidden;
-      display:flex;flex-direction:column;
-      transform:translateY(30px) scale(.98);opacity:0;
-      transition: transform 520ms var(--ease), opacity 520ms var(--ease), box-shadow 280ms var(--ease);
-      box-shadow: 0 12px 30px rgba(0,0,0,.55);
-      border:var(--card-border);
-      position:relative;
-    }
-    .card.show{transform:none;opacity:1}
-    .card-media{
-      height:180px;
-      overflow:hidden;
-      position:relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(0,0,0,0.1);
-    }
-    .card-media img{
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      transition: transform 700ms ease;
-      max-width: 100%;
-      max-height: 100%;
-    }
-    .card:hover{transform:translateY(-8px) scale(1.02); box-shadow: 0 30px 70px rgba(0,0,0,.7)}
-    .card:hover img{transform:scale(1.05)}
-    .card[data-category="bebidas"]:hover img{transform:scale(1.02)}
-    .card-body{padding:16px;display:flex;flex-direction:column;gap:8px; position: relative; z-index: 2;}
-    .meta{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-    .title{font-family:'Playfair Display',serif;font-size:18px;margin:0;color:var(--accent)}
-    .time{font-size:13px;color:var(--muted)}
-    .desc{color:var(--muted);font-size:14px;margin:6px 0 0;min-height:40px}
-    .card-actions{display:flex;gap:10px;margin-top:10px}
-    .btn{flex:1;padding:10px 12px;border-radius:12px;border:none;background:linear-gradient(90deg,var(--accent), #ffdca3); color:#1b1200; cursor:pointer;font-weight:700;transition:all 220ms var(--ease)}
-    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06)}
-    [data-theme="light"] .btn.ghost {
-      border:1px solid rgba(0,0,0,0.1);
-    }
+        .logo:hover .logo-icon {
+            transform: rotate(15deg) scale(1.1);
+        }
 
-    .cat-label{position:absolute;top:12px;left:12px;padding:7px 10px;border-radius:10px;background:rgba(0,0,0,0.45);font-size:13px;color:var(--muted);backdrop-filter: blur(6px); z-index: 3;}
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+            transition: var(--transition);
+            font-family: 'Playfair Display', serif;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
 
-    /* ---------- Modal ---------- */
-    .modal{
-      position:fixed;inset:0;display:none;align-items:center;justify-content:center;
-      background: linear-gradient(180deg, rgba(2,2,2,0.6), rgba(2,2,2,0.9));
-      z-index:500;backdrop-filter: blur(6px) saturate(120%);
-    }
-    .modal.show{display:flex}
-    .dialog{
-      width:94%;max-width:980px;border-radius:18px;background:var(--modal-bg);
-      padding:18px;display:grid;grid-template-columns: 1fr 360px;gap:18px;align-items:start;
-      box-shadow: 0 30px 80px rgba(0,0,0,.7);transform:translateY(30px) scale(.96);opacity:0;transition:all 360ms var(--ease);
-      position:relative;
-    }
-    .modal.show .dialog{transform:none;opacity:1}
-    .close-x{position:absolute;right:18px;top:14px;background:transparent;border:none;color:var(--text-primary);font-size:20px;cursor:pointer}
-    .close-x:hover{color:var(--accent)}
-    .dialog h2{margin:8px 0 6px;font-family:'Playfair Display',serif;color:var(--accent)}
-    .dialog p{color:var(--text-secondary);margin:0 0 10px}
-    .ingredients{margin-top:10px;padding-left:18px;color:var(--muted)}
-    .tabs{display:flex;gap:10px}
-    .tab-btn{padding:10px 12px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);color:var(--muted);cursor:pointer;font-weight:700}
-    [data-theme="light"] .tab-btn {
-      background:rgba(0,0,0,0.02);
-      border:1px solid rgba(0,0,0,0.04);
-    }
-    .tab-btn.active{background:linear-gradient(90deg,var(--accent),#ffdca3);color:#1b1200}
-    .tab-content{display:none;margin-top:10px;color:var(--muted)}
-    .tab-content.active{display:block}
-    .dialog-right{
-      border-radius:12px;
-      overflow:hidden;
-      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(0,0,0,0.1);
-    }
-    .dialog-right img{
-      width:100%;
-      height:100%;
-      object-fit: contain;
-      max-width: 100%;
-      max-height: 100%;
-    }
+        .logo-slogan {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.9);
+            margin-top: -5px;
+            transition: var(--transition);
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 500;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
 
-    /* ---------- Footer with map + contact ---------- */
-    footer{margin-top:40px;background:var(--footer-bg);color:var(--text-secondary);padding:28px 20px}
-    .footer-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns: 1fr 420px;gap:18px;align-items:start}
-    .contact-block{padding:18px;border-radius:12px;background:var(--card-bg);}
-    .contact-block h3{color:var(--accent);font-family:'Playfair Display',serif;margin-top:0}
-    .contact-block p{margin:8px 0;color:var(--text-secondary)}
-    .socials{display:flex;gap:12px;margin-top:10px}
-    .socials a{display:inline-flex;align-items:center; justify-content:center;width:44px;height:44px;border-radius:8px;background:transparent;text-decoration:none;border:1px solid rgba(255,255,255,0.1);transition:all 0.3s ease}
-    [data-theme="light"] .socials a {
-      border:1px solid rgba(0,0,0,0.1);
-    }
-    .socials a:hover{background:rgba(255,255,255,0.05);transform:translateY(-2px);border-color:var(--accent)}
-    .socials svg{width:26px;height:26px;display:block}
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px; /* MUY GRANDE - Aumentado de 25px a 30px */
+        }
 
-    /* Map filter for light theme */
-    #mapFrame {
-      filter: var(--map-filter);
-    }
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-weight: 700; /* MUY GRANDE - Aumentado de 600 a 700 */
+            position: relative;
+            transition: var(--transition);
+            font-family: 'Quicksand', sans-serif;
+            padding: 8px 0;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            font-size: 1.3rem; /* MUY GRANDE - Aumentado de 1.05rem a 1.3rem */
+        }
 
-    /* ---------- Back to top button ---------- */
-    .back-to-top {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background: var(--accent);
-      color: #1b1200;
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      z-index: 100;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s ease;
-    }
-    
-    .back-to-top.show {
-      opacity: 1;
-      visibility: visible;
-    }
-    
-    .back-to-top:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.4);
-    }
-    
-    .back-to-top svg {
-      width: 24px;
-      height: 24px;
-      fill: #1b1200;
-    }
+        nav a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transition: var(--transition);
+            border-radius: 3px;
+        }
 
-    /* Responsive */
-    @media (max-width:980px){
-      .dialog{grid-template-columns:1fr;max-width:720px}
-      .dialog-right{height:260px}
-      .footer-grid{grid-template-columns:1fr;gap:14px}
-    }
-    @media (max-width:720px){
-      nav.main-nav{display:none}
-      .hamburger{display:inline-flex}
-      .mobile-panel{width:84%}
-      
-      /* Show back to top button only on mobile */
-      .back-to-top {
-        display: flex;
-      }
-    }
-  </style>
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        nav a:hover:after {
+            width: 100%;
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* BOTÓN DE TEMA */
+        .theme-toggle-btn {
+            position: relative;
+            width: 90px;
+            height: 45px;
+            border-radius: 25px;
+            padding: 3px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .theme-toggle-btn:hover {
+            transform: scale(1.08);
+        }
+
+        .theme-toggle-btn:active {
+            transform: scale(0.95);
+        }
+
+        .theme-toggle-btn.dark {
+            background-color: rgba(75, 85, 99, 0.7);
+        }
+
+        .theme-toggle-btn.light {
+            background-color: rgba(251, 191, 36, 0.7);
+        }
+
+        .theme-toggle-thumb {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background-color: white;
+        }
+
+        .theme-toggle-thumb.dark {
+            background-color: #E5E7EB;
+            transform: translateX(45px);
+        }
+
+        .theme-toggle-thumb.light {
+            background-color: #FEF3C7;
+            transform: translateX(3px);
+        }
+
+        .language-selector {
+            position: relative;
+        }
+
+        .language-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: var(--transition);
+            background-color: rgba(255, 255, 255, 0.2);
+            font-family: 'Quicksand', sans-serif;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .language-btn:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .language-options {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px var(--shadow);
+            padding: 10px;
+            display: none;
+            z-index: 100;
+            min-width: 120px;
+        }
+
+        .language-options.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .language-option {
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        .language-option:hover {
+            background-color: var(--light);
+        }
+
+        .language-option.active {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: white;
+            cursor: pointer;
+            z-index: 1001;
+            transition: var(--transition);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .mobile-menu-btn:hover {
+            color: var(--primary);
+            transform: scale(1.1);
+        }
+
+        /* Menú móvil */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 280px;
+            height: 100vh;
+            background-color: var(--card-bg);
+            z-index: 1002;
+            transition: right 0.4s ease;
+            padding: 80px 20px 20px;
+            box-shadow: -5px 0 15px var(--shadow);
+            overflow-y: auto;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+        }
+
+        .mobile-menu li {
+            margin-bottom: 15px;
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 10px 15px;
+            color: var(--text);
+            text-decoration: none;
+            border-radius: 5px;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .mobile-menu a:hover {
+            background-color: var(--light);
+            color: var(--primary);
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1001;
+            display: none;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+            z-index: 2;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+            font-weight: 400;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 35px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Secciones de contenido */
+        section {
+            padding: 100px 0;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            display: inline-block;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        /* Menú con filtros */
+        .menu-filters {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            background-color: var(--light);
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+
+        /* Menú principal - GRID de 3 columnas */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .menu-item {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px var(--shadow);
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .menu-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .menu-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px var(--shadow);
+        }
+
+        .menu-item-img-container {
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--light);
+        }
+
+        .menu-item-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: var(--transition);
+        }
+
+        .menu-item:hover .menu-item-img {
+            transform: scale(1.05);
+        }
+
+        .menu-item-content {
+            padding: 20px;
+        }
+
+        .menu-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .menu-item-title {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+            color: var(--primary);
+        }
+
+        .menu-item-price {
+            font-weight: 700;
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+
+        .menu-item-desc {
+            color: var(--text);
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .menu-item-origin {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.9rem;
+            color: var(--secondary);
+            font-weight: 500;
+        }
+
+        /* Reservaciones */
+        .reservation-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--light);
+            border-radius: 8px;
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Quicksand', sans-serif;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(230, 81, 0, 0.2);
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .checkbox-group label {
+            margin-bottom: 0;
+            cursor: pointer;
+        }
+
+        /* Contacto REORGANIZADO */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .contact-item {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .contact-item i {
+            margin-right: 15px;
+            color: var(--primary);
+            width: 20px;
+            font-size: 1.2rem;
+            margin-top: 3px;
+        }
+
+        /* REDES SOCIALES MEJORADAS */
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: var(--light);
+            color: var(--primary);
+            font-size: 1.8rem;
+            transition: var(--transition);
+            text-decoration: none;
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+
+        .social-icon:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 25px var(--shadow);
+        }
+
+        /* Facebook - Azul */
+        .social-icon.facebook:hover {
+            background: #1877F2;
+        }
+
+        /* Instagram - Gradiente morado/rosa */
+        .social-icon.instagram:hover {
+            background: linear-gradient(45deg, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+        }
+
+        /* Gmail - Rojo */
+        .social-icon.gmail:hover {
+            background: #D44638;
+        }
+
+        /* WhatsApp - Verde */
+        .social-icon.whatsapp:hover {
+            background: #25D366;
+        }
+
+        /* Mapa CON DIRECCIÓN CORREGIDA - URL CORRECTA */
+        .map-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px var(--shadow);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+            display: block;
+            text-decoration: none;
+            order: -1;
+        }
+
+        .map-container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            filter: grayscale(30%) contrast(110%);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .map-container:hover iframe {
+            filter: grayscale(0%) contrast(120%);
+            transform: scale(1.02);
+        }
+
+        /* Efecto de brillo al pasar el mouse sobre el mapa */
+        .map-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.7s;
+            z-index: 1;
+        }
+
+        .map-container:hover::before {
+            left: 100%;
+        }
+
+        /* CHATBOT DE RESERVACIONES MEJORADO */
+        .chatbot-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        .chatbot-toggle {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #FF6B35, #F7931E);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+            transition: var(--transition);
+            animation: pulse 2s infinite;
+            position: relative;
+            z-index: 1001;
+        }
+
+        .chatbot-toggle:hover {
+            transform: scale(1.15);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+            background: linear-gradient(135deg, #FF8C42, #FFA94D);
+        }
+
+        .chatbot-toggle .knife-icon {
+            font-size: 32px;
+            transform: rotate(45deg);
+        }
+
+        .chatbot-window {
+            position: absolute;
+            bottom: 85px;
+            right: 0;
+            width: 350px;
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px var(--shadow);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 1000;
+        }
+
+        .chatbot-window.show {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .chatbot-header {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chatbot-header h3 {
+            margin: 0;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chatbot-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .chatbot-close:hover {
+            transform: scale(1.1);
+        }
+
+        .chatbot-messages {
+            padding: 20px;
+            height: 300px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .chatbot-message {
+            max-width: 80%;
+            padding: 12px 15px;
+            border-radius: 15px;
+            line-height: 1.4;
+        }
+
+        .chatbot-message.bot {
+            background-color: var(--light);
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+        }
+
+        .chatbot-message.user {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 5px;
+        }
+
+        .chatbot-input-container {
+            padding: 15px 20px;
+            border-top: 1px solid var(--light);
+            display: flex;
+            gap: 10px;
+        }
+
+        .chatbot-input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid var(--light);
+            border-radius: 25px;
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Quicksand', sans-serif;
+            transition: var(--transition);
+        }
+
+        .chatbot-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .chatbot-send {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .chatbot-send:hover {
+            transform: scale(1.1);
+        }
+
+        .chatbot-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 15px 20px;
+        }
+
+        .chatbot-option {
+            padding: 10px 15px;
+            background-color: var(--light);
+            border: none;
+            border-radius: 10px;
+            text-align: left;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 500;
+        }
+
+        .chatbot-option:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateX(5px);
+        }
+
+        /* Botón de scroll hacia arriba */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 110px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: 0 5px 15px var(--shadow);
+            transition: var(--transition);
+            opacity: 0;
+            visibility: hidden;
+            z-index: 999;
+        }
+
+        .scroll-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px var(--shadow);
+        }
+
+        /* Animaciones */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.08);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .menu-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            nav ul {
+                gap: 20px; /* Más espacio en responsive */
+            }
+            
+            nav a {
+                font-size: 1.1rem; /* Más grande en responsive */
+            }
+            
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .map-container {
+                order: 0;
+                height: 350px;
+            }
+            
+            .chatbot-window {
+                width: 320px;
+            }
+            
+            .menu-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .header-controls {
+                gap: 10px;
+            }
+            
+            .theme-toggle-btn {
+                width: 70px;
+                height: 35px;
+            }
+            
+            .theme-toggle-thumb {
+                width: 28px;
+                height: 28px;
+                font-size: 16px;
+            }
+            
+            .theme-toggle-thumb.dark {
+                transform: translateX(35px);
+            }
+            
+            .reservation-form {
+                padding: 25px;
+            }
+            
+            .chatbot-toggle {
+                bottom: 20px;
+                right: 20px;
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
+            }
+            
+            .scroll-top {
+                right: 90px;
+                bottom: 20px;
+            }
+            
+            .chatbot-window {
+                bottom: 70px;
+                width: 300px;
+            }
+            
+            .map-container {
+                height: 300px;
+            }
+            
+            .social-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.6rem;
+            }
+            
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .logo-text {
+                font-size: 20px;
+            }
+            
+            .logo-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .chatbot-toggle {
+                right: 15px;
+                bottom: 15px;
+                width: 55px;
+                height: 55px;
+                font-size: 22px;
+            }
+            
+            .scroll-top {
+                right: 75px;
+                bottom: 15px;
+            }
+            
+            .chatbot-window {
+                width: 280px;
+                right: -20px;
+            }
+            
+            .map-container {
+                height: 250px;
+            }
+            
+            .social-links {
+                gap: 12px;
+            }
+            
+            .social-icon {
+                width: 45px;
+                height: 45px;
+                font-size: 1.4rem;
+            }
+            
+            .contact-grid {
+                gap: 30px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <div class="brand">
-      <div class="logo" aria-hidden="true">
-        <svg width="36" height="36" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="32" cy="32" r="31" stroke="rgba(255,255,255,0.06)"/>
-          <path d="M20 34c0-6 5-10 12-10s12 4 12 10v6H20v-6z" fill="#fff" opacity=".9"/>
-          <path d="M24 28c0-4 3-6 8-6s8 2 8 6" stroke="#e6c27a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
-      <div>
-        <h1>Platos Fusión</h1>
-        <div class="tag">Menú Completo</div>
-      </div>
+    <!-- Header -->
+    <header id="mainHeader">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">T</div>
+                    <div>
+                        <div class="logo-text">Tonalithai</div>
+                        <div class="logo-slogan" id="slogan">Donde la energía y el sabor se unen</div>
+                    </div>
+                </div>
+                
+                <nav>
+                    <ul>
+                        <li><a href="#inicio" data-es="Inicio" data-en="Home">Inicio</a></li>
+                        <li><a href="#menu" data-es="Menú" data-en="Menu">Menú</a></li>
+                        <li><a href="#reservaciones" data-es="Reservaciones" data-en="Reservations">Reservaciones</a></li>
+                        <li><a href="#contacto" data-es="Contacto" data-en="Contact">Contacto</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="header-controls">
+                    <button class="theme-toggle-btn light" id="themeToggle">
+                        <div class="theme-toggle-thumb light" id="themeToggleThumb">
+                            🧈
+                        </div>
+                    </button>
+                    
+                    <div class="language-selector">
+                        <button class="language-btn" id="languageBtn">
+                            <span id="currentLang">ES</span> <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="language-options" id="languageOptions">
+                            <div class="language-option active" data-lang="es">Español</div>
+                            <div class="language-option" data-lang="en">English</div>
+                        </div>
+                    </div>
+                    
+                    <button class="mobile-menu-btn" id="mobileMenuBtn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Menú móvil -->
+    <div class="overlay" id="overlay"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <ul>
+            <li><a href="#inicio" data-es="Inicio" data-en="Home">Inicio</a></li>
+            <li><a href="#menu" data-es="Menú" data-en="Menu">Menú</a></li>
+            <li><a href="#reservaciones" data-es="Reservaciones" data-en="Reservations">Reservaciones</a></li>
+            <li><a href="#contacto" data-es="Contacto" data-en="Contact">Contacto</a></li>
+        </ul>
     </div>
 
-    <!-- Desktop nav -->
-    <nav class="main-nav" aria-label="Navegación principal">
-      <button class="filter-btn active" data-filter="all">Todos</button>
-      <button class="filter-btn" data-filter="platos-fuertes">Platos fuertes</button>
-      <button class="filter-btn" data-filter="sopas">Sopas</button>
-      <button class="filter-btn" data-filter="postres">Postres</button>
-      <button class="filter-btn" data-filter="bebidas">Bebidas</button>
-      <button class="lang-toggle" id="langToggle">EN</button>
-      <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema">
-        <div class="theme-toggle-inner">
-          <svg class="sun-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2"/>
-            <path d="M12 2V4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            <path d="M12 20V22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            <path d="M4 12H2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            <path d="M22 12H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            <path d="M19.07 4.93L17.66 6.34" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            <path d="M6.34 17.66L4.93 19.07" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            <path d="M19.07 19.07L17.66 17.66" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            <path d="M6.34 6.34L4.93 4.93" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-          <svg class="moon-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <h1>Tonalithai</h1>
+            <p id="hero-text">Una experiencia gastronómica única que fusiona los sabores vibrantes de México con la delicadeza de la cocina tailandesa</p>
+            <a href="#reservaciones" class="btn" id="reserve-btn">Reserva Ahora</a>
         </div>
-      </button>
-      <button class="location-btn" id="locationBtn" title="Ir a información de contacto">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C8 2 5 5 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-4-3-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>
-        Av. Insurgentes 123
-      </button>
-    </nav>
-
-    <!-- Hamburger for mobile - SVG CORREGIDO -->
-    <button class="hamburger" id="hamburger" aria-label="Abrir menú">
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M3 6h18v2H3zM3 11h18v2H3zM3 16h18v2H3z"/>
-      </svg>
-    </button>
-  </header>
-
-  <!-- Mobile sliding panel -->
-  <aside id="mobilePanel" class="mobile-panel" aria-hidden="true">
-    <button class="close-mobile" id="closeMobile" aria-label="Cerrar menú">✕</button>
-    <div style="display:flex;flex-direction:column;gap:12px;margin-top:8px">
-      <button class="filter-btn" data-filter="all">Todos</button>
-      <button class="filter-btn" data-filter="platos-fuertes">Platos fuertes</button>
-      <button class="filter-btn" data-filter="sopas">Sopas</button>
-      <button class="filter-btn" data-filter="postres">Postres</button>
-      <button class="filter-btn" data-filter="bebidas">Bebidas</button>
-      <button class="lang-toggle" id="langToggleMobile">EN</button>
-      <button class="theme-toggle" id="themeToggleMobile" aria-label="Cambiar tema">
-        <div class="theme-toggle-inner">
-          <svg class="sun-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2"/>
-            <path d="M12 2V4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            <path d="M12 20V22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            <path d="M4 12H2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            <path d="M22 12H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            <path d="M19.07 4.93L17.66 6.34" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            <path d="M6.34 17.66L4.93 19.07" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            <path d="M19.07 19.07L17.66 17.66" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            <path d="M6.34 6.34L4.93 4.93" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-          <svg class="moon-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-      </button>
-      <button class="location-btn" id="locationBtnMobile">📍 Ir a Contacto</button>
-    </div>
-  </aside>
-
-  <main>
-    <section class="hero">
-      <h2 id="hero-title">Menú Completo</h2>
-      <p id="hero-desc">Explora todas nuestras recetas: platos fuertes, sopas, postres y bebidas. Haz clic en "Ver Receta" para abrir la ficha con ingredientes y preparación.</p>
     </section>
 
-    <div class="container">
-      <div class="grid" id="menuGrid" aria-live="polite"></div>
-    </div>
-  </main>
-
-  <!-- Modal -->
-  <div id="modal" class="modal" role="dialog" aria-hidden="true">
-    <div class="dialog" role="document" aria-modal="true">
-      <button class="close-x" aria-label="Cerrar">✕</button>
-      <div class="dialog-left">
-        <h2 id="m-title">Título</h2>
-        <p id="m-desc"></p>
-
-        <div class="tabs" role="tablist" aria-label="Opciones receta">
-          <button class="tab-btn active" data-tab="ingredients" role="tab" aria-selected="true" id="ingredients-tab">Ingredientes</button>
-          <button class="tab-btn" data-tab="steps" role="tab" aria-selected="false" id="steps-tab">Preparación</button>
-        </div>
-
-        <div id="tab-ingredients" class="tab-content active">
-          <ul id="m-ingredients" class="ingredients"></ul>
-        </div>
-
-        <div id="tab-steps" class="tab-content">
-          <p id="m-steps"></p>
-        </div>
-      </div>
-
-      <div class="dialog-right">
-        <img id="m-img" src="" alt="Foto del platillo">
-      </div>
-    </div>
-  </div>
-
-  <!-- Footer -->
-  <footer id="contacto">
-    <div class="footer-grid">
-      <div>
-        <!-- embedded Google Map for the address -->
-        <iframe
-          id="mapFrame"
-          title="Mapa - Av. Insurgentes Sur 123, Col. Roma, CDMX"
-          src="https://www.google.com/maps?q=Av.+Insurgentes+Sur+123,+Col.+Roma,+CDMX&output=embed"
-          width="100%" height="320" style="border:0;border-radius:12px" allowfullscreen loading="lazy"></iframe>
-      </div>
-
-      <div class="contact-block" aria-label="Información de contacto">
-        <h3 id="contact-title">Encuéntranos</h3>
-        <p>📌 <strong id="address-label">Dirección:</strong> Av. Insurgentes Sur 123, Col. Roma, CDMX</p>
-        <p>🕒 <strong id="hours-label">Horario:</strong> Lunes a Domingo — 12:00 - 22:00 hrs</p>
-        <p>📞 <strong id="phone-label">Teléfono:</strong> <a href="tel:+521234567890" style="color:var(--accent);text-decoration:none">+52 123 456 7890</a></p>
-        <p>✉️ <strong id="reservations-label">Reservas:</strong> <a href="mailto:reservasfusion@gmail.com" style="color:var(--accent);text-decoration:none">reservasfusion@gmail.com</a></p>
-
-        <div style="margin-top:10px">
-          <strong style="color:var(--text-secondary)" id="social-label">Redes sociales</strong>
-          <div class="socials" role="navigation" aria-label="Redes sociales">
-            <!-- WhatsApp con fondo blanco -->
-            <a href="https://wa.me/521234567890" target="_blank" rel="noopener" aria-label="WhatsApp" style="display:inline-flex; align-items:center; justify-content:center; width:50px; height:50px; border-radius:50%; background-color:white; text-decoration:none; box-shadow:0 2px 5px rgba(0,0,0,0.1); margin:5px;">
-              <svg width="30" height="30" viewBox="0 0 24 24">
-                <path fill="#25D366" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.87 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.55 4.142 1.61 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.441h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413"/>
-              </svg>
-            </a>
-
-            <!-- Botón circular con logo Instagram en SVG -->
-            <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram" 
-               style="display:inline-flex; align-items:center; justify-content:center; width:50px; height:50px; 
-                      border-radius:50%; background-color:white; text-decoration:none; 
-                      box-shadow:0 2px 5px rgba(0,0,0,0.15); margin:5px;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 448 512">
-                <defs>
-                  <!-- Gradiente oficial Instagram -->
-                  <linearGradient id="igGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#f09433"/>
-                    <stop offset="25%" stop-color="#e6683c"/>
-                    <stop offset="50%" stop-color="#dc2743"/>
-                    <stop offset="75%" stop-color="#cc2366"/>
-                    <stop offset="100%" stop-color="#bc1888"/>
-                  </linearGradient>
-                </defs>
-                <path fill="url(#igGradient)" d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9 114.9-51.3 114.9-114.9S287.6 141 224.1 141zm0 189.6c-41.3 0-74.7-33.4-74.7-74.7s33.4-74.7 74.7-74.7 74.7 33.4 74.7 74.7-33.4 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.9-26.9 26.9s-26.9-12-26.9-26.9 12-26.9 26.9-26.9 26.9 12 26.9 26.9zm76.1 27.2c-1.7-35.7-9.9-67.3-36.2-93.5S377.4 38.8 341.7 37.1c-35.7-1.7-142.7-1.7-178.4 0-35.7 1.7-67.3 9.9-93.5 36.2S38.8 134.6 37.1 170.3c-1.7 35.7-1.7 142.7 0 178.4 1.7 35.7 9.9 67.3 36.2 93.5s57.8 34.5 93.5 36.2c35.7 1.7 142.7 1.7 178.4 0 35.7-1.7 67.3-9.9 93.5-36.2s34.5-57.8 36.2-93.5c1.7-35.7 1.7-142.7 0-178.4zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/>
-              </svg>
-            </a>
+    <!-- Menú Completo CON FILTROS -->
+    <section id="menu">
+        <div class="container">
+            <div class="section-title">
+                <h2 id="menu-title">Nuestro Menú</h2>
+            </div>
             
-            <!-- Gmail con fondo blanco -->
-            <a href="mailto:reservasfusion@gmail.com" aria-label="Email" style="display:inline-flex; align-items:center; justify-content:center; width:50px; height:50px; border-radius:50%; background-color:white; text-decoration:none; box-shadow:0 2px 5px rgba(0,0,0,0.1); margin:5px;">
-              <svg width="30" height="30" viewBox="0 0 24 24">
-                <path fill="#EA4335" d="M22.288 21h-20.576c-.945 0-1.712-.767-1.712-1.712v-13.576c0-.945.767-1.712 1.712-1.712h20.576c.945 0 1.712.767 1.712 1.712v13.576c0 .945-.767 1.712-1.712 1.712zm-10.288-6.086l-9.342-6.483-.02 11.569h18.684v-11.569l-9.322 6.483zm8.869-9.914h-17.789l8.92 6.229s6.252-4.406 8.869-6.229z"/>
-              </svg>
-            </a>
-          </div>
+            <!-- Filtros para las categorías -->
+            <div class="menu-filters">
+                <button class="filter-btn active" data-category="all" data-es="Todo" data-en="All">Todo</button>
+                <button class="filter-btn" data-category="entradas" data-es="Entradas" data-en="Appetizers">Entradas</button>
+                <button class="filter-btn" data-category="platos-fuertes" data-es="Platos Fuertes" data-en="Main Courses">Platos Fuertes</button>
+                <button class="filter-btn" data-category="sopas" data-es="Sopas" data-en="Soups">Sopas</button>
+                <button class="filter-btn" data-category="postres" data-es="Postres" data-en="Desserts">Postres</button>
+                <button class="filter-btn" data-category="bebidas" data-es="Bebidas" data-en="Drinks">Bebidas</button>
+            </div>
+            
+            <!-- Grid de 3 columnas -->
+            <div class="menu-grid" id="menuGrid">
+                <!-- Los elementos del menú se cargarán con JavaScript -->
+            </div>
         </div>
-      </div>
+    </section>
+
+    <!-- Reservaciones -->
+    <section id="reservaciones" style="background-color: var(--light);">
+        <div class="container">
+            <div class="section-title">
+                <h2 id="reservations-title">Reservaciones</h2>
+            </div>
+            <div class="reservation-form">
+                <form id="reservationForm">
+                    <div class="form-group">
+                        <label for="name" id="name-label">Nombre completo</label>
+                        <input type="text" id="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" id="email-label">Correo electrónico</label>
+                        <input type="email" id="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone" id="phone-label">Teléfono</label>
+                        <input type="tel" id="phone" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="date" id="date-label">Fecha</label>
+                        <input type="date" id="date" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="time" id="time-label">Hora</label>
+                        <input type="time" id="time" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="guests" id="guests-label">Número de personas</label>
+                        <select id="guests" class="form-control" required>
+                            <option value="1" data-es="1 persona" data-en="1 person">1 persona</option>
+                            <option value="2" data-es="2 personas" data-en="2 people">2 personas</option>
+                            <option value="3" data-es="3 personas" data-en="3 people">3 personas</option>
+                            <option value="4" data-es="4 personas" data-en="4 people">4 personas</option>
+                            <option value="5" data-es="5 personas" data-en="5 people">5 personas</option>
+                            <option value="6" data-es="6 personas" data-en="6 people">6 personas</option>
+                            <option value="7" data-es="7 personas" data-en="7 people">7 personas</option>
+                            <option value="8" data-es="8 personas" data-en="8 people">8 personas</option>
+                            <option value="9" data-es="9 personas" data-en="9 people">9 personas</option>
+                            <option value="10" data-es="10 personas" data-en="10 people">10 personas</option>
+                            <option value="more" data-es="Más de 10 personas" data-en="More than 10 people">Más de 10 personas</option>
+                        </select>
+                    </div>
+                    
+                    <!-- PREGUNTA SOBRE ALERGIAS AÑADIDA -->
+                    <div class="form-group">
+                        <label id="allergies-label">¿Algún miembro del grupo tiene alergias alimentarias?</label>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="allergies-yes" name="allergies" value="yes">
+                            <label for="allergies-yes" id="allergies-yes-label">Sí</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="allergies-no" name="allergies" value="no" checked>
+                            <label for="allergies-no" id="allergies-no-label">No</label>
+                        </div>
+                        <input type="text" id="allergies-details" class="form-control" placeholder="Especifica las alergias (si aplica)" style="display: none; margin-top: 10px;">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message" id="message-label">Mensaje adicional (opcional)</label>
+                        <textarea id="message" class="form-control" rows="4"></textarea>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;" id="submit-btn">Reservar Mesa</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contacto">
+        <div class="container">
+            <div class="section-title">
+                <h2 id="contact-title">Contacto</h2>
+            </div>
+            <div class="contact-grid">
+                <!-- Mapa con dirección CORREGIDA - URL DIRECTA DE GOOGLE MAPS -->
+                <div class="map-container" id="mapContainer">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3763.322448981647!2d-99.16798772477373!3d19.40604074123601!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1ff35f5bd1563%3A0x6c366f0e2de02ff7!2sIztaccihuatl%2054%2C%20Hip%C3%B3dromo%2C%20Cuauht%C3%A9moc%2C%2006100%20Ciudad%20de%20M%C3%A9xico%2C%20CDMX!5e0!3m2!1ses-419!2smx!4v1717549541237!5m2!1ses-419!2smx" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="Ubicación de Tonalithai"
+                            style="border:0;">
+                    </iframe>
+                </div>
+                
+                <!-- Información de contacto -->
+                <div class="contact-info">
+                    <div>
+                        <h3 style="margin-bottom: 20px; color: var(--primary);" id="contact-info-title">Información de Contacto</h3>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Iztaccihuatl 54, Hipódromo, Cuauhtémoc, 06100 Ciudad de México, CDMX</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>+52 55 4536 6620</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span>tonalithai80@gmail.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <span id="hours-text">12:00 PM - 12:00 AM<br>Todos los días</span>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 style="margin-bottom: 20px; color: var(--primary);" id="follow-title">Síguenos</h3>
+                        <div class="social-links">
+                            <a href="https://facebook.com/tonalithai" class="social-icon facebook" aria-label="Facebook" target="_blank">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="https://instagram.com/tonalithai" class="social-icon instagram" aria-label="Instagram" target="_blank">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="mailto:tonalithai80@gmail.com" class="social-icon gmail" aria-label="Gmail">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                            <a href="https://wa.me/525545366620" class="social-icon whatsapp" aria-label="WhatsApp" target="_blank">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Botón de scroll hacia arriba -->
+    <button class="scroll-top" id="scrollTop">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- CHATBOT DE RESERVACIONES -->
+    <div class="chatbot-container">
+        <button class="chatbot-toggle" id="chatbotToggle">
+            <span class="knife-icon">🔪</span>
+        </button>
+        
+        <div class="chatbot-window" id="chatbotWindow">
+            <div class="chatbot-header">
+                <h3><i class="fas fa-robot"></i> Asistente de Reservas</h3>
+                <button class="chatbot-close" id="chatbotClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="chatbot-messages" id="chatbotMessages">
+                <div class="chatbot-message bot">
+                    ¡Hola! Soy el asistente de Tonalithai. ¿Te gustaría hacer una reservación?
+                </div>
+            </div>
+            
+            <div class="chatbot-options" id="chatbotOptions">
+                <button class="chatbot-option" data-action="start-reservation">
+                    <i class="fas fa-calendar-check"></i> Hacer Reservación
+                </button>
+                <button class="chatbot-option" data-action="whatsapp">
+                    <i class="fab fa-whatsapp"></i> Contactar por WhatsApp
+                </button>
+                <button class="chatbot-option" data-action="menu">
+                    <i class="fas fa-utensils"></i> Ver Menú
+                </button>
+            </div>
+            
+            <div class="chatbot-input-container" id="chatbotInputContainer" style="display: none;">
+                <input type="text" class="chatbot-input" id="chatbotInput" placeholder="Escribe tu respuesta...">
+                <button class="chatbot-send" id="chatbotSend">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
     </div>
-  </footer>
 
-  <!-- Back to top button -->
-  <button class="back-to-top" id="backToTop" aria-label="Volver arriba">
-    <svg viewBox="0 0 24 24">
-      <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/>
-    </svg>
-  </button>
+    <script>
+        // MENÚ COMPLETO ESTANDARIZADO
+        const menuItems = [
+            // ENTRADAS
+            {
+                id: 1,
+                name: 'Elotitos',
+                name_en: 'Elotitos',
+                price: 45,
+                price_usd: 2.50,
+                description: 'Elotes tiernos asados con mantequilla saborizada, salsa de soya y shichimi togarashi.',
+                description_en: 'Grilled tender corn with flavored butter, soy sauce and shichimi togarashi.',
+                category: 'entradas',
+                origin: 'fusion',
+                profit: 'high',
+                image: 'https://images.unsplash.com/photo-1563245372-f21724e3856d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
+            },
+            {
+                id: 2,
+                name: 'Rollitos',
+                name_en: 'Rollitos',
+                price: 85,
+                price_usd: 4.70,
+                description: 'Rollitos frescos de papel de arroz con verduras y guacamole tailandés.',
+                description_en: 'Fresh rice paper rolls with vegetables and Thai guacamole.',
+                category: 'entradas',
+                origin: 'fusion',
+                profit: 'high',
+                image: 'https://images.unsplash.com/photo-1553621042-f6e147245704?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
+            },
+            {
+                id: 3,
+                name: 'Dumplings de Cochinita Pibil',
+                name_en: 'Cochinita Pibil Dumplings',
+                price: 120,
+                price_usd: 6.70,
+                description: 'Dumplings rellenos de cochinita pibil con masa casera y acompañamiento de cebolla morada.',
+                description_en: 'Dumplings filled with cochinita pibil with homemade dough and red onion accompaniment.',
+                category: 'entradas',
+                origin: 'fusion',
+                profit: 'high',
+                image: 'https://images.unsplash.com/photo-1589647363585-f4a7d3877b10?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
+            },
+            {
+                id: 4,
+                name: 'Camarones al Coco con Chile Habanero y Mango',
+                name_en: 'Coconut Shrimp with Habanero Chile and Mango',
+                price: 145,
+                price_usd: 8.00,
+                description: 'Camarones marinados en leche de coco y especias, salteados con chile habanero y mango.',
+                description_en: 'Shrimp marinated in coconut milk and spices, sautéed with habanero chili and mango.',
+                category: 'entradas',
+                origin: 'fusion',
+                profit: 'high',
+                image: 'https://images.unsplash.com/photo-1559847844-5315695d62e4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
+            },
+            {
+                id: 5,
+                name: 'Ceviche con Leche de Coco y Chile Habanero con Mango',
+                name_en: 'Ceviche with Coconut Milk and Habanero Chile with Mango',
+                price: 130,
+                price_usd: 7.20,
+                description: 'Ceviche fresco con leche de coco, chile habanero, mango y hierbas tailandesas.',
+                description_en: 'Fresh ceviche with coconut milk, habanero chili, mango and Thai herbs.',
+                category: 'entradas',
+                origin: 'fusion',
+                profit: 'high',
+                image: 'https://images.unsplash.com/photo-1553163147-622d57d3e37a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
+            },
 
-  <!-- ========== SCRIPT: render, modal, mobile nav, map behavior ========== -->
-  <script>
-    /* ===========================
-       menuData: todas las recetas (completas)
-       =========================== */
-    const menuData = [
-      {
-        id: 'elotitos',
-        title: 'Elotitos',
-        title_en: 'Corn Cobs',
-        category: 'platos-fuertes',
-        category_en: 'main-courses',
-        time: '25 min',
-        price_mxn: 85,
-        price_usd: 4.50,
-        img: 'elotito.jpeg',
-        desc: 'Elotes tiernos asados, untados con mantequilla mezclada con salsa de soya y espolvoreados con shichimi.',
-        desc_en: 'Tender roasted corn cobs, brushed with butter mixed with soy sauce and sprinkled with shichimi.',
-        ingredients: ['Elotes tiernos', 'Mantequilla', 'Salsa de soya', 'Shichimi'],
-        ingredients_en: ['Tender corn cobs', 'Butter', 'Soy sauce', 'Shichimi'],
-        steps: 'Asar los elotes en grill o carbón hasta dorar. Mezclar mantequilla con soya, untar y espolvorear shichimi.',
-        steps_en: 'Grill corn cobs until golden brown. Mix butter with soy sauce, brush on corn and sprinkle with shichimi.'
-      },
-      {
-        id: 'rollitos-thai',
-        title: 'Rollitos Thai',
-        title_en: 'Thai Rolls',
-        category: 'platos-fuertes',
-        category_en: 'main-courses',
-        time: '25 min',
-        price_mxn: 120,
-        price_usd: 6.50,
-        img: 'rollitos thai.jpeg',
-        desc: 'Papel de arroz relleno de tiras de lechuga, zanahoria, pepino, pimiento rojo y guacamole picante.',
-        desc_en: 'Rice paper rolls filled with lettuce strips, carrot, cucumber, red bell pepper and spicy guacamole.',
-        ingredients: ['Papel de arroz', 'Lechuga', 'Zanahoria', 'Pepino', 'Pimiento rojo', 'Aguacate', 'Limón', 'Chile serrano'],
-        ingredients_en: ['Rice paper', 'Lettuce', 'Carrot', 'Cucumber', 'Red bell pepper', 'Avocado', 'Lime', 'Serrano chili'],
-        steps: 'Hidratar papel de arroz, colocar verduras en tiras y enrollar. Acompañar con guacamole de aguacate, limón y chile.',
-        steps_en: 'Hydrate rice paper, place vegetable strips and roll. Serve with avocado, lime and chili guacamole.'
-      },
-      {
-        id: 'dumplings-cochinita',
-        title: 'Dumplings de Cochinita pibil',
-        title_en: 'Cochinita Pibil Dumplings',
-        category: 'platos-fuertes',
-        category_en: 'main-courses',
-        time: '30 min',
-        price_mxn: 135,
-        price_usd: 7.20,
-        img: 'Dumplings de Cochinita pibil.jpeg',
-        desc: 'Cochinita pibil sazonada, envuelta en láminas de wonton y cocida al vapor o al horno.',
-        desc_en: 'Seasoned cochinita pibil, wrapped in wonton sheets and steamed or baked.',
-        ingredients: ['Carne de cerdo', 'Achiote en pasta', 'Jugo de naranja agria', 'Ajo', 'Sal', 'Pimienta', 'Láminas de wonton'],
-        ingredients_en: ['Pork meat', 'Achiote paste', 'Sour orange juice', 'Garlic', 'Salt', 'Pepper', 'Wonton sheets'],
-        steps: 'Marinar carne en achiote y cítricos; rellenar wonton; cocer al vapor u hornear envuelto en hoja de plátano opcionalmente.',
-        steps_en: 'Marinate meat in achiote and citrus; fill wonton; steam or bake wrapped in banana leaf optionally.'
-      },
-      {
-        id: 'ceviche-coco-mango',
-        title: 'Ceviche en leche de coco con habanero y mango',
-        title_en: 'Coconut Milk Ceviche with Habanero and Mango',
-        category: 'platos-fuertes',
-        category_en: 'main-courses',
-        time: '25 min',
-        price_mxn: 150,
-        price_usd: 8.00,
-        img: 'Ceviche.jpeg',
-        desc: 'Pescado marinado en cítricos y leche de coco con habanero y mango; servido con tostadas.',
-        desc_en: 'Fish marinated in citrus and coconut milk with habanero and mango; served with tostadas.',
-        ingredients: ['Pescado blanco', 'Leche de coco', 'Jugo de limón', 'Jugo de naranja', 'Cebolla morada', 'Habanero', 'Mango', 'Cilantro'],
-        ingredients_en: ['White fish', 'Coconut milk', 'Lime juice', 'Orange juice', 'Red onion', 'Habanero', 'Mango', 'Cilantro'],
-        steps: 'Marinar pescado 10–12 min con jugos; agregar leche de coco y vegetales; mezclar y servir con tostadas.',
-        steps_en: 'Marinate fish 10-12 min with juices; add coconut milk and vegetables; mix and serve with tostadas.'
-      },
-      {
-        id: 'pescado-fusion',
-        title: 'Pescado Fusión (achiote + salsa thai)',
-        title_en: 'Fusion Fish (achiote + thai sauce)',
-        category: 'platos-fuertes',
-        category_en: 'main-courses',
-        time: '40 min',
-        price_mxn: 180,
-        price_usd: 9.50,
-        img: 'Pescado.jpeg',
-        desc: 'Filetes marinados en achiote y limón, servidos con salsa de leche de coco estilo thai.',
-        desc_en: 'Fillets marinated in achiote and lime, served with Thai-style coconut milk sauce.',
-        ingredients: ['Filetes de pescado', 'Achiote', 'Jugo de limón', 'Ajo', 'Jengibre', 'Leche de coco', 'Salsa de pescado', 'Cúrcuma', 'Albahaca'],
-        ingredients_en: ['Fish fillets', 'Achiote', 'Lime juice', 'Garlic', 'Ginger', 'Coconut milk', 'Fish sauce', 'Turmeric', 'Basil'],
-        steps: 'Marinar filetes en achiote y cítricos 15–20 min; sellar en sartén; preparar salsa thai con leche de coco y servir sobre filetes.',
-        steps_en: 'Marinate fillets in achiote and citrus 15-20 min; sear in pan; prepare Thai sauce with coconut milk and serve over fillets.'
-      },
-      {
-        id: 'tacos-tierra-fuego',
-        title: 'Tacos Tierra y Fuego',
-        title_en: 'Earth and Fire Tacos',
-        category: 'platos-fuertes',
-        category_en: 'main-courses',
-        time: '40 min',
-        price_mxn: 140,
-        price_usd: 7.50,
-        img: 'Tacos.jpeg',
-        desc: 'Pulpa de res con salsa de tamarindo y chipotle, salteada con jengibre para un perfil ahumado y picante.',
-        desc_en: 'Beef pulp with tamarind and chipotle sauce, sautéed with ginger for a smoky and spicy profile.',
-        ingredients: ['Pulpa de res', 'Pasta de tamarindo', 'Chipotle en adobo', 'Jengibre', 'Salsa de pescado/soya', 'Cilantro'],
-        ingredients_en: ['Beef pulp', 'Tamarind paste', 'Chipotle in adobo', 'Ginger', 'Fish/soy sauce', 'Cilantro'],
-        steps: 'Saltear carne; preparar salsa con tamarindo, chipotle y jengibre; mezclar y servir en tortillas con vegetales.',
-        steps_en: 'Sauté meat; prepare sauce with tamarind, chipotle and ginger; mix and serve in tortillas with vegetables.'
-      },
-      {
-        id: 'mayum',
-        title: 'Mayum (sopa tipo Tom Yum)',
-        title_en: 'Mayum (Tom Yum style soup)',
-        category: 'sopas',
-        category_en: 'soups',
-        time: '30 min',
-        price_mxn: 95,
-        price_usd: 5.00,
-        img: 'Mayum.jpeg',
-        desc: 'Sopa aromática con camarones, lemongrass, pasta Tom Yum, leche de coco y jugo de limón.',
-        desc_en: 'Aromatic soup with shrimp, lemongrass, Tom Yum paste, coconut milk and lime juice.',
-        ingredients: ['Caldo de pollo', 'Camarones', 'Champiñones', 'Lemongrass', 'Hojas de lima', 'Pasta Tom Yum', 'Leche de coco', 'Jugo de limón', 'Salsa de pescado'],
-        ingredients_en: ['Chicken broth', 'Shrimp', 'Mushrooms', 'Lemongrass', 'Lime leaves', 'Tom Yum paste', 'Coconut milk', 'Lime juice', 'Fish sauce'],
-        steps: 'Aromatizar caldo con lemongrass y hojas de lima; añadir pasta Tom Yum, verduras y camarones; terminar con limón y leche de coco.',
-        steps_en: 'Flavor broth with lemongrass and lime leaves; add Tom Yum paste, vegetables and shrimp; finish with lime and coconut milk.'
-      },
-      {
-        id: 'crema-chicharron',
-        title: 'Crema de Chicharrón',
-        title_en: 'Pork Rind Cream Soup',
-        category: 'sopas',
-        category_en: 'soups',
-        time: '45 min',
-        price_mxn: 85,
-        price_usd: 4.50,
-        img: 'Crema de Chicharron.jpeg',
-        desc: 'Crema rica con chicharrón, crema para batir, leche y un toque de epazote.',
-        desc_en: 'Rich cream soup with pork rinds, whipping cream, milk and a touch of epazote.',
-        ingredients: ['Chicharrón de cerdo', 'Cebolla', 'Crema para batir', 'Leche', 'Fondo de ave', 'Epazote', 'Sal y pimienta'],
-        ingredients_en: ['Pork rinds', 'Onion', 'Whipping cream', 'Milk', 'Poultry stock', 'Epazote', 'Salt and pepper'],
-        steps: 'Sofreír cebolla, incorporar chicharrón, añadir leche y fondo; temperar la crema, hervir y ajustar sazón; servir con aceite de chile verde.',
-        steps_en: 'Sauté onion, add pork rinds, add milk and stock; temper the cream, boil and adjust seasoning; serve with green chili oil.'
-      },
-      {
-        id: 'mixiote-carnero',
-        title: 'Mixiote de Carnero',
-        title_en: 'Lamb Mixiote',
-        category: 'platos-fuertes',
-        category_en: 'main-courses',
-        time: '2 hrs',
-        price_mxn: 220,
-        price_usd: 11.50,
-        img: 'mixiote.jpeg',
-        desc: 'Preparación tradicional con carnero, elote, chilacayote y epazote.',
-        desc_en: 'Traditional preparation with lamb, corn, chilacayote and epazote.',
-        ingredients: ['Carnero', 'Cebolla', 'Elote', 'Chilacayote', 'Chile poblano', 'Flor de calabaza', 'Fondo de vegetales', 'Epazote'],
-        ingredients_en: ['Lamb', 'Onion', 'Corn', 'Chilacayote', 'Poblano pepper', 'Squash blossom', 'Vegetable stock', 'Epazote'],
-        steps: 'Saltear verduras, añadir fondo y cocinar; integrar carnero y vegetales hasta punto deseado; sazonar.',
-        steps_en: 'Sauté vegetables, add stock and cook; integrate lamb and vegetables until desired doneness; season.'
-      },
-      {
-        id: 'sopa-tarasca',
-        title: 'Sopa Tarasca',
-        title_en: 'Tarascan Soup',
-        category: 'sopas',
-        category_en: 'soups',
-        time: '60 min',
-        price_mxn: 75,
-        price_usd: 4.00,
-        img: 'sopa tascara.jpeg',
-        desc: 'Sopa de tomate con base de tortilla frita, chile pasilla y queso Cotija.',
-        desc_en: 'Tomato soup with fried tortilla base, pasilla chili and Cotija cheese.',
-        ingredients: ['Jitomate', 'Cebolla', 'Ajo', 'Chile pasilla', 'Tortillas', 'Fondo de ave', 'Orégano', 'Epazote', 'Queso Cotija'],
-        ingredients_en: ['Tomato', 'Onion', 'Garlic', 'Pasilla chili', 'Tortillas', 'Poultry stock', 'Oregano', 'Epazote', 'Cotija cheese'],
-        steps: 'Freír tortillas y chile pasilla; moler jitomate con caldo; saltear y agregar fondo; hervir y servir con guarniciones.',
-        steps_en: 'Fry tortillas and pasilla chili; grind tomato with broth; sauté and add stock; boil and serve with garnishes.'
-      },
-      {
-        id: 'sopa-milpa',
-        title: 'Sopa de Milpa',
-        title_en: 'Milpa Soup',
-        category: 'sopas',
-        category_en: 'soups',
-        time: '2 hrs',
-        price_mxn: 80,
-        price_usd: 4.25,
-        img: 'chilacayote.jpeg',
-        desc: 'Sopa tradicional con elote, flor de calabaza, chilacayote y epazote.',
-        desc_en: 'Traditional soup with corn, squash blossom, chilacayote and epazote.',
-        ingredients: ['Elote', 'Chilacayote', 'Flor de calabaza', 'Chile poblano', 'Cebolla', 'Fondo de vegetales', 'Epazote'],
-        ingredients_en: ['Corn', 'Chilacayote', 'Squash blossom', 'Poblano pepper', 'Onion', 'Vegetable stock', 'Epazote'],
-        steps: 'Saltear cebolla y elote, añadir poblano; agregar fondo, cocer y sumar chilacayote y flor de calabaza; sazonar.',
-        steps_en: 'Sauté onion and corn, add poblano; add stock, cook and add chilacayote and squash blossom; season.'
-      },
-      {
-        id: 'pad-thai',
-        title: 'Pad Thai',
-        title_en: 'Pad Thai',
-        category: 'platos-fuertes',
-        category_en: 'main-courses',
-        time: '35 min',
-        price_mxn: 145,
-        price_usd: 7.70,
-        img: 'Pad Thai.jpeg',
-        desc: 'Clásico pad thai con fideos de arroz, camarones, huevo y cacahuate tostado.',
-        desc_en: 'Classic pad thai with rice noodles, shrimp, egg and toasted peanuts.',
-        ingredients: ['Fideos de arroz', 'Camarones', 'Huevos', 'Ajo', 'Zanahoria', 'Pimiento', 'Brotes de soya', 'Salsa de soya', 'Miel de agave', 'Cacahuates'],
-        ingredients_en: ['Rice noodles', 'Shrimp', 'Eggs', 'Garlic', 'Carrot', 'Bell pepper', 'Bean sprouts', 'Soy sauce', 'Agave honey', 'Peanuts'],
-        steps: 'Preparar fideos; saltear ajo y camarones; cocinar huevos; mezclar todos los ingredientes con salsa y servir con cacahuates.',
-        steps_en: 'Prepare noodles; sauté garlic and shrimp; cook eggs; mix all ingredients with sauce and serve with peanuts.'
-      },
-      {
-        id: 'karin-gai',
-        title: 'Karin Gai (curry amarillo)',
-        title_en: 'Karin Gai (yellow curry)',
-        category: 'platos-fuertes',
-        category_en: 'main-courses',
-        time: '30 min',
-        price_mxn: 160,
-        price_usd: 8.50,
-        img: 'curry amarillo.jpeg',
-        desc: 'Guiso suave de pollo con curry amarillo, leche de coco y vegetales.',
-        desc_en: 'Mild chicken stew with yellow curry, coconut milk and vegetables.',
-        ingredients: ['Pechuga de pollo', 'Curry amarillo', 'Leche de coco', 'Caldo de pollo', 'Papa', 'Zanahoria', 'Cúrcuma', 'Comino', 'Salsa de pescado'],
-        ingredients_en: ['Chicken breast', 'Yellow curry', 'Coconut milk', 'Chicken broth', 'Potato', 'Carrot', 'Turmeric', 'Cumin', 'Fish sauce'],
-        steps: 'Sellar pollo; sofreír pasta de curry; añadir leche de coco y caldo; cocinar verduras; incorporar pollo y servir con arroz jazmín.',
-        steps_en: 'Sear chicken; sauté curry paste; add coconut milk and broth; cook vegetables; incorporate chicken and serve with jasmine rice.'
-      },
-      {
-        id: 'paleta-cordero',
-        title: 'Paleta de cordero (massaman)',
-        title_en: 'Lamb Shoulder (massaman)',
-        category: 'platos-fuertes',
-        category_en: 'main-courses',
-        time: '70 min',
-        price_mxn: 280,
-        price_usd: 14.80,
-        img: 'cordero.jpeg',
-        desc: 'Paletilla asada con pasta massaman, canela y anís para un resultado meloso.',
-        desc_en: 'Roasted lamb shoulder with massaman paste, cinnamon and anise for a tender result.',
-        ingredients: ['Paletilla de cordero', 'Pasta massaman', 'Leche de coco', 'Canela', 'Anís', 'Caldo de pollo', 'Papa'],
-        ingredients_en: ['Lamb shoulder', 'Massaman paste', 'Coconut milk', 'Cinnamon', 'Anise', 'Chicken broth', 'Potato'],
-        steps: 'Cubrir paletilla con curry y leche de coco; hornear tapada a 220°C 1 hr hasta tierna; reducir salsa y servir.',
-        steps_en: 'Coat shoulder with curry and coconut milk; bake covered at 220°C for 1 hr until tender; reduce sauce and serve.'
-      },
-      {
-        id: 'gai-yang',
-        title: 'Gai Yang (pollo marinado estilo Thai)',
-        title_en: 'Gai Yang (Thai marinated chicken)',
-        category: 'platos-fuertes',
-        category_en: 'main-courses',
-        time: '3 hrs (marinado)',
-        price_mxn: 155,
-        price_usd: 8.20,
-        img: 'Paleta de Cordero al Curry Massaman.jpeg',
-        desc: 'Muslos de pollo marinados en mezcla aromática (lemongrass, ajo, salsa de pescado) y asados.',
-        desc_en: 'Chicken thighs marinated in aromatic mixture (lemongrass, garlic, fish sauce) and grilled.',
-        ingredients: ['Muslo de pollo', 'Ajo', 'Lemongrass', 'Jugo de lima', 'Salsa de pescado', 'Jerez', 'Miel', 'Aceite de sésamo'],
-        ingredients_en: ['Chicken thighs', 'Garlic', 'Lemongrass', 'Lime juice', 'Fish sauce', 'Sherry', 'Honey', 'Sesame oil'],
-        steps: 'Marinar pollo 3–24 hrs; asar a fuego medio-alto hasta dorar y cocinar internamente; servir con salsa a gusto.',
-        steps_en: 'Marinate chicken 3-24 hrs; grill over medium-high heat until browned and cooked through; serve with sauce to taste.'
-      },
-      {
-        id: 'sopa-calabaza-coco',
-        title: 'Sopa de Calabaza y Coco',
-        title_en: 'Pumpkin and Coconut Soup',
-        category: 'sopas',
-        category_en: 'soups',
-        time: '30 min',
-        price_mxn: 90,
-        price_usd: 4.75,
-        img: 'Sopa de Calabaza y Coco.jpeg',
-        desc: 'Crema de calabaza con leche de coco, curry rojo y un toque de salsa de pescado.',
-        desc_en: 'Pumpkin cream with coconut milk, red curry and a touch of fish sauce.',
-        ingredients: ['Calabaza', 'Leche de coco', 'Cebolla', 'Ajo', 'Pasta de curry roja', 'Salsa de pescado'],
-        ingredients_en: ['Pumpkin', 'Coconut milk', 'Onion', 'Garlic', 'Red curry paste', 'Fish sauce'],
-        steps: 'Sofreír ajo y cebolla, añadir pasta de curry, agregar calabaza y cubrir con leche de coco; cocer, licuar y rectificar sazón.',
-        steps_en: 'Sauté garlic and onion, add curry paste, add pumpkin and cover with coconut milk; cook, blend and adjust seasoning.'
-      },
-      {
-        id: 'camarones-coco-mango',
-        title: 'Camarones al coco y habanero con mango',
-        title_en: 'Coconut and Habanero Shrimp with Mango',
-        category: 'platos-fuertes',
-        category_en: 'main-courses',
-        time: '25 min',
-        price_mxn: 195,
-        price_usd: 10.30,
-        img: 'Camarones de coco.jpeg',
-        desc: 'Camarones salteados en leche de coco con habanero y mango asado; balance dulce-picante.',
-        desc_en: 'Shrimp sautéed in coconut milk with habanero and roasted mango; sweet-spicy balance.',
-        ingredients: ['Camarones', 'Leche de coco', 'Habanero', 'Mango', 'Ajo', 'Jengibre', 'Salsa de pescado', 'Cilantro'],
-        ingredients_en: ['Shrimp', 'Coconut milk', 'Habanero', 'Mango', 'Garlic', 'Ginger', 'Fish sauce', 'Cilantro'],
-        steps: 'Marinar camarones; dorar mango; saltear camarones 4–5 min y añadir mango al final; servir con cilantro.',
-        steps_en: 'Marinate shrimp; brown mango; sauté shrimp 4-5 min and add mango at the end; serve with cilantro.'
-      },
-      {
-        id: 'flan-coco-piloncillo',
-        title: 'Flan de coco y Piloncillo',
-        title_en: 'Coconut and Piloncillo Flan',
-        category: 'postres',
-        category_en: 'desserts',
-        time: '50 min + reposo',
-        price_mxn: 75,
-        price_usd: 4.00,
-        img: 'Flan de coco.jpeg',
-        desc: 'Flan horneado a baño María con caramelo de piloncillo y jengibre para aroma.',
-        desc_en: 'Baked flan in water bath with piloncillo caramel and ginger for aroma.',
-        ingredients: ['Huevos', 'Yemas', 'Leche de coco', 'Piloncillo', 'Jengibre'],
-        ingredients_en: ['Eggs', 'Egg yolks', 'Coconut milk', 'Piloncillo', 'Ginger'],
-        steps: 'Hacer caramelo con piloncillo; mezclar huevos y leche de coco con jengibre; hornear a baño María 35-40 min; refrigerar y desmoldar.',
-        steps_en: 'Make caramel with piloncillo; mix eggs and coconut milk with ginger; bake in water bath 35-40 min; refrigerate and unmold.'
-      },
-      {
-        id: 'platanos-fritos',
-        title: 'Plátanos fritos con cajeta y coco tostado',
-        title_en: 'Fried Plantains with Cajeta and Toasted Coconut',
-        category: 'postres',
-        category_en: 'desserts',
-        time: '15 min',
-        price_mxn: 65,
-        price_usd: 3.45,
-        img: 'Platanos fritos.jpeg',
-        desc: 'Plátanos empanizados y fritos, bañados en cajeta y espolvoreados con coco tostado.',
-        desc_en: 'Breaded and fried plantains, drizzled with cajeta and sprinkled with toasted coconut.',
-        ingredients: ['Plátano macho', 'Harina', 'Huevo', 'Panko', 'Aceite vegetal', 'Cajeta', 'Coco rallado'],
-        ingredients_en: ['Plantain', 'Flour', 'Egg', 'Panko', 'Vegetable oil', 'Cajeta', 'Shredded coconut'],
-        steps: 'Empanizar plátanos en harina-huevo-panko; freír a 170–180°C; bañar con cajeta y espolvorear coco.',
-        steps_en: 'Bread plantains in flour-egg-panko; fry at 170-180°C; drizzle with cajeta and sprinkle with coconut.'
-      },
-      {
-        id: 'dragon-mezcal',
-        title: 'Dragon Fruit Mezcalito',
-        title_en: 'Dragon Fruit Mezcalito',
-        category: 'bebidas',
-        category_en: 'drinks',
-        time: '5 min',
-        price_mxn: 95,
-        price_usd: 5.00,
-        img: 'Dragon Fruit Mezcalito.jpeg',
-        desc: 'Mezcal con pulpa de dragon fruit, jugo de naranja y unas gotas de bitter de jengibre.',
-        desc_en: 'Mezcal with dragon fruit pulp, orange juice and a few drops of ginger bitter.',
-        ingredients: ['Mezcal', 'Pulpa de dragon fruit', 'Jugo de naranja', 'Bitter de jengibre', 'Jarabe simple', 'Hielo'],
-        ingredients_en: ['Mezcal', 'Dragon fruit pulp', 'Orange juice', 'Ginger bitter', 'Simple syrup', 'Ice'],
-        steps: 'Licuar dragon fruit con naranja, mezclar con mezcal y agitar con hielo; servir y añadir bitter.',
-        steps_en: 'Blend dragon fruit with orange, mix with mezcal and shake with ice; serve and add bitter.'
-      },
-      {
-        id: 'coco-siam',
-        title: 'Coco Siam',
-        title_en: 'Coco Siam',
-        category: 'bebidas',
-        category_en: 'drinks',
-        time: '5 min',
-        price_mxn: 65,
-        price_usd: 3.45,
-        img: 'Coco Siam.jpeg',
-        desc: 'Agua de coco infusionada con menta y pepino con un toque de miel.',
-        desc_en: 'Coconut water infused with mint and cucumber with a touch of honey.',
-        ingredients: ['Agua de coco', 'Menta', 'Pepino', 'Jugo de limón', 'Miel', 'Hielo'],
-        ingredients_en: ['Coconut water', 'Mint', 'Cucumber', 'Lime juice', 'Honey', 'Ice'],
-        steps: 'Infusionar agua de coco con menta y pepino en frío; colar y añadir limón y miel; servir con hielo.',
-        steps_en: 'Infuse coconut water with mint and cucumber cold; strain and add lime and honey; serve with ice.'
-      },
-      {
-        id: 'jamaica-fizz',
-        title: 'Jamaica Fizz',
-        title_en: 'Jamaica Fizz',
-        category: 'bebidas',
-        category_en: 'drinks',
-        time: '6 min',
-        price_mxn: 55,
-        price_usd: 2.90,
-        img: 'Jamaica Fizz.jpeg',
-        desc: 'Infusión de jamaica fría con soda de lychee y un toque de limón.',
-        desc_en: 'Cold hibiscus infusion with lychee soda and a touch of lemon.',
-        ingredients: ['Infusión de jamaica', 'Soda de lychee', 'Jugo de limón', 'Azúcar', 'Hielo'],
-        ingredients_en: ['Hibiscus infusion', 'Lychee soda', 'Lemon juice', 'Sugar', 'Ice'],
-        steps: 'Preparar infusión de jamaica, enfriar; mezclar con soda de lychee y limón; servir en vasos escarchados.',
-        steps_en: 'Prepare hibiscus infusion, cool; mix with lychee soda and lemon; serve in frosted glasses.'
-      },
-      {
-        id: 'horchata-tai',
-        title: 'Horchata Tai',
-        title_en: 'Horchata Tai',
-        category: 'bebidas',
-        category_en: 'drinks',
-        time: '10 min (+remojo)',
-        price_mxn: 60,
-        price_usd: 3.20,
-        img: 'Horchata Tai.jpeg',
-        desc: 'Horchata de arroz mezclada con leche de coco infusionada con canela y cardamomo.',
-        desc_en: 'Rice horchata mixed with coconut milk infused with cinnamon and cardamom.',
-        ingredients: ['Arroz remojado', 'Agua', 'Leche de coco', 'Canela', 'Cardamomo', 'Azúcar', 'Hielo'],
-        ingredients_en: ['Soaked rice', 'Water', 'Coconut milk', 'Cinnamon', 'Cardamomo', 'Sugar', 'Ice'],
-        steps: 'Remojar arroz, licuar con agua, colar; infusionar leche de coco con canela; mezclar y servir frío con hielo.',
-        steps_en: 'Soak rice, blend with water, strain; infuse coconut milk with cinnamon; mix and serve cold with ice.'
-      },
-      {
-        id: 'chilate',
-        title: 'Chilate',
-        title_en: 'Chilate',
-        category: 'bebidas',
-        category_en: 'drinks',
-        time: '10 min',
-        price_mxn: 50,
-        price_usd: 2.65,
-        img: 'Chilate.jpeg',
-        desc: 'Bebida tradicional a base de cacao tostado, arroz y piloncillo, servida con hielo y espuma.',
-        desc_en: 'Traditional drink based on roasted cacao, rice and piloncillo, served with ice and foam.',
-        ingredients: ['Cacao crudo', 'Arroz blanco', 'Canela', 'Piloncillo', 'Agua', 'Hielo'],
-        ingredients_en: ['Raw cacao', 'White rice', 'Cinnamon', 'Piloncillo', 'Water', 'Ice'],
-        steps: 'Tostar cacao y canela; moler ingredientes y formar pasta; diluir con agua, colar y servir con hielo para generar espuma.',
-        steps_en: 'Roast cacao and cinnamon; grind ingredients and form paste; dilute with water, strain and serve with ice to generate foam.'
-      },
-      {
-        id: 'tejuino',
-        title: 'Tejuino',
-        title_en: 'Tejuino',
-        category: 'bebidas',
-        category_en: 'drinks',
-        time: '1.5 hrs',
-        price_mxn: 45,
-        price_usd: 2.40,
-        img: 'Tejuino.jpeg',
-        desc: 'Bebida fermentada a base de maíz pozolero, piloncillo y especias, servida fría.',
-        desc_en: 'Fermented drink based on pozolero corn, piloncillo and spices, served cold.',
-        ingredients: ['Agua', 'Piloncillo', 'Clavos', 'Canela', 'Maíz pozolero precocido', 'Leche condensada opcional'],
-        ingredients_en: ['Water', 'Piloncillo', 'Cloves', 'Cinnamon', 'Precooked pozolero corn', 'Condensed milk optional'],
-        steps: 'Cocer piloncillo con especias; cocer maíz; licuar con dulces y servir frío.',
-        steps_en: 'Cook piloncillo with spices; cook corn; blend with sweets and serve cold.'
-      },
-      {
-        id: 'ponche-frutas',
-        title: 'Ponche de Frutas',
-        title_en: 'Fruit Punch',
-        category: 'bebidas',
-        category_en: 'drinks',
-        time: '60 min',
-        price_mxn: 70,
-        price_usd: 3.70,
-        img: 'Ponche de Frutas.jpeg',
-        desc: 'Ponche tradicional con jamaica, tamarindo, tejocotes, piloncillo y fruta surtida.',
-        desc_en: 'Traditional punch with hibiscus, tamarind, tejocotes, piloncillo and assorted fruit.',
-        ingredients: ['Agua', 'Flor de jamaica', 'Tamarindo', 'Caña', 'Tejocotes', 'Piloncillo', 'Guayaba', 'Manzana', 'Ciruela pasa'],
-        ingredients_en: ['Water', 'Hibiscus flower', 'Tamarind', 'Sugarcane', 'Tejocotes', 'Piloncillo', 'Guava', 'Apple', 'Prune'],
-        steps: 'Cocer jamaica, tamarindo y piloncillo; añadir frutas y cocinar hasta suavizar; servir caliente.',
-        steps_en: 'Cook hibiscus, tamarind and piloncillo; add fruits and cook until softened; serve hot.'
-      },
-      {
-        id: 'thai-iced-tea',
-        title: 'Thai Iced Tea',
-        title_en: 'Thai Iced Tea',
-        category: 'bebidas',
-        category_en: 'drinks',
-        time: '60 min',
-        price_mxn: 65,
-        price_usd: 3.45,
-        img: 'Thai Iced Tea.jpeg',
-        desc: 'Té negro tailandés infusionado, endulzado y servido con leche de coco sobre hielo.',
-        desc_en: 'Infused Thai black tea, sweetened and served with coconut milk over ice.',
-        ingredients: ['Té negro tailandés', 'Agua caliente', 'Azúcar mascabado', 'Leche de coco', 'Hielo'],
-        ingredients_en: ['Thai black tea', 'Hot water', 'Brown sugar', 'Coconut milk', 'Ice'],
-        steps: 'Infusionar té 3–5 min, colar y endulzar; enfriar y servir con hielo y leche de coco.',
-        steps_en: 'Infuse tea 3-5 min, strain and sweeten; cool and serve with ice and coconut milk.'
-      },
-      {
-        id: 'thai-mai-tai',
-        title: 'Thai Mai Tai (versión)',
-        title_en: 'Thai Mai Tai (version)',
-        category: 'bebidas',
-        category_en: 'drinks',
-        time: '10 min',
-        price_mxn: 110,
-        price_usd: 5.80,
-        img: 'Thai Mai Tai.jpeg',
-        desc: 'Cóctel tropical con ron, triple sec y jugo de lima; refrescante y cítrico.',
-        desc_en: 'Tropical cocktail with rum, triple sec and lime juice; refreshing and citrusy.',
-        ingredients: ['Ron oscuro', 'Triple sec', 'Jugo de lima', 'Hielo', 'Decoración'],
-        ingredients_en: ['Dark rum', 'Triple sec', 'Lime juice', 'Ice', 'Garnish'],
-        steps: 'Mezclar licores con jugo de lima y hielo; servir en vaso con decoración cítrica.',
-        steps_en: 'Mix liquors with lime juice and ice; serve in glass with citrus garnish.'
-      },
-      {
-        id: 'siam-sunset',
-        title: 'Siam Sunset',
-        title_en: 'Siam Sunset',
-        category: 'bebidas',
-        category_en: 'drinks',
-        time: '8 min',
-        price_mxn: 95,
-        price_usd: 5.00,
-        img: 'Siam Sunser.jpeg',
-        desc: 'Cóctel brillante con jugo de naranja y granadina; simple y visualmente atractivo.',
-        desc_en: 'Bright cocktail with orange juice and grenadine; simple and visually appealing.',
-        ingredients: ['Jugo de naranja', 'Granadina', 'Vodka opcional', 'Hielo'],
-        ingredients_en: ['Orange juice', 'Grenadine', 'Vodka optional', 'Ice'],
-        steps: 'Mezclar líquidos y servir con hielo y rodaja de naranja.',
-        steps_en: 'Mix liquids and serve with ice and orange slice.'
-      }
-    ];
+            // PLATOS FUERTES
+            {
+                id: 6,
+                name: 'Pescado Fusión',
+                name_en: 'Fusion Fish',
+                price: 220,
+                price_usd: 12.20,
+                description: 'Filete de mojarra con salsa thai de leche de coco, axiote, miel y albahaca.',
+                description_en: 'Mojarra fillet with Thai coconut milk sauce, axiote, honey and basil.',
+                category: 'platos-fuertes',
+                origin: 'fusion',
+                profit: 'high',
+                image: 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
+            },
+            {
+                id: 7,
+                name: 'Pad Thai',
+                name_en: 'Pad Thai',
+                price: 160,
+                price_usd: 8.90,
+                description: 'Fideos de arroz salteados con camarones, huevo, vegetales y salsa tamarindo-miel.',
+                description_en: 'Rice noodles stir-fried with shrimp, egg, vegetables and tamarind-honey sauce.',
+                category: 'platos-fuertes',
+                origin: 'thai',
+                profit: 'high',
+                image: 'https://images.unsplash.com/photo-1559314809-0f155d88cb60?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
+            },
+            {
+                id: 8,
+                name: 'Tacos Tierra y Fuego',
+                name_en: 'Earth and Fire Tacos',
+                price: 150,
+                price_usd: 8.30,
+                description: 'Tacos de pulpa de res con salsa de guajillo, chipotle y verduras asadas.',
+                description_en: 'Beef pulp tacos with guajillo sauce, chipotle and grilled vegetables.',
+                category: 'platos-fuertes',
+                origin: 'mexican',
+                profit: 'medium',
+                image: 'https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
+            },
+            {
+                id: 9,
+                name: 'Paleta de Cordero',
+                name_en: 'Lamb Chop',
+                price: 280,
+                price_usd: 15.60,
+                description: 'Paletillas de cordero horneadas con curry massaman, leche de coco y papas.',
+                description_en: 'Baked lamb chops with massaman curry, coconut milk and potatoes.',
+                category: 'platos-fuertes',
+                origin: 'fusion',
+                profit: 'high',
+                image: 'https://images.unsplash.com/photo-1603360946369-dc9bb6258143?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
+            },
 
-    /* ===========================
-       Utilidades y Render
-       =========================== */
-    const grid = document.getElementById('menuGrid');
-    let currentLanguage = 'es';
-    let currentTheme = 'dark';
+            // SOPAS
+            {
+                id: 10,
+                name: 'Mayum',
+                name_en: 'Mayum',
+                price: 180,
+                price_usd: 10.00,
+                description: 'Sopa tailandesa con camarones, champiñones, jitomate y hierbas aromáticas.',
+                description_en: 'Thai soup with shrimp, mushrooms, tomato and aromatic herbs.',
+                category: 'sopas',
+                origin: 'thai',
+                profit: 'medium',
+                image: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
+            },
+            {
+                id: 11,
+                name: 'Sopa de Calabaza',
+                name_en: 'Pumpkin Soup',
+                price: 120,
+                price_usd: 6.70,
+                description: 'Crema de calabaza con leche de coco, curry massaman y salsa de pescado.',
+                description_en: 'Pumpkin cream with coconut milk, massaman curry and fish sauce.',
+                category: 'sopas',
+                origin: 'fusion',
+                profit: 'medium',
+                image: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
+            },
 
-    function escapeHtml(str){ if(!str) return ''; return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-    function capitalizeCat(cat){ return cat ? cat.split('-').map(w=>w[0].toUpperCase()+w.slice(1)).join(' ') : ''; }
+            // POSTRES
+            {
+                id: 12,
+                name: 'Pastel de Crepas de Mazapán y Piloncillo',
+                name_en: 'Marzipan and Piloncillo Crepe Cake',
+                price: 80,
+                price_usd: 4.40,
+                description: 'Pastel de capas de crepas finas rellenas de crema de mazapán y piloncillo.',
+                description_en: 'Layered crepe cake filled with marzipan and piloncillo cream.',
+                category: 'postres',
+                origin: 'fusion',
+                profit: 'high',
+                image: 'https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
+            },
+            {
+                id: 13,
+                name: 'Flan de Coco y Piloncillo',
+                name_en: 'Coconut and Piloncillo Flan',
+                price: 75,
+                price_usd: 4.20,
+                description: 'Flan cremoso con sabores de coco y piloncillo.',
+                description_en: 'Creamy flan with coconut and piloncillo flavors.',
+                category: 'postres',
+                origin: 'fusion',
+                profit: 'high',
+                image: 'https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
+            },
+            {
+                id: 14,
+                name: 'Plátanos Fritos con Cajeta y Coco Tostado',
+                name_en: 'Fried Plantains with Cajeta and Toasted Coconut',
+                price: 90,
+                price_usd: 5.00,
+                description: 'Plátanos fritos cubiertos con cajeta y coco tostado crujiente.',
+                description_en: 'Fried plantains topped with cajeta and toasted coconut.',
+                category: 'postres',
+                origin: 'mexican',
+                profit: 'high',
+                image: 'https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
+            },
+            {
+                id: 15,
+                name: 'Tamal de Camote Dulce con Coco',
+                name_en: 'Sweet Potato Tamal with Coconut',
+                price: 85,
+                price_usd: 4.70,
+                description: 'Tamal de camote dulce con ralladura de coco y especias.',
+                description_en: 'Sweet potato tamal with coconut shreds and spices.',
+                category: 'postres',
+                origin: 'fusion',
+                profit: 'high',
+                image: 'https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
+            },
 
-    function createCard(item, idx){
-      const el = document.createElement('article');
-      el.className = 'card';
-      el.dataset.category = item.category;
-      el.dataset.cat = item.category; // Para identificar bebidas
-      
-      const title = currentLanguage === 'es' ? item.title : item.title_en;
-      const desc = currentLanguage === 'es' ? item.desc : item.desc_en;
-      const category = currentLanguage === 'es' ? capitalizeCat(item.category) : capitalizeCat(item.category_en);
-      const price = currentLanguage === 'es' ? `$${item.price_mxn} MXN` : `$${item.price_usd} USD`;
-      const buttonText = currentLanguage === 'es' ? 'Ver Receta' : 'View Recipe';
-      
-      el.innerHTML = `
-        <div class="cat-label">${escapeHtml(category)}</div>
-        <div class="card-media"><img loading="lazy" src="${item.img}" alt="${escapeHtml(title)}"></div>
-        <div class="card-body">
-          <div class="meta">
-            <h3 class="title">${escapeHtml(title)}</h3>
-            <div class="time">${escapeHtml(price)}</div>
-          </div>
-          <div class="desc">${escapeHtml(desc)}</div>
-          <div class="card-actions"><button class="btn view" data-id="${item.id}">${buttonText}</button></div>
-        </div>`;
-      setTimeout(()=> el.classList.add('show'), idx * 70 + 80);
-      addParallax(el);
-      return el;
-    }
+            // BEBIDAS
+            {
+                id: 16,
+                name: 'Dragon Fruit Mezcalita',
+                name_en: 'Dragon Fruit Mezcalita',
+                price: 120,
+                price_usd: 6.70,
+                description: 'Mezcal artesanal con pulpa de pitahaya, jugo de naranja y bitter de jengibre.',
+                description_en: 'Artisanal mezcal with dragon fruit pulp, orange juice and ginger bitter.',
+                category: 'bebidas',
+                origin: 'fusion',
+                profit: 'high',
+                image: 'https://images.unsplash.com/photo-1470337458703-46ad1756a187?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
+            },
+            {
+                id: 17,
+                name: 'Coco Siam',
+                name_en: 'Coco Siam',
+                price: 110,
+                price_usd: 6.10,
+                description: 'Cóctel refrescante de ron blanco, leche de coco, jugo de piña y lima.',
+                description_en: 'Refreshing cocktail with white rum, coconut milk, pineapple and lime juice.',
+                category: 'bebidas',
+                origin: 'fusion',
+                profit: 'high',
+                image: 'https://images.unsplash.com/photo-1536935338788-846bb9981813?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
+            },
+            {
+                id: 18,
+                name: 'Jamaica Fizz',
+                name_en: 'Jamaica Fizz',
+                price: 100,
+                price_usd: 5.50,
+                description: 'Refresco de flor de jamaica con soda y toque de lima.',
+                description_en: 'Hibiscus flower soda with a touch of lime.',
+                category: 'bebidas',
+                origin: 'mexican',
+                profit: 'high',
+                image: 'https://images.unsplash.com/photo-1571934811356-5cc061b6821f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
+            },
+            {
+                id: 19,
+                name: 'Horchata Thai',
+                name_en: 'Thai Horchata',
+                price: 70,
+                price_usd: 3.90,
+                description: 'Bebida tradicional mexicana con toques tailandeses de coco y especias.',
+                description_en: 'Traditional Mexican drink with Thai touches of coconut and spices.',
+                category: 'bebidas',
+                origin: 'fusion',
+                profit: 'high',
+                image: 'https://images.unsplash.com/photo-1544145945-5cf4e5b5c622?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
+            },
+            {
+                id: 20,
+                name: 'Ponche de Frutas',
+                name_en: 'Fruit Punch',
+                price: 80,
+                price_usd: 4.40,
+                description: 'Mezcla de jugos tropicales con toque de hierbabuena.',
+                description_en: 'Mix of tropical juices with a touch of mint.',
+                category: 'bebidas',
+                origin: 'fusion',
+                profit: 'high',
+                image: 'https://images.unsplash.com/photo-1571934811356-5cc061b6821f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
+            },
+            {
+                id: 21,
+                name: 'Thai Iced Tea',
+                name_en: 'Thai Iced Tea',
+                price: 65,
+                price_usd: 3.60,
+                description: 'Té negro tailandés con leche de coco y especias, servido con hielo.',
+                description_en: 'Thai black tea with coconut milk and spices, served with ice.',
+                category: 'bebidas',
+                origin: 'thai',
+                profit: 'high',
+                image: 'https://images.unsplash.com/photo-1571934811356-5cc061b6821f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
+            },
+            {
+                id: 22,
+                name: 'Thai Mai Tai',
+                name_en: 'Thai Mai Tai',
+                price: 130,
+                price_usd: 7.20,
+                description: 'Cóctel tropical con ron, jugos de frutas y toque tailandés.',
+                description_en: 'Tropical cocktail with rum, fruit juices and Thai touch.',
+                category: 'bebidas',
+                origin: 'fusion',
+                profit: 'high',
+                image: 'https://images.unsplash.com/photo-1470337458703-46ad1756a187?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
+            },
+            {
+                id: 23,
+                name: 'Siam Sunset',
+                name_en: 'Siam Sunset',
+                price: 125,
+                price_usd: 6.90,
+                description: 'Cóctel vibrante con tequila, jugo de granada y lima.',
+                description_en: 'Vibrant cocktail with tequila, pomegranate and lime juice.',
+                category: 'bebidas',
+                origin: 'fusion',
+                profit: 'high',
+                image: 'https://images.unsplash.com/photo-1536935338788-846bb9981813?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'
+            }
+        ];
 
-    function render(items){
-      grid.innerHTML = '';
-      items.forEach((it,i)=> grid.appendChild(createCard(it,i)));
-      // observe for reveal
-      setTimeout(()=> {
-        document.querySelectorAll('.card').forEach(c => {
-          if(!c.dataset.observed){
-            observer.observe(c);
-            c.dataset.observed = '1';
-          }
+        // Variables globales
+        let currentLanguage = 'es';
+        let currentCategory = 'all';
+        let lastScrollTop = 0;
+        let ticking = false;
+
+        // Variables para el chatbot
+        let chatbotConversation = [];
+        let currentStep = null;
+        let reservationData = {
+            name: '',
+            email: '',
+            phone: '',
+            date: '',
+            time: '',
+            guests: '',
+            allergies: false,
+            allergiesDetails: '',
+            message: ''
+        };
+
+        // Textos para traducción
+        const translations = {
+            es: {
+                slogan: "Donde la energía y el sabor se unen",
+                heroText: "Una experiencia gastronómica única que fusiona los sabores vibrantes de México con la delicadeza de la cocina tailandesa",
+                reserveBtn: "Reserva Ahora",
+                menuTitle: "Nuestro Menú",
+                reservationsTitle: "Reservaciones",
+                contactTitle: "Contacto",
+                contactInfoTitle: "Información de Contacto",
+                followTitle: "Síguenos",
+                hoursText: "12:00 PM - 12:00 AM<br>Todos los días",
+                nameLabel: "Nombre completo",
+                emailLabel: "Correo electrónico",
+                phoneLabel: "Teléfono",
+                dateLabel: "Fecha",
+                timeLabel: "Hora",
+                guestsLabel: "Número de personas",
+                messageLabel: "Mensaje adicional (opcional)",
+                submitBtn: "Reservar Mesa",
+                allergiesLabel: "¿Algún miembro del grupo tiene alergias alimentarias?",
+                allergiesYesLabel: "Sí",
+                allergiesNoLabel: "No",
+                allergiesDetailsPlaceholder: "Especifica las alergias (si aplica)",
+                reservationSuccess: "¡Reserva realizada con éxito! Te contactaremos pronto para confirmar.",
+                chatbotGreeting: "¡Hola! Soy el asistente de Tonalithai. ¿Te gustaría hacer una reservación?",
+                chatbotReservationOption: "Hacer Reservación",
+                chatbotWhatsAppOption: "Contactar por WhatsApp",
+                chatbotMenuOption: "Ver Menú",
+                chatbotNameQuestion: "¿Cuál es tu nombre completo?",
+                chatbotEmailQuestion: "¿Cuál es tu correo electrónico?",
+                chatbotPhoneQuestion: "¿Cuál es tu número de teléfono?",
+                chatbotDateQuestion: "¿Para qué fecha te gustaría reservar? (Por favor usa el formato DD/MM/AAAA)",
+                chatbotTimeQuestion: "¿A qué hora prefieres? (Por ejemplo: 19:00)",
+                chatbotGuestsQuestion: "¿Para cuántas personas es la reservación?",
+                chatbotAllergiesQuestion: "¿Algún miembro del grupo tiene alergias alimentarias que debamos conocer?",
+                chatbotAllergiesDetailsQuestion: "Por favor, especifica las alergias:",
+                chatbotMessageQuestion: "¿Algún mensaje adicional o requerimiento especial?",
+                chatbotConfirmation: "¡Gracias! Voy a procesar tu reservación. Te enviaré un correo de confirmación en breve.",
+                chatbotReservationSent: "Tu reservación ha sido enviada. Te contactaremos pronto para confirmar.",
+                chatbotError: "Lo siento, ha ocurrido un error. Por favor intenta nuevamente o contáctanos directamente."
+            },
+            en: {
+                slogan: "Where energy and flavor unite",
+                heroText: "A unique gastronomic experience that fuses the vibrant flavors of Mexico with the delicacy of Thai cuisine",
+                reserveBtn: "Book Now",
+                menuTitle: "Our Menu",
+                reservationsTitle: "Reservations",
+                contactTitle: "Contact",
+                contactInfoTitle: "Contact Information",
+                followTitle: "Follow Us",
+                hoursText: "12:00 PM - 12:00 AM<br>Every day",
+                nameLabel: "Full Name",
+                emailLabel: "Email Address",
+                phoneLabel: "Phone",
+                dateLabel: "Date",
+                timeLabel: "Time",
+                guestsLabel: "Number of People",
+                messageLabel: "Additional Message (optional)",
+                submitBtn: "Book Table",
+                allergiesLabel: "Does anyone in the group have food allergies?",
+                allergiesYesLabel: "Yes",
+                allergiesNoLabel: "No",
+                allergiesDetailsPlaceholder: "Specify allergies (if applicable)",
+                reservationSuccess: "Reservation made successfully! We will contact you soon to confirm.",
+                chatbotGreeting: "Hello! I'm Tonalithai's assistant. Would you like to make a reservation?",
+                chatbotReservationOption: "Make Reservation",
+                chatbotWhatsAppOption: "Contact via WhatsApp",
+                chatbotMenuOption: "View Menu",
+                chatbotNameQuestion: "What is your full name?",
+                chatbotEmailQuestion: "What is your email address?",
+                chatbotPhoneQuestion: "What is your phone number?",
+                chatbotDateQuestion: "For what date would you like to reserve? (Please use DD/MM/YYYY format)",
+                chatbotTimeQuestion: "What time do you prefer? (Example: 19:00)",
+                chatbotGuestsQuestion: "For how many people is the reservation?",
+                chatbotAllergiesQuestion: "Does anyone in the group have food allergies we should know about?",
+                chatbotAllergiesDetailsQuestion: "Please specify the allergies:",
+                chatbotMessageQuestion: "Any additional message or special requirements?",
+                chatbotConfirmation: "Thank you! I'll process your reservation. I'll send you a confirmation email shortly.",
+                chatbotReservationSent: "Your reservation has been sent. We'll contact you soon to confirm.",
+                chatbotError: "Sorry, an error occurred. Please try again or contact us directly."
+            }
+        };
+
+        // Inicialización cuando el DOM esté listo
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM cargado - Inicializando aplicación');
+            initializeApp();
         });
-      }, 200);
-    }
 
-    render(menuData);
-
-    /* Filters */
-    document.querySelectorAll('.filter-btn').forEach(btn=>{
-      btn.addEventListener('click', ()=>{
-        document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-        btn.classList.add('active');
-        const f = btn.dataset.filter;
-        if(f === 'all') render(menuData);
-        else render(menuData.filter(x => x.category === f));
-      });
-    });
-
-    /* Parallax micro */
-    function addParallax(card){
-      const media = card.querySelector('.card-media img');
-      if(!media) return;
-      card.addEventListener('mousemove', (ev)=>{
-        const r = card.getBoundingClientRect();
-        const cx = r.left + r.width/2;
-        const cy = r.top + r.height/2;
-        const dx = (ev.clientX - cx) / r.width;
-        const dy = (ev.clientY - cy) / r.height;
-        media.style.transform = `translate(${dx*8}px, ${dy*8}px) scale(1.05)`;
-      });
-      card.addEventListener('mouseleave', ()=> media.style.transform = '');
-    }
-
-    /* ===========================
-       Modal logic
-       =========================== */
-    const modal = document.getElementById('modal');
-    const mTitle = document.getElementById('m-title');
-    const mDesc = document.getElementById('m-desc');
-    const mIngredients = document.getElementById('m-ingredients');
-    const mSteps = document.getElementById('m-steps');
-    const mImg = document.getElementById('m-img');
-
-    document.body.addEventListener('click', (e)=>{
-      const view = e.target.closest('.view');
-      if(view){
-        const id = view.dataset.id;
-        const item = menuData.find(x=>x.id === id);
-        if(!item) return;
-        
-        const title = currentLanguage === 'es' ? item.title : item.title_en;
-        const desc = currentLanguage === 'es' ? item.desc : item.desc_en;
-        const ingredients = currentLanguage === 'es' ? item.ingredients : item.ingredients_en;
-        const steps = currentLanguage === 'es' ? item.steps : item.steps_en;
-        const ingredientsTabText = currentLanguage === 'es' ? 'Ingredientes' : 'Ingredients';
-        const stepsTabText = currentLanguage === 'es' ? 'Preparación' : 'Preparation';
-        
-        mTitle.textContent = title;
-        mDesc.textContent = desc;
-        mIngredients.innerHTML = (ingredients||[]).map(i=>`<li>${escapeHtml(i)}</li>`).join('');
-        mSteps.textContent = steps || '';
-        mImg.src = item.img || '';
-        
-        // Update tab text
-        document.getElementById('ingredients-tab').textContent = ingredientsTabText;
-        document.getElementById('steps-tab').textContent = stepsTabText;
-        
-        modal.classList.add('show');
-        // default to ingredients
-        document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-        document.querySelectorAll('.tab-content').forEach(tc=>tc.classList.remove('active'));
-        document.querySelector('.tab-btn[data-tab="ingredients"]').classList.add('active');
-        document.getElementById('tab-ingredients').classList.add('active');
-      }
-    });
-
-    document.querySelector('.close-x').addEventListener('click', ()=> modal.classList.remove('show'));
-    modal.addEventListener('click', (e)=> { if(e.target === modal) modal.classList.remove('show'); });
-    document.addEventListener('keydown', (e)=> { if(e.key === 'Escape' && modal.classList.contains('show')) modal.classList.remove('show'); });
-
-    document.querySelectorAll('.tab-btn').forEach(btn=>{
-      btn.addEventListener('click', ()=>{
-        document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-        document.querySelectorAll('.tab-content').forEach(tc=>tc.classList.remove('active'));
-        btn.classList.add('active');
-        document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
-      });
-    });
-
-    /* ===========================
-       Mobile panel behavior
-       =========================== */
-    const hamburger = document.getElementById('hamburger');
-    const mobilePanel = document.getElementById('mobilePanel');
-    const closeMobile = document.getElementById('closeMobile');
-    hamburger.addEventListener('click', ()=> {
-      mobilePanel.classList.add('open');
-      mobilePanel.setAttribute('aria-hidden','false');
-    });
-    closeMobile.addEventListener('click', ()=> {
-      mobilePanel.classList.remove('open');
-      mobilePanel.setAttribute('aria-hidden','true');
-    });
-    // wire mobile filter buttons
-    mobilePanel.querySelectorAll('.filter-btn').forEach(btn=>{
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-        // set desktop buttons active too for consistency
-        document.querySelectorAll('.main-nav .filter-btn').forEach(b=> b.classList.remove('active'));
-        // find desktop button with same data-filter and set active (if exists)
-        const df = btn.dataset.filter;
-        const desktopBtn = document.querySelector('.main-nav .filter-btn[data-filter="'+df+'"]');
-        if(desktopBtn) desktopBtn.classList.add('active');
-        // render
-        if(df === 'all') render(menuData);
-        else render(menuData.filter(x=>x.category===df));
-        // close panel
-        mobilePanel.classList.remove('open');
-        mobilePanel.setAttribute('aria-hidden','true');
-      });
-    });
-
-    // mobile location button scrolls to contact section
-    document.getElementById('locationBtnMobile').addEventListener('click', ()=> {
-      document.getElementById('contacto').scrollIntoView({ behavior: 'smooth' });
-      mobilePanel.classList.remove('open');
-    });
-
-    /* locationBtn (desktop) scrolls to contact section */
-    document.getElementById('locationBtn').addEventListener('click', ()=> {
-      document.getElementById('contacto').scrollIntoView({ behavior: 'smooth' });
-    });
-
-    /* ===========================
-       Language Toggle
-       =========================== */
-    function toggleLanguage() {
-      currentLanguage = currentLanguage === 'es' ? 'en' : 'es';
-      
-      // Update button text
-      document.querySelectorAll('.lang-toggle').forEach(btn => {
-        btn.textContent = currentLanguage === 'es' ? 'EN' : 'ES';
-      });
-      
-      // Update page content
-      document.getElementById('hero-title').textContent = currentLanguage === 'es' ? 'Menú Completo' : 'Complete Menu';
-      document.getElementById('hero-desc').textContent = currentLanguage === 'es' 
-        ? 'Explora todas nuestras recetas: platos fuertes, sopas, postres y bebidas. Haz clic en "Ver Receta" para abrir la ficha con ingredientes y preparación.'
-        : 'Explore all our recipes: main courses, soups, desserts and drinks. Click "View Recipe" to open the card with ingredients and preparation.';
-      
-      // Update filter buttons
-      document.querySelectorAll('.filter-btn[data-filter="all"]').forEach(btn => {
-        btn.textContent = currentLanguage === 'es' ? 'Todos' : 'All';
-      });
-      document.querySelectorAll('.filter-btn[data-filter="platos-fuertes"]').forEach(btn => {
-        btn.textContent = currentLanguage === 'es' ? 'Platos fuertes' : 'Main courses';
-      });
-      document.querySelectorAll('.filter-btn[data-filter="sopas"]').forEach(btn => {
-        btn.textContent = currentLanguage === 'es' ? 'Sopas' : 'Soups';
-      });
-      document.querySelectorAll('.filter-btn[data-filter="postres"]').forEach(btn => {
-        btn.textContent = currentLanguage === 'es' ? 'Postres' : 'Desserts';
-      });
-      document.querySelectorAll('.filter-btn[data-filter="bebidas"]').forEach(btn => {
-        btn.textContent = currentLanguage === 'es' ? 'Bebidas' : 'Drinks';
-      });
-      
-      // Update footer
-      document.getElementById('contact-title').textContent = currentLanguage === 'es' ? 'Encuéntranos' : 'Find Us';
-      document.getElementById('address-label').textContent = currentLanguage === 'es' ? 'Dirección:' : 'Address:';
-      document.getElementById('hours-label').textContent = currentLanguage === 'es' ? 'Horario:' : 'Hours:';
-      document.getElementById('phone-label').textContent = currentLanguage === 'es' ? 'Teléfono:' : 'Phone:';
-      document.getElementById('reservations-label').textContent = currentLanguage === 'es' ? 'Reservas:' : 'Reservations:';
-      document.getElementById('social-label').textContent = currentLanguage === 'es' ? 'Redes sociales' : 'Social Media';
-      
-      // Re-render cards with new language
-      const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
-      if(activeFilter === 'all') {
-        render(menuData);
-      } else {
-        render(menuData.filter(x => x.category === activeFilter));
-      }
-    }
-
-    document.getElementById('langToggle').addEventListener('click', toggleLanguage);
-    document.getElementById('langToggleMobile').addEventListener('click', () => {
-      toggleLanguage();
-      mobilePanel.classList.remove('open');
-    });
-
-    /* ===========================
-       Theme Toggle
-       =========================== */
-    function toggleTheme() {
-      currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', currentTheme);
-    }
-
-    document.getElementById('themeToggle').addEventListener('click', toggleTheme);
-    document.getElementById('themeToggleMobile').addEventListener('click', () => {
-      toggleTheme();
-      mobilePanel.classList.remove('open');
-    });
-
-    /* ===========================
-       Back to top button
-       =========================== */
-    const backToTopBtn = document.getElementById('backToTop');
-    
-    // Show/hide button based on scroll position
-    window.addEventListener('scroll', () => {
-      if (window.pageYOffset > 300) {
-        backToTopBtn.classList.add('show');
-      } else {
-        backToTopBtn.classList.remove('show');
-      }
-    });
-    
-    // Scroll to top when button is clicked
-    backToTopBtn.addEventListener('click', () => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    });
-
-    /* ===========================
-       Intersection observer for reveal
-       =========================== */
-    const observer = new IntersectionObserver((entries)=>{
-      entries.forEach(entry=>{
-        if(entry.isIntersecting){
-          entry.target.classList.add('show');
-          observer.unobserve(entry.target);
+        function initializeApp() {
+            console.log('Inicializando aplicación...');
+            // Cargar menú completo
+            renderFullMenu();
+            
+            // Configurar eventos
+            setupEventListeners();
+            
+            // Configurar animaciones de scroll
+            setupScrollAnimations();
+            
+            // Configurar el efecto de scroll en la barra de navegación
+            setupNavbarScroll();
+            
+            // Configurar chatbot
+            setupChatbot();
+            
+            console.log('Aplicación inicializada correctamente');
         }
-      });
-    }, {threshold:0.12});
 
-    // observe after initial render
-    setTimeout(()=> {
-      document.querySelectorAll('.card').forEach(c => {
-        if(!c.dataset.observed){
-          observer.observe(c);
-          c.dataset.observed = '1';
+        // FUNCIÓN: Efecto de scroll en la barra de navegación
+        function setupNavbarScroll() {
+            const header = document.getElementById('mainHeader');
+            const headerHeight = header.offsetHeight;
+            
+            window.addEventListener('scroll', function() {
+                if (!ticking) {
+                    window.requestAnimationFrame(function() {
+                        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                        
+                        if (scrollTop > 50) {
+                            header.classList.add('scrolled');
+                        } else {
+                            header.classList.remove('scrolled');
+                        }
+                        
+                        // Ocultar/mostrar barra según la dirección del scroll
+                        if (scrollTop > lastScrollTop && scrollTop > headerHeight) {
+                            // Scroll hacia abajo - ocultar barra
+                            header.classList.add('hidden');
+                        } else {
+                            // Scroll hacia arriba - mostrar barra
+                            header.classList.remove('hidden');
+                        }
+                        
+                        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+                        ticking = false;
+                    });
+                    
+                    ticking = true;
+                }
+            });
         }
-      });
-    }, 300);
 
-  </script>
+        // Función para actualizar el botón de tema
+        function updateThemeToggle() {
+            const themeToggle = document.getElementById('themeToggle');
+            const themeToggleThumb = document.getElementById('themeToggleThumb');
+            const isDark = document.body.classList.contains('dark-mode');
+            
+            if (isDark) {
+                themeToggle.classList.add('dark');
+                themeToggle.classList.remove('light');
+                themeToggleThumb.classList.add('dark');
+                themeToggleThumb.classList.remove('light');
+                themeToggleThumb.innerHTML = '🥞';
+            } else {
+                themeToggle.classList.add('light');
+                themeToggle.classList.remove('dark');
+                themeToggleThumb.classList.add('light');
+                themeToggleThumb.classList.remove('dark');
+                themeToggleThumb.innerHTML = '🧈';
+            }
+        }
+
+        function renderFullMenu(category = 'all') {
+            console.log('Renderizando menú completo en:', currentLanguage, 'categoría:', category);
+            const menuGrid = document.getElementById('menuGrid');
+            menuGrid.innerHTML = '';
+            
+            // Filtrar elementos según la categoría seleccionada
+            let filteredItems = menuItems;
+            if (category !== 'all') {
+                filteredItems = menuItems.filter(item => item.category === category);
+            }
+            
+            // Renderizar elementos en grid de 3 columnas
+            filteredItems.forEach((item, index) => {
+                const menuItem = document.createElement('div');
+                menuItem.className = `menu-item`;
+                menuItem.style.animationDelay = `${index * 0.1}s`;
+                
+                // Determinar icono de origen
+                let originIcon = '';
+                let originText = '';
+                
+                switch(item.origin) {
+                    case 'mexican':
+                        originIcon = '🌮';
+                        originText = currentLanguage === 'es' ? 'Mexicano' : 'Mexican';
+                        break;
+                    case 'thai':
+                        originIcon = '🍛';
+                        originText = currentLanguage === 'es' ? 'Tailandés' : 'Thai';
+                        break;
+                    case 'fusion':
+                        originIcon = '✨';
+                        originText = currentLanguage === 'es' ? 'Fusión' : 'Fusion';
+                        break;
+                }
+                
+                // Determinar precio según el idioma
+                const price = currentLanguage === 'es' ? `$${item.price} MXN` : `$${item.price_usd} USD`;
+                
+                menuItem.innerHTML = `
+                    <div class="menu-item-img-container">
+                        <img src="${item.image}" alt="${currentLanguage === 'es' ? item.name : item.name_en}" class="menu-item-img">
+                    </div>
+                    <div class="menu-item-content">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-title">${currentLanguage === 'es' ? item.name : item.name_en}</h3>
+                            <div class="menu-item-price">${price}</div>
+                        </div>
+                        <p class="menu-item-desc">${currentLanguage === 'es' ? item.description : item.description_en}</p>
+                        <div class="menu-item-origin">
+                            <span>${originIcon}</span>
+                            <span>${originText}</span>
+                        </div>
+                    </div>
+                `;
+                
+                menuGrid.appendChild(menuItem);
+            });
+            
+            // Activar animaciones después de un breve delay
+            setTimeout(() => {
+                document.querySelectorAll('.menu-item').forEach(item => {
+                    item.classList.add('visible');
+                });
+            }, 100);
+            
+            console.log('Menú completo renderizado con', filteredItems.length, 'elementos en grid de 3 columnas');
+        }
+
+        function setupEventListeners() {
+            console.log('Configurando event listeners...');
+            
+            // Toggle de tema
+            document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+            
+            // Selector de idioma
+            document.getElementById('languageBtn').addEventListener('click', toggleLanguageOptions);
+            document.querySelectorAll('.language-option').forEach(option => {
+                option.addEventListener('click', changeLanguage);
+            });
+            
+            // Navegación principal
+            document.querySelectorAll('nav a').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    changeSection(targetId);
+                });
+            });
+            
+            // Filtros del menú
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', filterMenu);
+            });
+            
+            // Formulario de reservación
+            document.getElementById('reservationForm').addEventListener('submit', handleReservation);
+            
+            // Checkboxes de alergias
+            document.getElementById('allergies-yes').addEventListener('change', function() {
+                if (this.checked) {
+                    document.getElementById('allergies-no').checked = false;
+                    document.getElementById('allergies-details').style.display = 'block';
+                }
+            });
+            
+            document.getElementById('allergies-no').addEventListener('change', function() {
+                if (this.checked) {
+                    document.getElementById('allergies-yes').checked = false;
+                    document.getElementById('allergies-details').style.display = 'none';
+                }
+            });
+            
+            // Botón de scroll hacia arriba
+            document.getElementById('scrollTop').addEventListener('click', scrollToTop);
+            
+            // Detectar scroll para mostrar/ocultar botón de scroll hacia arriba
+            window.addEventListener('scroll', handleScroll);
+            
+            // Botón "Reserva Ahora" en el hero
+            document.querySelector('.hero .btn').addEventListener('click', function(e) {
+                e.preventDefault();
+                changeSection('reservaciones');
+            });
+            
+            // Menú móvil
+            document.getElementById('mobileMenuBtn').addEventListener('click', toggleMobileMenu);
+            document.getElementById('overlay').addEventListener('click', toggleMobileMenu);
+            
+            // Cerrar menú móvil al hacer clic en un enlace
+            document.querySelectorAll('.mobile-menu a').forEach(link => {
+                link.addEventListener('click', function() {
+                    toggleMobileMenu();
+                });
+            });
+            
+            console.log('Event listeners configurados correctamente');
+        }
+
+        function setupChatbot() {
+            const chatbotToggle = document.getElementById('chatbotToggle');
+            const chatbotWindow = document.getElementById('chatbotWindow');
+            const chatbotClose = document.getElementById('chatbotClose');
+            const chatbotSend = document.getElementById('chatbotSend');
+            const chatbotInput = document.getElementById('chatbotInput');
+            const chatbotOptions = document.getElementById('chatbotOptions');
+            const chatbotMessages = document.getElementById('chatbotMessages');
+            const chatbotInputContainer = document.getElementById('chatbotInputContainer');
+            
+            // Mostrar/ocultar chatbot
+            chatbotToggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                chatbotWindow.classList.toggle('show');
+                if (chatbotWindow.classList.contains('show')) {
+                    addBotMessage(translations[currentLanguage].chatbotGreeting);
+                }
+            });
+            
+            // Cerrar chatbot
+            chatbotClose.addEventListener('click', function() {
+                chatbotWindow.classList.remove('show');
+            });
+            
+            // Cerrar chatbot al hacer clic fuera
+            document.addEventListener('click', function(e) {
+                if (!chatbotToggle.contains(e.target) && !chatbotWindow.contains(e.target)) {
+                    chatbotWindow.classList.remove('show');
+                }
+            });
+            
+            // Enviar mensaje al presionar Enter
+            chatbotInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendChatbotMessage();
+                }
+            });
+            
+            // Enviar mensaje al hacer clic en el botón
+            chatbotSend.addEventListener('click', sendChatbotMessage);
+            
+            // Opciones del chatbot
+            chatbotOptions.addEventListener('click', function(e) {
+                if (e.target.closest('.chatbot-option')) {
+                    const action = e.target.closest('.chatbot-option').getAttribute('data-action');
+                    handleChatbotAction(action);
+                }
+            });
+            
+            // Función para enviar mensaje
+            function sendChatbotMessage() {
+                const message = chatbotInput.value.trim();
+                if (message) {
+                    addUserMessage(message);
+                    chatbotInput.value = '';
+                    
+                    // Procesar respuesta según el paso actual
+                    processChatbotResponse(message);
+                }
+            }
+            
+            // Función para añadir mensaje del bot
+            function addBotMessage(text) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'chatbot-message bot';
+                messageDiv.textContent = text;
+                chatbotMessages.appendChild(messageDiv);
+                chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+                chatbotConversation.push({ sender: 'bot', message: text });
+            }
+            
+            // Función para añadir mensaje del usuario
+            function addUserMessage(text) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'chatbot-message user';
+                messageDiv.textContent = text;
+                chatbotMessages.appendChild(messageDiv);
+                chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+                chatbotConversation.push({ sender: 'user', message: text });
+            }
+            
+            // Función para manejar acciones del chatbot
+            function handleChatbotAction(action) {
+                switch(action) {
+                    case 'start-reservation':
+                        chatbotOptions.style.display = 'none';
+                        chatbotInputContainer.style.display = 'flex';
+                        startReservationProcess();
+                        break;
+                    case 'whatsapp':
+                        window.open('https://wa.me/525545366620', '_blank');
+                        break;
+                    case 'menu':
+                        changeSection('menu');
+                        break;
+                }
+            }
+            
+            // Función para iniciar proceso de reservación
+            function startReservationProcess() {
+                currentStep = 'name';
+                addBotMessage(translations[currentLanguage].chatbotNameQuestion);
+            }
+            
+            // Función para procesar respuestas del chatbot
+            function processChatbotResponse(message) {
+                switch(currentStep) {
+                    case 'name':
+                        reservationData.name = message;
+                        currentStep = 'email';
+                        addBotMessage(translations[currentLanguage].chatbotEmailQuestion);
+                        break;
+                    case 'email':
+                        // Validación básica de email
+                        if (message.includes('@') && message.includes('.')) {
+                            reservationData.email = message;
+                            currentStep = 'phone';
+                            addBotMessage(translations[currentLanguage].chatbotPhoneQuestion);
+                        } else {
+                            addBotMessage('Por favor, introduce un correo electrónico válido.');
+                        }
+                        break;
+                    case 'phone':
+                        reservationData.phone = message;
+                        currentStep = 'date';
+                        addBotMessage(translations[currentLanguage].chatbotDateQuestion);
+                        break;
+                    case 'date':
+                        reservationData.date = message;
+                        currentStep = 'time';
+                        addBotMessage(translations[currentLanguage].chatbotTimeQuestion);
+                        break;
+                    case 'time':
+                        reservationData.time = message;
+                        currentStep = 'guests';
+                        addBotMessage(translations[currentLanguage].chatbotGuestsQuestion);
+                        break;
+                    case 'guests':
+                        reservationData.guests = message;
+                        currentStep = 'allergies';
+                        addBotMessage(translations[currentLanguage].chatbotAllergiesQuestion);
+                        break;
+                    case 'allergies':
+                        if (message.toLowerCase().includes('sí') || message.toLowerCase().includes('si') || message.toLowerCase().includes('yes')) {
+                            reservationData.allergies = true;
+                            currentStep = 'allergies_details';
+                            addBotMessage(translations[currentLanguage].chatbotAllergiesDetailsQuestion);
+                        } else {
+                            reservationData.allergies = false;
+                            currentStep = 'message';
+                            addBotMessage(translations[currentLanguage].chatbotMessageQuestion);
+                        }
+                        break;
+                    case 'allergies_details':
+                        reservationData.allergiesDetails = message;
+                        currentStep = 'message';
+                        addBotMessage(translations[currentLanguage].chatbotMessageQuestion);
+                        break;
+                    case 'message':
+                        reservationData.message = message;
+                        completeReservation();
+                        break;
+                }
+            }
+            
+            // Función para completar la reservación
+            function completeReservation() {
+                addBotMessage(translations[currentLanguage].chatbotConfirmation);
+                
+                // Preparar datos para enviar por correo
+                const subject = `Nueva Reservación Tonalithai - ${reservationData.name}`;
+                const body = `
+Nueva Reservación Realizada a través del Chatbot
+
+Datos del Cliente:
+- Nombre: ${reservationData.name}
+- Email: ${reservationData.email}
+- Teléfono: ${reservationData.phone}
+- Fecha: ${reservationData.date}
+- Hora: ${reservationData.time}
+- Personas: ${reservationData.guests}
+- Alergias: ${reservationData.allergies ? 'Sí' : 'No'}
+${reservationData.allergiesDetails ? `- Detalles de alergias: ${reservationData.allergiesDetails}` : ''}
+- Mensaje adicional: ${reservationData.message || 'Ninguno'}
+
+Fecha de la solicitud: ${new Date().toLocaleString()}
+                `;
+                
+                // Enviar correo al restaurante
+                const restaurantEmail = `mailto:tonalithai80@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                
+                // Enviar correo de confirmación al cliente
+                const clientSubject = `Confirmación de Reservación - Tonalithai`;
+                const clientBody = `
+Estimado/a ${reservationData.name},
+
+Gracias por tu reservación en Tonalithai. Hemos recibido tu solicitud con los siguientes detalles:
+
+- Fecha: ${reservationData.date}
+- Hora: ${reservationData.time}
+- Personas: ${reservationData.guests}
+${reservationData.allergies ? `- Alergias registradas: ${reservationData.allergiesDetails || 'No especificadas'}` : ''}
+
+Nos pondremos en contacto contigo en las próximas 24 horas para confirmar tu reservación.
+
+Dirección: Iztaccihuatl 54, Hipódromo, Cuauhtémoc, 06100 Ciudad de México, CDMX
+Teléfono: +52 55 4536 6620
+
+¡Esperamos verte pronto en Tonalithai!
+
+Atentamente,
+El equipo de Tonalithai
+                `;
+                
+                const clientEmail = `mailto:${reservationData.email}?subject=${encodeURIComponent(clientSubject)}&body=${encodeURIComponent(clientBody)}`;
+                
+                // Abrir enlaces de correo (simulado)
+                setTimeout(() => {
+                    window.open(restaurantEmail, '_blank');
+                    setTimeout(() => {
+                        window.open(clientEmail, '_blank');
+                        addBotMessage(translations[currentLanguage].chatbotReservationSent);
+                        
+                        // Resetear el chatbot
+                        setTimeout(() => {
+                            chatbotOptions.style.display = 'flex';
+                            chatbotInputContainer.style.display = 'none';
+                            currentStep = null;
+                            reservationData = {
+                                name: '',
+                                email: '',
+                                phone: '',
+                                date: '',
+                                time: '',
+                                guests: '',
+                                allergies: false,
+                                allergiesDetails: '',
+                                message: ''
+                            };
+                        }, 3000);
+                    }, 1000);
+                }, 1000);
+            }
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            updateThemeToggle();
+        }
+
+        function toggleLanguageOptions() {
+            document.getElementById('languageOptions').classList.toggle('show');
+        }
+
+        function changeLanguage(e) {
+            const selectedLang = e.target.getAttribute('data-lang');
+            console.log('Cambiando idioma a:', selectedLang);
+            
+            if (selectedLang === currentLanguage) {
+                console.log('El idioma ya está seleccionado');
+                return;
+            }
+            
+            currentLanguage = selectedLang;
+            
+            // Actualizar texto del botón de idioma
+            document.getElementById('currentLang').textContent = selectedLang.toUpperCase();
+            
+            // Cerrar el menú de idiomas
+            document.getElementById('languageOptions').classList.remove('show');
+            
+            // Actualizar todos los textos de la página
+            updatePageTexts();
+            
+            // Re-renderizar los menús para actualizar textos
+            renderFullMenu(currentCategory);
+            
+            console.log('Idioma cambiado exitosamente a:', currentLanguage);
+        }
+
+        function updatePageTexts() {
+            console.log('Actualizando textos de la página a:', currentLanguage);
+            // Actualizar todos los textos según el idioma seleccionado
+            const texts = translations[currentLanguage];
+            
+            // Actualizar textos principales
+            document.getElementById('slogan').textContent = texts.slogan;
+            document.getElementById('hero-text').textContent = texts.heroText;
+            document.getElementById('reserve-btn').textContent = texts.reserveBtn;
+            document.getElementById('menu-title').textContent = texts.menuTitle;
+            document.getElementById('reservations-title').textContent = texts.reservationsTitle;
+            document.getElementById('contact-title').textContent = texts.contactTitle;
+            document.getElementById('contact-info-title').textContent = texts.contactInfoTitle;
+            document.getElementById('follow-title').textContent = texts.followTitle;
+            document.getElementById('hours-text').innerHTML = texts.hoursText;
+            document.getElementById('name-label').textContent = texts.nameLabel;
+            document.getElementById('email-label').textContent = texts.emailLabel;
+            document.getElementById('phone-label').textContent = texts.phoneLabel;
+            document.getElementById('date-label').textContent = texts.dateLabel;
+            document.getElementById('time-label').textContent = texts.timeLabel;
+            document.getElementById('guests-label').textContent = texts.guestsLabel;
+            document.getElementById('message-label').textContent = texts.messageLabel;
+            document.getElementById('submit-btn').textContent = texts.submitBtn;
+            document.getElementById('allergies-label').textContent = texts.allergiesLabel;
+            document.getElementById('allergies-yes-label').textContent = texts.allergiesYesLabel;
+            document.getElementById('allergies-no-label').textContent = texts.allergiesNoLabel;
+            document.getElementById('allergies-details').placeholder = texts.allergiesDetailsPlaceholder;
+            
+            // Actualizar navegación
+            document.querySelectorAll('nav a').forEach(link => {
+                link.textContent = link.getAttribute(`data-${currentLanguage}`);
+            });
+            
+            // Actualizar filtros del menú
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.textContent = btn.getAttribute(`data-${currentLanguage}`);
+            });
+            
+            // Actualizar opciones del formulario
+            document.querySelectorAll('#guests option').forEach(option => {
+                option.textContent = option.getAttribute(`data-${currentLanguage}`);
+            });
+            
+            // Actualizar menú móvil
+            document.querySelectorAll('.mobile-menu a').forEach(link => {
+                link.textContent = link.getAttribute(`data-${currentLanguage}`);
+            });
+            
+            console.log('Textos de la página actualizados correctamente');
+        }
+
+        function changeSection(sectionId) {
+            // Mostrar la sección seleccionada
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                // Scroll suave a la sección
+                window.scrollTo({
+                    top: targetSection.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        function filterMenu(e) {
+            // Remover clase active de todos los botones
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Agregar clase active al botón clickeado
+            e.target.classList.add('active');
+            
+            // Obtener la categoría seleccionada
+            const category = e.target.getAttribute('data-category');
+            currentCategory = category;
+            
+            // Renderizar el menú filtrado
+            renderFullMenu(category);
+        }
+
+        function handleReservation(e) {
+            e.preventDefault();
+            
+            // Obtener datos del formulario
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                date: document.getElementById('date').value,
+                time: document.getElementById('time').value,
+                guests: document.getElementById('guests').value,
+                allergies: document.getElementById('allergies-yes').checked,
+                allergiesDetails: document.getElementById('allergies-details').value,
+                message: document.getElementById('message').value
+            };
+            
+            // Enviar correo al restaurante
+            const subject = `Nueva Reservación Tonalithai - ${formData.name}`;
+            const body = `
+Nueva Reservación Realizada desde el Formulario Web
+
+Datos del Cliente:
+- Nombre: ${formData.name}
+- Email: ${formData.email}
+- Teléfono: ${formData.phone}
+- Fecha: ${formData.date}
+- Hora: ${formData.time}
+- Personas: ${formData.guests}
+- Alergias: ${formData.allergies ? 'Sí' : 'No'}
+${formData.allergiesDetails ? `- Detalles de alergias: ${formData.allergiesDetails}` : ''}
+- Mensaje adicional: ${formData.message || 'Ninguno'}
+
+Fecha de la solicitud: ${new Date().toLocaleString()}
+            `;
+            
+            const restaurantEmail = `mailto:tonalithai80@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            
+            // Enviar correo de confirmación al cliente
+            const clientSubject = `Confirmación de Reservación - Tonalithai`;
+            const clientBody = `
+Estimado/a ${formData.name},
+
+Gracias por tu reservación en Tonalithai. Hemos recibido tu solicitud con los siguientes detalles:
+
+- Fecha: ${formData.date}
+- Hora: ${formData.time}
+- Personas: ${formData.guests}
+${formData.allergies ? `- Alergias registradas: ${formData.allergiesDetails || 'No especificadas'}` : ''}
+
+Nos pondremos en contacto contigo en las próximas 24 horas para confirmar tu reservación.
+
+Dirección: Iztaccihuatl 54, Hipódromo, Cuauhtémoc, 06100 Ciudad de México, CDMX
+Teléfono: +52 55 4536 6620
+
+¡Esperamos verte pronto en Tonalithai!
+
+Atentamente,
+El equipo de Tonalithai
+            `;
+            
+            const clientEmail = `mailto:${formData.email}?subject=${encodeURIComponent(clientSubject)}&body=${encodeURIComponent(clientBody)}`;
+            
+            // Abrir enlaces de correo
+            window.open(restaurantEmail, '_blank');
+            setTimeout(() => {
+                window.open(clientEmail, '_blank');
+                alert(translations[currentLanguage].reservationSuccess);
+                e.target.reset();
+                document.getElementById('allergies-details').style.display = 'none';
+            }, 500);
+        }
+
+        function handleScroll() {
+            const scrollTop = document.getElementById('scrollTop');
+            if (window.pageYOffset > 300) {
+                scrollTop.classList.add('show');
+            } else {
+                scrollTop.classList.remove('show');
+            }
+        }
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        function setupScrollAnimations() {
+            // Configurar Intersection Observer para animaciones al hacer scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+            
+            // Observar secciones
+            document.querySelectorAll('section').forEach(section => {
+                observer.observe(section);
+            });
+            
+            // Observar elementos del menú
+            document.querySelectorAll('.menu-item').forEach(item => {
+                observer.observe(item);
+            });
+            
+            // Observar mapa
+            const mapContainer = document.getElementById('mapContainer');
+            if (mapContainer) {
+                observer.observe(mapContainer);
+            }
+        }
+
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const overlay = document.getElementById('overlay');
+            
+            mobileMenu.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+    </script>
 </body>
 </html>
